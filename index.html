@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Terra Labs — Autonomous Biogeochemical Control</title>
+<meta name="description" content="Terra Labs builds the edge-autonomous Bayesian control engine for closed biological systems — modeling whole-system state to catch the failure modes that break closed life support, from recirculating fish farms to lunar habitats." />
+<meta name="theme-color" content="#000000" />
+<meta property="og:title" content="Terra Labs — Autonomous control from ocean to the lunar surface" />
+<meta property="og:description" content="One Bayesian inference engine for every closed loop. From the mud to the moon." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#000000; --bg-2:#080808;
+  --panel:rgba(255,255,255,0.028); --panel-2:rgba(255,255,255,0.05); --panel-solid:#0c0c0c;
+  --line:rgba(255,255,255,0.12); --line-strong:rgba(255,255,255,0.26);
+  --text:#f5f5f7; --text-dim:#a1a1a6; --text-faint:#6e6e73;
+  --white:#ffffff;
+  --radius:14px;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6}
+.glow-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.06;background:var(--white);animation:drift 30s ease-in-out infinite}
+.g1{width:50vw;height:50vw;left:-10vw;top:-16vw}
+.g2{width:40vw;height:40vw;right:-8vw;bottom:-14vw;animation-delay:-12s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vw,4vh) scale(1.15)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,header,footer{position:relative;z-index:2}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.4s}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:var(--maxw);margin:0 auto}
+header.scrolled{backdrop-filter:blur(20px);background:rgba(0,0,0,.72);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;letter-spacing:.04em;font-size:15px;text-decoration:none;color:var(--text);text-transform:uppercase}
+.navlinks{display:flex;gap:28px;align-items:center}
+.navlinks a{color:var(--text-dim);text-decoration:none;font-size:13px;letter-spacing:.02em;transition:.25s;position:relative}
+.navlinks a:hover{color:var(--text)}
+.navlinks a.txt::after{content:'';position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--white);transition:.3s}
+.navlinks a.txt:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:500;font-size:13.5px;padding:10px 20px;border-radius:100px;text-decoration:none;transition:.3s;cursor:pointer;border:1px solid transparent;letter-spacing:.01em}
+.btn-primary{background:var(--white);color:#000;font-weight:600}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,.16)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--text)}
+.btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.05)}
+.btn-sim{position:relative}
+.btn-sim .pin{width:6px;height:6px;border-radius:50%;background:#000;animation:pulse 1.8s infinite}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--text);cursor:pointer}
+
+/* SECTION */
+section{padding:120px 0;position:relative}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-bottom:22px;display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--line-strong)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4.6vw,54px);margin-bottom:26px}
+h2 em,h1 em{font-style:normal;font-weight:300;color:var(--white)}
+.lead{font-size:clamp(16px,1.5vw,19px);color:var(--text-dim);max-width:660px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:60px}
+.sec-head .lead{margin:0}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(34px);transition:.9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+[data-delay="1"]{transition-delay:.08s}[data-delay="2"]{transition-delay:.16s}[data-delay="3"]{transition-delay:.24s}[data-delay="4"]{transition-delay:.32s}
+
+/* HERO */
+#top{min-height:100vh;display:flex;align-items:center;padding-top:130px;padding-bottom:130px}
+.hero-tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:30px;display:flex;align-items:center;gap:12px}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--white);box-shadow:0 0 12px rgba(255,255,255,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(42px,7.4vw,98px);font-weight:600;letter-spacing:-.04em;margin-bottom:30px}
+.hero .lead{font-size:clamp(17px,1.7vw,21px);max-width:700px;margin-bottom:38px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:54px}
+.hero-cta .btn{padding:15px 30px;font-size:15px}
+.hero-meta{display:flex;gap:44px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px;max-width:720px}
+.hero-meta .m .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px}
+.hero-meta .m .v{font-size:14.5px;color:var(--text);font-weight:500}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+@media(max-height:860px){.scroll-cue{display:none}}
+.scroll-cue .bar{width:1px;height:38px;background:linear-gradient(var(--white),transparent);animation:cue 2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.1%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* PROBLEM */
+.prob-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:start}
+.prob-stats{display:flex;flex-direction:column;gap:16px}
+.pstat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;transition:.4s}
+.pstat:hover{border-color:var(--line-strong);transform:translateX(6px);background:var(--panel-2)}
+.pstat .big{font-family:var(--display);font-size:clamp(38px,5vw,56px);font-weight:300;line-height:1;color:var(--white);margin-bottom:8px;letter-spacing:-.02em}
+.pstat .cap{font-size:14px;color:var(--text-dim)}
+.nasa-quote{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--white);border-radius:0 14px 14px 0;padding:26px 28px;margin-top:0}
+.nasa-quote .ql{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px}
+.nasa-quote p{font-family:var(--display);font-size:19px;font-weight:400;color:var(--text);line-height:1.45}
+
+/* CARDS */
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.4s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:radial-gradient(360px circle at var(--mx,50%) var(--my,0),rgba(255,255,255,.06),transparent 60%);opacity:0;transition:.4s}
+.card:hover{border-color:var(--line-strong);transform:translateY(-5px)}
+.card:hover::before{opacity:1}
+.card .idx{font-family:var(--mono);font-size:12px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:18px}
+.card h3{font-size:18px;margin-bottom:10px}
+.card p{font-size:13.5px;color:var(--text-dim)}
+
+/* DATA FLOW */
+.flow-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;margin-top:26px}
+.flow{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
+.flow .fl-label,.stack .fl-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:20px}
+.flow-node{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-family:var(--mono);font-size:13px;color:var(--text-dim);text-align:center;transition:.3s}
+.flow-node.engine{background:var(--white);border-color:var(--white);color:#000;font-weight:600}
+.flow-node.state{border-color:var(--line-strong);color:var(--text)}
+.flow-arrow{text-align:center;font-family:var(--mono);font-size:11px;color:var(--text-faint);padding:9px 0;letter-spacing:.08em}
+.stack{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
+.stack .srow{font-family:var(--mono);font-size:13px;color:var(--text-dim);padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+.stack .srow:last-child{border:none}
+.stack .srow b{color:var(--white);font-weight:600}
+.stack .foot{font-family:var(--mono);font-size:11px;color:var(--text-faint);margin-top:16px;letter-spacing:.06em}
+
+/* CONSOLE */
+.console{margin-top:26px;background:linear-gradient(180deg,#0a0a0a,#050505);border:1px solid var(--line-strong);border-radius:18px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.7)}
+.console-top{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.console-top .id{font-family:var(--mono);font-size:12px;color:var(--text-dim);letter-spacing:.08em;display:flex;align-items:center;gap:10px}
+.live-badge{font-family:var(--mono);font-size:11px;color:var(--white);display:flex;align-items:center;gap:7px;letter-spacing:.14em}
+.live-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--white);box-shadow:0 0 10px rgba(255,255,255,.7);animation:pulse 1.8s infinite}
+.console-body{display:grid;grid-template-columns:180px 1fr 290px;min-height:420px}
+.console-col{padding:20px}
+.console-col.left{border-right:1px solid var(--line)}
+.console-col.right{border-left:1px solid var(--line);background:rgba(255,255,255,.01)}
+.col-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:14px}
+.sys-item{font-family:var(--mono);font-size:12.5px;color:var(--text-dim);padding:7px 10px;border-radius:8px;margin-bottom:3px;transition:.2s;display:flex;justify-content:space-between;align-items:center}
+.sys-item:hover{background:rgba(255,255,255,.05);color:var(--text)}
+.sys-item.active{background:rgba(255,255,255,.08);color:var(--white);border:1px solid var(--line-strong)}
+.sys-item .s{width:5px;height:5px;border-radius:50%;background:var(--text-dim)}
+.sys-group{margin-bottom:20px}
+.center-head{font-family:var(--display);font-size:15px;font-weight:600;margin-bottom:4px}
+.center-sub{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.metric{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.metric .k{font-family:var(--mono);font-size:10.5px;color:var(--text-faint);letter-spacing:.08em;margin-bottom:6px;display:flex;justify-content:space-between}
+.metric .v{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--text)}
+.metric .v .u{font-size:11px;color:var(--text-faint);font-weight:400;margin-left:2px}
+.metric.warn{border-color:var(--line-strong);background:rgba(255,255,255,.05)}
+.metric.warn .v{color:var(--white)}
+.metric .arrow{color:var(--white)}
+.chart-box{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.chart-box .ch-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.chart-box .ch-title{font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:.06em}
+.chart-box .ch-delta{font-family:var(--mono);font-size:11px;color:var(--text-dim)}
+.chart svg{width:100%;height:90px;display:block;overflow:visible}
+.ch-foot{font-family:var(--mono);font-size:10px;color:var(--text-faint);letter-spacing:.14em;margin-top:8px;display:flex;justify-content:space-between}
+.events{display:flex;flex-direction:column;gap:14px}
+.event{font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--text-dim);border-left:1px solid var(--line);padding-left:12px}
+.event .t{color:var(--text-faint)}
+.event.alert{border-left-color:var(--white)}
+.event.alert strong{color:var(--white);font-weight:600}
+.event.ok{border-left-color:var(--text-dim)}
+.console-cta{padding:16px 20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:rgba(255,255,255,.015)}
+.console-cta span{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.06em}
+
+/* KITS */
+.kit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kit{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.4s;position:relative;overflow:hidden}
+.kit:hover{border-color:var(--line-strong);transform:translateY(-6px);background:var(--panel-2)}
+.kit-code{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--text);margin-bottom:20px;display:inline-block;padding:4px 10px;border:1px solid var(--line-strong);border-radius:6px}
+.kit h3{font-size:23px;margin-bottom:12px}
+.kit .kdesc{font-size:13.5px;color:var(--text-dim);margin-bottom:20px;min-height:60px}
+.kit .row{display:flex;flex-direction:column;gap:3px;margin-bottom:12px}
+.kit .row .rl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)}
+.kit .row .rv{font-family:var(--mono);font-size:11.5px;color:var(--text-dim);line-height:1.5}
+.kit .price{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:13px;color:var(--text-dim)}
+.kit .price b{font-family:var(--display);font-size:22px;color:var(--white);font-weight:500}
+.nolock{margin-top:36px;text-align:center;font-family:var(--mono);font-size:14px;color:var(--text);padding:20px;border:1px dashed var(--line-strong);border-radius:14px}
+
+/* THROUGH-LINE */
+.tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:26px}
+.tl{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;transition:.4s;position:relative}
+.tl:hover{border-color:var(--line-strong);transform:translateY(-5px)}
+.tl .stage{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;display:inline-block;padding:5px 11px;border-radius:100px;color:var(--text-dim);border:1px solid var(--line)}
+.stage.now{color:var(--white);border-color:var(--white)}
+.stage.next{color:var(--text);border-color:var(--line-strong)}
+.stage.mission{color:var(--text-dim);border-color:var(--line)}
+.tl h3{font-size:22px;margin-bottom:12px}
+.tl p{font-size:13.5px;color:var(--text-dim)}
+.tl .mkt{margin-top:18px;font-family:var(--display);font-weight:300;font-size:28px;color:var(--white);letter-spacing:-.02em}
+.tl .mkt span{font-family:var(--mono);font-size:11px;color:var(--text-faint);display:block;margin-top:4px;letter-spacing:.04em;font-weight:400}
+.tl-note{font-family:var(--mono);font-size:12.5px;color:var(--text-dim);line-height:1.7;background:rgba(255,255,255,.015);border:1px solid var(--line);border-radius:14px;padding:22px 26px}
+.tl-note b{color:var(--white);font-weight:600}
+
+/* COMPARISON */
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:20px}
+.cmp th,.cmp td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line)}
+.cmp thead th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);font-weight:500}
+.cmp thead th.us{color:var(--white)}
+.cmp td:first-child{color:var(--text);font-weight:500}
+.cmp td.us{color:var(--white);font-family:var(--mono);font-size:12.5px}
+.cmp td.dim{color:var(--text-faint);font-family:var(--mono);font-size:12px}
+.cmp tbody tr{transition:.25s}
+.cmp tbody tr:hover{background:rgba(255,255,255,.03)}
+.cmp .col-us{background:rgba(255,255,255,.05)}
+.moat{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.moat-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.moat-card .ml{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px}
+.moat-card h4{font-family:var(--display);font-size:17px;margin-bottom:8px}
+.moat-card p{font-size:13.5px;color:var(--text-dim)}
+
+/* VALIDATION */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.val-card{background:var(--panel);border:1px solid var(--line-strong);border-radius:18px;padding:30px}
+.val-card .vl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px}
+.val-card h4{font-family:var(--display);font-size:20px;margin-bottom:20px}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.check-list li{font-size:14px;color:var(--text-dim);padding-left:28px;position:relative}
+.check-list li::before{content:'✓';position:absolute;left:0;top:0;color:var(--white);font-size:13px}
+.vpath{display:flex;flex-direction:column;gap:14px}
+.vstep{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;transition:.3s}
+.vstep:hover{border-color:var(--line-strong)}
+.vstep .n{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--line-strong);color:var(--white);font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center}
+.vstep h5{font-family:var(--display);font-size:15px;margin-bottom:5px;font-weight:600}
+.vstep p{font-size:13px;color:var(--text-dim)}
+
+/* REMEDIATION */
+.rem-list{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:14px}
+.rem-list li{font-size:15px;color:var(--text-dim);padding-left:30px;position:relative}
+.rem-list li::before{content:'';position:absolute;left:0;top:9px;width:14px;height:14px;border-radius:4px;border:1px solid var(--line-strong)}
+.rem-list li::after{content:'✓';position:absolute;left:3px;top:2px;font-size:10px;color:var(--white)}
+.rem-visual{background:var(--panel);border:1px solid var(--line-strong);border-radius:18px;padding:28px}
+.rem-visual .rv-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:20px}
+.rem-visual svg{width:100%;height:200px;overflow:visible}
+
+/* LIFE SUPPORT */
+#space{text-align:center}
+#space .wrap{max-width:1140px}
+#space h2{font-size:clamp(32px,5vw,60px)}
+#space .lead{margin:0 auto 20px;font-size:clamp(16px,1.6vw,20px)}
+.blss-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:52px 0 40px;text-align:left}
+.blss-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:.4s;position:relative}
+.blss-card:hover{border-color:var(--line-strong);transform:translateY(-5px);background:var(--panel-2)}
+.blss-card .bn{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.12em;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.blss-card .bn svg{width:20px;height:20px;stroke:var(--white);flex:none}
+.blss-card h4{font-family:var(--display);font-size:17px;font-weight:600;margin-bottom:9px}
+.blss-card p{font-size:13px;color:var(--text-dim);line-height:1.55}
+.blss-card .gap{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#000;background:var(--white);border-radius:4px;padding:4px 8px;margin-top:14px}
+.blss-card .var{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--line-strong);border-radius:4px;padding:4px 8px;margin-top:14px}
+.blss-loop{font-family:var(--mono);font-size:11.5px;color:var(--text-faint);letter-spacing:.06em;margin:6px auto 0;max-width:760px;line-height:1.7}
+.blss-loop b{color:var(--white);font-weight:600}
+
+/* ROADMAP */
+.rm-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.rm-col h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:26px;color:var(--text-dim)}
+.rm-item{position:relative;padding-left:28px;padding-bottom:28px;border-left:1px solid var(--line)}
+.rm-item:last-child{border-color:transparent;padding-bottom:0}
+.rm-item::before{content:'';position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1.5px solid var(--white)}
+.rm-item .date{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.06em;margin-bottom:6px}
+.rm-item h5{font-family:var(--display);font-size:16px;margin-bottom:5px}
+.rm-item p{font-size:13.5px;color:var(--text-dim)}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.founder{background:var(--panel);border:1px solid var(--line-strong);border-radius:18px;padding:32px}
+.founder .fhead{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.founder .av{width:52px;height:52px;border-radius:50%;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:22px;font-weight:300;color:var(--white);flex:none;background:rgba(255,255,255,.04)}
+.founder .fname{font-family:var(--display);font-size:20px;font-weight:600}
+.founder .frole{font-family:var(--mono);font-size:12px;color:var(--text-dim);letter-spacing:.04em}
+.net{display:flex;flex-direction:column;gap:14px}
+.net .nl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px}
+.net-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;transition:.3s}
+.net-card:hover{border-color:var(--line-strong)}
+.net-card h5{font-family:var(--display);font-size:15px;margin-bottom:6px}
+.net-card p{font-size:13px;color:var(--text-dim)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.stat{border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px;background:var(--panel);text-align:center}
+.stat .big{font-family:var(--display);font-size:clamp(28px,3.4vw,44px);font-weight:300;color:var(--white);line-height:1;margin-bottom:12px;letter-spacing:-.02em}
+.stat .cap{font-size:13px;color:var(--text-dim)}
+
+/* CONTACT */
+#contact{text-align:center}
+#contact .wrap{max-width:820px}
+.contact-card{background:var(--panel);border:1px solid var(--line-strong);border-radius:24px;padding:60px 40px;position:relative;overflow:hidden}
+.contact-card .eyebrow{margin-bottom:18px}
+.contact-card h2{margin-bottom:20px}
+.contact-card .quote{font-family:var(--display);font-size:22px;font-weight:300;color:var(--text-dim);margin:26px auto 0;max-width:520px}
+.contact-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.contact-cta .btn{padding:15px 30px;font-size:15px}
+.mail{display:inline-block;font-family:var(--mono);font-size:clamp(14px,1.8vw,17px);color:var(--text);text-decoration:none;padding:15px 28px;border:1px solid var(--line-strong);border-radius:100px;transition:.3s}
+.mail:hover{background:rgba(255,255,255,.05);border-color:var(--white);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(0,0,0,.5)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
+.foot-brand .brand{margin-bottom:16px}
+.foot-brand p{font-size:13.5px;color:var(--text-dim);max-width:280px}
+.foot-col h5{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px}
+.foot-col a{display:block;color:var(--text-dim);text-decoration:none;font-size:14px;margin-bottom:10px;transition:.25s}
+.foot-col a:hover{color:var(--white)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:30px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--text-faint);letter-spacing:.06em}
+.foot-bottom .tag{color:var(--text)}
+
+@media(max-width:1000px){
+  .feature-grid,.kit-grid,.blss-grid{grid-template-columns:repeat(2,1fr)}
+  .console-body{grid-template-columns:1fr}
+  .console-col.left,.console-col.right{border:none;border-top:1px solid var(--line)}
+  .tl-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .split,.prob-grid,.flow-wrap,.rm-grid,.team-grid,.moat{grid-template-columns:1fr;gap:30px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .cmp{font-size:12px}.cmp th,.cmp td{padding:12px 10px}
+}
+@media(max-width:680px){
+  .navlinks{display:none}
+  .navlinks.open{display:flex;position:absolute;top:64px;right:20px;flex-direction:column;background:var(--panel-solid);border:1px solid var(--line);border-radius:14px;padding:18px 22px;gap:16px}
+  .menu-btn{display:block}
+  .scroll-cue{display:none}
+  .feature-grid,.kit-grid,.stats,.foot-grid,.blss-grid{grid-template-columns:1fr}
+  section{padding:80px 0}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .cmp-scroll{overflow-x:auto}
+  .hero-meta{gap:26px}
+}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.glow{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="glow-wrap"><div class="glow g1"></div><div class="glow g2"></div></div>
+<div class="grain"></div>
+
+<header id="site-header">
+  <nav class="nav">
+    <a href="#top" class="brand">Terra Labs</a>
+    <div class="navlinks" id="navlinks">
+      <a href="#problem" class="txt">Problem</a>
+      <a href="#engine" class="txt">Engine</a>
+      <a href="#kits" class="txt">Sensor Kits</a>
+      <a href="#markets" class="txt">Markets</a>
+      <a href="#space" class="txt">Life Support</a>
+      <a href="team.html" class="txt">Team</a>
+      <a href="simulation.html" class="btn btn-ghost btn-sim">Live Simulation</a>
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <div class="wrap">
+      <div class="hero-tag reveal"><span class="dot"></span> Bayesian Biogeochemical Intelligence</div>
+      <h1 class="reveal" data-delay="1">Autonomous control from ocean to the <em>lunar surface.</em></h1>
+      <p class="lead reveal" data-delay="2">Terra Labs builds the edge-autonomous Bayesian control engine for closed biological systems — modeling the whole loop to catch the systems-level failure modes that break closed life support, from recirculating fish tanks to lunar habitats.</p>
+      <div class="hero-cta reveal" data-delay="3">
+        <a href="simulation.html" class="btn btn-primary btn-sim"><span class="pin"></span> Launch live simulation</a>
+        <a href="#engine" class="btn btn-ghost">See the engine →</a>
+      </div>
+      <div class="hero-meta reveal" data-delay="4">
+        <div class="m"><div class="l">Founder</div><div class="v">Cameron Souza</div></div>
+        <div class="m"><div class="l">Focus</div><div class="v">Aquaculture → Remediation → BLSS</div></div>
+        <div class="m"><div class="l">Status</div><div class="v">Bridge round open</div></div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scroll</span><span class="bar"></span></div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="wrap">
+      <div class="eyebrow reveal">01 — The Problem</div>
+      <div class="sec-head">
+        <h2 class="reveal">Closed life support fails at the <em>system level.</em></h2>
+        <p class="lead reveal" data-delay="1">The unsolved problem isn't any single component — it's that closed biological systems fail in ways no one has fully mapped. Atmosphere, water, plants, and microbes are so tightly coupled that failures emerge from the interactions between them, cascading across the whole loop before any single gauge crosses a threshold. Sensor biofouling and drift are one such failure mode — real and expensive — but only one. What's missing is a system that models the entire state of the loop and sees the failure coming.</p>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-stats">
+          <div class="pstat reveal" data-delay="1"><div class="big">$6–19B</div><div class="cap">lost annually in aquaculture to water-quality failures</div></div>
+          <div class="pstat reveal" data-delay="2"><div class="big">44–76%</div><div class="cap">crop-yield swings from mismanaged nutrient cycles in controlled-environment agriculture</div></div>
+          <div class="pstat reveal" data-delay="3"><div class="big">2.8M</div><div class="cap">contaminated European sites stalled by inadequate monitoring</div></div>
+        </div>
+        <div class="reveal" data-delay="2">
+          <div class="nasa-quote">
+            <div class="ql">NASA's explicit technology gap</div>
+            <p>"Autonomous biological life-support systems represent a critical unmet need for sustained human presence on the Moon and Mars."</p>
+          </div>
+          <div class="tl-note" style="margin-top:22px">The tooling today is manual checks and threshold alarms on individual sensors — blind to failures that emerge across the system. <b>We replace it with inference</b> — a live probabilistic estimate of the whole loop's state, mounted on edge AI, catching systemic failures before they cascade.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGINE -->
+  <section id="engine">
+    <div class="wrap">
+      <div class="eyebrow reveal">02 — The Solution</div>
+      <div class="sec-head">
+        <h2 class="reveal">The Terra <em>Engine.</em></h2>
+        <p class="lead reveal" data-delay="1">Bayesian state estimation that fuses drifting, noisy sensor signals into a reliable picture of biogeochemical state — running edge-autonomous with no network required. It holds a probability distribution over the loop's true state, closes its mass and energy budget continuously, and forecasts where it is heading with calibrated uncertainty.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="card reveal" data-delay="1"><div class="idx">/01</div><h3>Catches systemic failure</h3><p>Models the whole coupled loop and flags emergent, system-level failures — sensor drift among them — before they cascade.</p></div>
+        <div class="card reveal" data-delay="2"><div class="idx">/02</div><h3>Runs at the edge</h3><p>Raspberry Pi–class deployment. No cloud, no connectivity — remote farms, contaminated sites, space habitats.</p></div>
+        <div class="card reveal" data-delay="3"><div class="idx">/03</div><h3>Controls state, not proxies</h3><p>Targets nitrogen cycling, dissolved oxygen and pH flux — the processes that decide whether biology survives.</p></div>
+        <div class="card reveal" data-delay="4"><div class="idx">/04</div><h3>Works with natural biology</h3><p>Leverages nitrifying bacteria and natural cycles — it keeps biology alive rather than controlling around it.</p></div>
+      </div>
+
+      <div class="flow-wrap">
+        <div class="flow reveal" data-delay="1">
+          <div class="fl-label">Data Flow</div>
+          <div class="flow-node">Sensor array · DO · pH · TAN · ORP · EC</div>
+          <div class="flow-arrow">↓ noisy / drifting</div>
+          <div class="flow-node engine">Bayesian estimation engine · HMC · VI · SBI</div>
+          <div class="flow-arrow">↓ probabilistic state estimate</div>
+          <div class="flow-node state">Biogeochemical state · N-cycle · DO · pH</div>
+          <div class="flow-arrow">↓ autonomous decision</div>
+          <div class="flow-node">Actuator control · edge deployment</div>
+        </div>
+        <div class="stack reveal" data-delay="2">
+          <div class="fl-label">Inference Stack</div>
+          <div class="srow"><span>HMC / NUTS</span><b>model fitting &amp; posterior</b></div>
+          <div class="srow"><span>Variational inference</span><b>real-time edge</b></div>
+          <div class="srow"><span>SBI</span><b>novel sensor regimes</b></div>
+          <div class="srow"><span>Runtime</span><b>JAX · NumPyro · BlackJAX</b></div>
+          <div class="foot">◇ Calibrated forecast — every estimate ships with how far ahead, and how much to trust it.</div>
+        </div>
+      </div>
+
+      <!-- LIVE CONSOLE -->
+      <div class="console reveal" data-delay="1">
+        <div class="console-top">
+          <div class="id"><span>◈</span> Terra // Control · Edge node</div>
+          <div class="live-badge"><span class="dot"></span> LIVE</div>
+        </div>
+        <div class="console-body">
+          <div class="console-col left">
+            <div class="sys-group">
+              <div class="col-label">Systems</div>
+              <div class="sys-item active">Grow-out · T04 <span class="s"></span></div>
+              <div class="sys-item">Hatchery A · T01 <span class="s"></span></div>
+              <div class="sys-item">Hatchery A · T02 <span class="s"></span></div>
+              <div class="sys-item">Biofilter · BF1 <span class="s"></span></div>
+              <div class="sys-item">Reservoir · R1 <span class="s"></span></div>
+            </div>
+            <div class="sys-group">
+              <div class="col-label">Sites</div>
+              <div class="sys-item">Field · Plot 7 <span class="s"></span></div>
+              <div class="sys-item">Wetland · Cell 3 <span class="s"></span></div>
+            </div>
+          </div>
+          <div class="console-col center">
+            <div class="center-head">RAS Loop · Grow-out T04</div>
+            <div class="center-sub">Tracking · 1,024 channels</div>
+            <div class="metrics">
+              <div class="metric"><div class="k">Diss. O₂</div><div class="v" data-val="7.9" data-dec="1">7.9<span class="u">mg/L</span></div></div>
+              <div class="metric"><div class="k">CO₂</div><div class="v" data-val="9.1" data-dec="1">9.1<span class="u">mg/L</span></div></div>
+              <div class="metric warn"><div class="k">TAN <span class="arrow">▲</span></div><div class="v" data-val="0.41" data-dec="2">0.41<span class="u">mg/L</span></div></div>
+              <div class="metric"><div class="k">NO₂–N</div><div class="v" data-val="0.12" data-dec="2">0.12<span class="u">mg/L</span></div></div>
+              <div class="metric"><div class="k">pH</div><div class="v" data-val="7.34" data-dec="2">7.34</div></div>
+              <div class="metric"><div class="k">Temp</div><div class="v" data-val="14.8" data-dec="1">14.8<span class="u">°C</span></div></div>
+            </div>
+            <div class="chart-box">
+              <div class="ch-head"><span class="ch-title">Nitrogen Budget · 24h Forecast</span><span class="ch-delta">Δ +0.06 mg·L⁻¹·h⁻¹</span></div>
+              <div class="chart" id="chart"></div>
+              <div class="ch-foot"><span>CONTROL LIMIT</span><span>DIVERGENCE · +3.5H</span></div>
+            </div>
+          </div>
+          <div class="console-col right">
+            <div class="col-label">Events</div>
+            <div class="events">
+              <div class="event"><span class="t">14:02 · T04</span><br>State posterior updated · 1,024 channels</div>
+              <div class="event alert"><span class="t">13:48 · T04</span><br><strong>TAN trend departs budget.</strong> Loss probability by 06:00 estimated 0.38.</div>
+              <div class="event"><span class="t">13:30 · BF1</span><br>Biofilter nitrification efficiency −7% vs prior</div>
+              <div class="event"><span class="t">12:10 · T04</span><br>Recommended action logged · dosing +Δ</div>
+              <div class="event ok"><span class="t">09:44 · R1</span><br>Reservoir budget closed · Δ ≈ 0</div>
+            </div>
+          </div>
+        </div>
+        <div class="console-cta">
+          <span>◇ This is a static preview. The full interactive twin runs the live inference loop.</span>
+          <a href="simulation.html" class="btn btn-primary btn-sim"><span class="pin"></span> Launch live simulation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KITS -->
+  <section id="kits">
+    <div class="wrap">
+      <div class="eyebrow reveal">03 — Hardware</div>
+      <div class="sec-head">
+        <h2 class="reveal">Cheap, open <em>sensor kits.</em></h2>
+        <p class="lead reveal" data-delay="1">We are a software company. The hardware is built at cost with open instrumentation partners, ships with full raw-stream access, and never locks your data. One node form factor, tuned per domain. Bring your own sensors and the engine rides on those instead.</p>
+      </div>
+      <div class="kit-grid">
+        <div class="kit reveal" data-delay="1">
+          <span class="kit-code">TLK-AQUA</span><h3>Aqua</h3>
+          <p class="kdesc">Recirculating aquaculture and aquaponics. Watches the nitrogen loop where a failure kills stock in hours.</p>
+          <div class="row"><span class="rl">Channels</span><span class="rv">TAN · NO₂ · NO₃ · DO · pH · ORP · Temp · Flow</span></div>
+          <div class="row"><span class="rl">Loop</span><span class="rv">RAS · Aquaponic</span></div>
+          <div class="row"><span class="rl">Data</span><span class="rv">Raw · Open</span></div>
+          <div class="price">from <b>$390</b> / node</div>
+        </div>
+        <div class="kit reveal" data-delay="2">
+          <span class="kit-code">TLK-SOIL</span><h3>Soil</h3>
+          <p class="kdesc">Agriculture and controlled-environment growing. Tracks the carbon and nitrogen budget of the root zone.</p>
+          <div class="row"><span class="rl">Channels</span><span class="rv">Moisture · N · Redox · CO₂ flux · EC · Temp</span></div>
+          <div class="row"><span class="rl">Loop</span><span class="rv">Field · CEA</span></div>
+          <div class="row"><span class="rl">Data</span><span class="rv">Raw · Open</span></div>
+          <div class="price">from <b>$340</b> / node</div>
+        </div>
+        <div class="kit reveal" data-delay="3">
+          <span class="kit-code">TLK-FLOW</span><h3>Flow</h3>
+          <p class="kdesc">Water, wastewater, and field remediation. Verifies that a living cleanup is actually closing.</p>
+          <div class="row"><span class="rl">Channels</span><span class="rv">ORP · DO · Turbidity · pH · Metal-proxy · Temp</span></div>
+          <div class="row"><span class="rl">Loop</span><span class="rv">Wetland · Bioreactor</span></div>
+          <div class="row"><span class="rl">Data</span><span class="rv">Raw · Open</span></div>
+          <div class="price">from <b>$420</b> / node</div>
+        </div>
+        <div class="kit reveal" data-delay="4">
+          <span class="kit-code">TLK-CORE</span><h3>Core</h3>
+          <p class="kdesc">Research and closed-habitat programs. Full gas and liquid suite for budget closure against ground truth.</p>
+          <div class="row"><span class="rl">Channels</span><span class="rv">Full gas + liquid · 1,024 logged</span></div>
+          <div class="row"><span class="rl">Loop</span><span class="rv">Habitat · BLSS</span></div>
+          <div class="row"><span class="rl">Data</span><span class="rv">Raw · Open</span></div>
+          <div class="price">research · <b style="font-size:16px">partner</b></div>
+        </div>
+      </div>
+      <div class="nolock reveal">◇ Your system. Your data. Our inference. No vendor lock-in, ever.</div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <section id="markets">
+    <div class="wrap">
+      <div class="eyebrow reveal">04 — The Through-Line</div>
+      <div class="sec-head">
+        <h2 class="reveal">One problem. <em>Three environments.</em></h2>
+        <p class="lead reveal" data-delay="1">The same engine retargets across domains. Each environment trains the engine; each deployment makes the next one more capable. Three independently large markets — a deliberate capability build, not a pivot.</p>
+      </div>
+      <div class="tl-grid">
+        <div class="tl reveal" data-delay="1">
+          <span class="stage now">Stage 1 · Commercial · Now</span>
+          <h3>Aquaculture RAS</h3>
+          <p>Sensor biofouling in dense biological media. Hold the nitrogen cycle in band and forecast tank loss hours before it happens. The closest terrestrial analog to a space habitat, and the engine's base.</p>
+          <div class="mkt">$1.64B<span>Global monitoring &amp; automation · 9–12% CAGR</span></div>
+        </div>
+        <div class="tl reveal" data-delay="2">
+          <span class="stage next">Stage 2 · Ecological · Next</span>
+          <h3>Bioremediation</h3>
+          <p>Sensor drift across heterogeneous soil and water. Prove a living cleanup is actually drawing contaminants down — at landscape scale, with the uncertainty attached.</p>
+          <div class="mkt">$18–19B<span>Global market · regulatory-driven growth</span></div>
+        </div>
+        <div class="tl reveal" data-delay="3">
+          <span class="stage mission">Stage 3 · The Mission</span>
+          <h3>Bioregenerative Life Support</h3>
+          <p>The reason Terra exists. A stack of coupled loops — air, water, waste, food, microbes — where system-level failure means a crew doesn't come home. The engine, hardened across two demanding Earth environments, running autonomously off-world.</p>
+          <div class="mkt">$10–12B<span>Space life support by 2033 · NASA-documented gap</span></div>
+        </div>
+      </div>
+      <div class="tl-note reveal" data-delay="1">Non-dilutive pathway: <b>NSF SBIR Phase I</b> → <b>USDA Aquaculture</b> → <b>NOAA</b> → <b>NASA STTR</b> → <b>NASA Tipping Point</b>. Grants can carry the company from validated systems to hardware demonstration.</div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATION -->
+  <section id="differentiation">
+    <div class="wrap">
+      <div class="eyebrow reveal">05 — Differentiation</div>
+      <div class="sec-head">
+        <h2 class="reveal">No direct <em>competitor exists.</em></h2>
+        <p class="lead reveal" data-delay="1">Incumbents do threshold alerting. Nobody has combined Bayesian estimation with edge-autonomous control for biological systems.</p>
+      </div>
+      <div class="cmp-scroll reveal" data-delay="1">
+        <table class="cmp">
+          <thead><tr><th>Capability</th><th class="us">Terra Labs</th><th>Xylem / YSI</th><th>In-Situ</th><th>Interstellar Lab</th></tr></thead>
+          <tbody>
+            <tr><td>Controls biogeochemical state</td><td class="us col-us">✓</td><td class="dim">—</td><td class="dim">—</td><td class="dim">Partial</td></tr>
+            <tr><td>Handles sensor drift / fouling</td><td class="us col-us">✓ Bayesian fusion</td><td class="dim">Manual recal.</td><td class="dim">Manual recal.</td><td class="dim">—</td></tr>
+            <tr><td>Edge-autonomous (no network)</td><td class="us col-us">✓</td><td class="dim">Cloud-dependent</td><td class="dim">Cloud-dependent</td><td class="dim">Partial</td></tr>
+            <tr><td>Designed for BLSS / space</td><td class="us col-us">✓ Primary mission</td><td class="dim">—</td><td class="dim">—</td><td class="dim">Partial (Haven-1)</td></tr>
+            <tr><td>Multi-environment path</td><td class="us col-us">✓ RAS → Remediation → BLSS</td><td class="dim">RAS only</td><td class="dim">Environmental only</td><td class="dim">Greenhouse only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="moat">
+        <div class="moat-card reveal" data-delay="1"><div class="ml">Closest threat</div><h4>Interstellar Lab</h4><p>Greenhouse OS, Haven-1 (2026). No Bayesian estimation, no RAS, not BLSS-rated. Primarily physical-environment control.</p></div>
+        <div class="moat-card reveal" data-delay="2"><div class="ml">Defensibility</div><h4>Deep technical moat</h4><p>Sensor-fouling dynamics in biological systems require domain expertise that general-purpose monitoring companies don't have and won't acquire cheaply.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALIDATION -->
+  <section id="validation">
+    <div class="wrap">
+      <div class="eyebrow reveal">06 — Validation</div>
+      <div class="sec-head">
+        <h2 class="reveal">This is not <em>simulation-only.</em></h2>
+        <p class="lead reveal" data-delay="1">The core inference stack has already been validated against real biogeochemical data. The remaining gap is the transition from spatially-integrated satellite observations to in-situ point sensors — different noise structure, biofouling-driven drift. That is exactly what the bench testbed solves.</p>
+      </div>
+      <div class="split">
+        <div class="val-card reveal" data-delay="1">
+          <div class="vl">PhD Dissertation · Oregon State University</div>
+          <h4>Hawaii Island Biogeochemical Budget</h4>
+          <ul class="check-list">
+            <li>Same HMC/NUTS inference engine used in Terra</li>
+            <li>Same process models: N-cycle, dissolved oxygen, pH</li>
+            <li>Validated against real satellite observations — not synthetic data</li>
+            <li>Publishable results — academically independent</li>
+          </ul>
+        </div>
+        <div>
+          <div class="vpath">
+            <div class="vstep reveal" data-delay="1"><span class="n">1</span><div><h5>Bench-scale RAS testbed</h5><p>7-sensor suite on a Raspberry Pi 4 edge node, cycled biofilter, no live fish. Running Oct 2026 at Biosphere 2 or the OSU Huang Center.</p></div></div>
+            <div class="vstep reveal" data-delay="2"><span class="n">2</span><div><h5>First field pilot</h5><p>60–90 day deployment at a tribal hatchery or commercial RAS. Jan–Jun 2027.</p></div></div>
+            <div class="vstep reveal" data-delay="3"><span class="n">3</span><div><h5>NASA STTR with OSU · ISS National Lab</h5><p>OSU as research partner. 2027–2028, contingent on bench data.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REMEDIATION -->
+  <section id="bioremediation">
+    <div class="wrap">
+      <div class="eyebrow reveal">07 — Remediation, in depth</div>
+      <div class="split">
+        <div>
+          <h2 class="reveal">Verify the cleanup, <em>not just the plan.</em></h2>
+          <p class="lead reveal" data-delay="1">Bioremediation works when microbes and plants metabolize contaminants faster than they spread. The hard part has never been deploying the biology — it is proving, continuously and defensibly, that the system is actually drawing the contaminant down rather than stalling. Terra closes the redox and mass budget of the treatment zone and reports progress with calibrated uncertainty.</p>
+          <ul class="rem-list reveal" data-delay="2">
+            <li>Redox and electron-donor budgets tracked to closure</li>
+            <li>Contaminant drawdown estimated between lab samples, not just at them</li>
+            <li>Stall and rebound detected early, before a site falls out of compliance</li>
+            <li>Regulator-ready record with uncertainty stated, not hidden</li>
+          </ul>
+        </div>
+        <div class="rem-visual reveal" data-delay="2">
+          <div class="rv-label">Contaminant Drawdown · Modelled Between Samples</div>
+          <svg id="remChart" viewBox="0 0 400 200" preserveAspectRatio="none"></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFE SUPPORT -->
+  <section id="space">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="justify-content:center">08 — The Mission · BLSS</div>
+      <h2 class="reveal">Everything we build points at <em>bioregenerative life support.</em></h2>
+      <p class="lead reveal" data-delay="1">A bioregenerative life-support system (BLSS) recycles a crew's air, water, and waste through living nitrogen and carbon cycles — with no margin and no resupply. It is the reason Terra exists. Unlike the physico-chemical scrubbers on today's stations, a BLSS is biological, and it fails the way every closed living system fails: at the level of the coupled biogeochemical state.</p>
+      <p class="lead reveal" data-delay="1" style="margin-bottom:0">NASA has named the unsolved pieces in writing — the nutrient loop isn't closed, the microbial and plant communities aren't understood, and there is no autonomous system to detect and respond to off-nominal events. Every one is a biogeochemical state problem. Every one is what the engine does.</p>
+
+      <div class="blss-grid">
+        <div class="blss-card reveal" data-delay="1">
+          <div class="bn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 7h16M4 12h16M4 17h16"/></svg> LOOP / 01</div>
+          <h4>Closing the nutrient loop</h4>
+          <p>Route crew and crop waste back through nitrification into fertilizer — holding the nitrogen and carbon budget to closure. This is Terra's home cycle, the same one the engine estimates on Earth.</p>
+          <span class="gap">NASA-named gap</span>
+        </div>
+        <div class="blss-card reveal" data-delay="2">
+          <div class="bn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><circle cx="7" cy="9" r="2.4"/><circle cx="16" cy="7" r="2"/><circle cx="15" cy="16" r="2.6"/><path d="M9 10l5-2M9.5 11l4.5 4"/></svg> LOOP / 02</div>
+          <h4>Microbial community state</h4>
+          <p>NASA has no map of which microbial and plant taxa function together in space. The engine estimates the microbiome's hidden state from partial signals and catches community drift before it cascades.</p>
+          <span class="gap">NASA-named gap</span>
+        </div>
+        <div class="blss-card reveal" data-delay="3">
+          <div class="bn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 3v6M12 9c-3 0-5 2-5 6a5 5 0 0 0 10 0c0-4-2-6-5-6z"/></svg> LOOP / 03</div>
+          <h4>Off-nominal detection &amp; response</h4>
+          <p>With no ability to abort to Earth, the habitat has to catch and correct emergent, system-level failures itself. Edge-autonomous inference watches every coupled loop at once and acts.</p>
+          <span class="gap">NASA-named gap</span>
+        </div>
+        <div class="blss-card reveal" data-delay="1">
+          <div class="bn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M3 12h4l2-5 3 10 2-5h7"/></svg> LOOP / 04</div>
+          <h4>Atmosphere &amp; carbon balance</h4>
+          <p>Photosynthetic O₂ generation and CO₂ fixation through algae photobioreactors and plant canopies — holding the coupled gas budget as crew load and light swing.</p>
+          <span class="var">O₂ · CO₂ flux</span>
+        </div>
+        <div class="blss-card reveal" data-delay="2">
+          <div class="bn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 21c-4-3-7-6-7-10a7 7 0 0 1 14 0c0 4-3 7-7 10zM12 3v8"/></svg> LOOP / 05</div>
+          <h4>Crop production &amp; root zone</h4>
+          <p>Roughly 20–25 m² of crops supplies one crew member's oxygen. The engine holds the root-zone nitrogen, dissolved-oxygen and pH state that decides whether that yield actually shows up.</p>
+          <span class="var">N · DO · pH</span>
+        </div>
+        <div class="blss-card reveal" data-delay="3">
+          <div class="bn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 8c1.5 1.5 4.5 1.5 6 0M9 13c1.5 1.5 4.5 1.5 6 0"/></svg> LOOP / 06</div>
+          <h4>Bioreactor &amp; aqueous chemistry</h4>
+          <p>Nitrifying and photo-bioreactors regenerate the habitat through the water loop — dissolved oxygen, pH, ammonia and nitrate held in band autonomously, with no operator standing by.</p>
+          <span class="var">DO · pH · NH₃ · NO₃</span>
+        </div>
+      </div>
+
+      <p class="blss-loop reveal">Nutrients, microbes, gases, crops, water — <b>every one is a closed biogeochemical loop that recycles through nitrogen and carbon cycling</b>, and every one fails the same way: at the system level, through the couplings between them. One engine estimates the whole state and holds them together — validated on a fish farm before it ever has to hold a crew.</p>
+
+      <a href="#contact" class="btn btn-primary reveal" data-delay="2" style="padding:15px 30px;font-size:15px;margin-top:40px">Partner with us →</a>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="eyebrow reveal">09 — Roadmap</div>
+      <div class="sec-head"><h2 class="reveal">From bench to the <em>lunar surface.</em></h2></div>
+      <div class="rm-grid">
+        <div class="rm-col reveal" data-delay="1">
+          <h4>Near term · this raise</h4>
+          <div class="rm-item"><div class="date">Aug 2026</div><h5>Bench setup</h5><p>Sensors ordered, venue confirmed, biofilter seeded.</p></div>
+          <div class="rm-item"><div class="date">Oct–Nov 2026</div><h5>First real sensor data · NSF SBIR submission</h5><p>Controlled perturbation experiments. Investor pitch with bench results.</p></div>
+          <div class="rm-item"><div class="date">Jan–Jun 2027</div><h5>Field pilot · first paying customer</h5><p>Tribal hatchery or commercial RAS. 60–90 day deployment.</p></div>
+          <div class="rm-item"><div class="date">Mid 2027</div><h5>NSF SBIR Phase I award · $305K</h5><p>Non-dilutive runway extension.</p></div>
+        </div>
+        <div class="rm-col reveal" data-delay="2">
+          <h4>Long term · the mission</h4>
+          <div class="rm-item"><div class="date">2027–2028</div><h5>Scale aquaculture · bioremediation pilot</h5><p>USDA + NOAA SBIRs. Prove ecological control theory at landscape scale.</p></div>
+          <div class="rm-item"><div class="date">2028–2030</div><h5>NASA STTR with OSU · ISS National Lab</h5><p>First space-environment testing. OSU as research partner.</p></div>
+          <div class="rm-item"><div class="date">2030s</div><h5>BLSS deployment · lunar surface</h5><p>NASA Tipping Point. The engine, hardened on Earth, running autonomously on the Moon.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="wrap">
+      <div class="eyebrow reveal">10 — Team</div>
+      <div class="sec-head">
+        <h2 class="reveal">Built for this <em>specific problem.</em></h2>
+        <a href="team.html" class="btn btn-ghost reveal" data-delay="1">Meet the full team →</a>
+      </div>
+      <div class="team-grid">
+        <div class="founder reveal" data-delay="1">
+          <div class="fhead"><div class="av">C</div><div><div class="fname">Cameron Souza</div><div class="frole">Founder · Marine Biochemist &amp; Data Scientist</div></div></div>
+          <ul class="check-list">
+            <li>PhD candidate, Oregon State University — biogeochemical process modeling</li>
+            <li>Built and validated the HMC/NUTS inference stack on real Hawaii Island biogeochemical data</li>
+            <li>Domain expertise: nitrogen cycling, dissolved-oxygen dynamics, marine chemistry</li>
+            <li>Full-time, fully committed to Terra Labs</li>
+          </ul>
+        </div>
+        <div class="net reveal" data-delay="2">
+          <div class="nl">Network &amp; Resources</div>
+          <div class="net-card"><h5>Biosphere 2</h5><p>Preferred venue for bench validation — a closed ecological system with space-analog heritage and the strongest narrative link to BLSS.</p></div>
+          <div class="net-card"><h5>NASA · NOAA · Oregon State</h5><p>Research network from PhD work. Pathway to NASA STTR with OSU as research partner; NOAA SBIR track in progress.</p></div>
+          <div class="net-card"><h5>SBIR / STTR pathway</h5><p>Non-dilutive funding track across NSF, USDA, NOAA and NASA — carrying the company from validated systems to hardware demonstration.</p></div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat reveal" data-delay="1"><div class="big">Hours</div><div class="cap">From budget drift to total stock loss</div></div>
+        <div class="stat reveal" data-delay="2"><div class="big">1 engine</div><div class="cap">From the fish farm to the Moon</div></div>
+        <div class="stat reveal" data-delay="3"><div class="big">Edge</div><div class="cap">Fully autonomous · no cloud required</div></div>
+        <div class="stat reveal" data-delay="4"><div class="big">Real data</div><div class="cap">Validated, not simulation-only</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <div class="eyebrow" style="justify-content:center">Bridge round open</div>
+        <h2>The engine that keeps biology alive — <em>anywhere in the universe.</em></h2>
+        <p class="lead" style="margin:0 auto">Terra Labs is building the autonomous biogeochemical control engine that manages life in tanks, in soil, and eventually in the closed habitats that will sustain humans on the Moon and Mars. If you build instrumentation, run closed systems, or invest in the infrastructure of living systems — talk to us.</p>
+        <p class="quote">"The lunar surface isn't the finish line. It's where the work begins."</p>
+        <div class="contact-cta">
+          <a href="mailto:cameron@terralaboratories.com" class="mail">cameron@terralaboratories.com</a>
+          <a href="simulation.html" class="btn btn-primary btn-sim"><span class="pin"></span> Launch live simulation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">Terra Labs</a>
+        <p>Autonomous biogeochemical control and monitoring for closed living systems.</p>
+      </div>
+      <div class="foot-col"><h5>Platform</h5><a href="#engine">The engine</a><a href="#kits">Sensor kits</a><a href="simulation.html">Live simulation</a></div>
+      <div class="foot-col"><h5>Domains</h5><a href="#markets">Aquaculture</a><a href="#bioremediation">Remediation</a><a href="#space">Life support</a></div>
+      <div class="foot-col"><h5>Company</h5><a href="team.html">Team</a><a href="#roadmap">Roadmap</a><a href="mailto:cameron@terralaboratories.com">Email</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Terra Laboratories · <span class="tag">From the mud to the moon</span></span>
+      <span>Cameron Souza · Hawaii</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const header=document.getElementById('site-header');
+addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>40),{passive:true});
+const menuBtn=document.getElementById('menuBtn'),navlinks=document.getElementById('navlinks');
+menuBtn.addEventListener('click',()=>navlinks.classList.toggle('open'));
+navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});
+});
+
+function animVal(el){
+  const target=parseFloat(el.dataset.val),dec=parseInt(el.dataset.dec||0);let start=null,dur=1400;
+  function step(ts){if(!start)start=ts;const p=Math.min((ts-start)/dur,1);const e=1-Math.pow(1-p,3);
+    el.firstChild.textContent=(target*e).toFixed(dec);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+const mio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){animVal(e.target);mio.unobserve(e.target);}})},{threshold:.5});
+document.querySelectorAll('.metric .v[data-val]').forEach(el=>mio.observe(el));
+
+function buildChart(){
+  const box=document.getElementById('chart');if(!box)return;
+  const W=560,H=90,n=48;let pts=[],fc=[];
+  for(let i=0;i<n;i++){const x=i/(n-1)*W*0.6;const y=H*0.55+Math.sin(i*0.5)*6+Math.random()*3;pts.push([x,y]);}
+  const last=pts[pts.length-1];
+  for(let i=0;i<n;i++){const x=W*0.6+i/(n-1)*W*0.4;const y=last[1]-i*0.55;fc.push([x,y]);}
+  const line=a=>a.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const limit=H*0.28;
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:90px">
+    <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+    <line x1="0" y1="${limit}" x2="${W}" y2="${limit}" stroke="#777" stroke-width="1" stroke-dasharray="4 4" opacity=".6"/>
+    <path d="${line(pts)} L ${last[0]} ${H} L 0 ${H} Z" fill="url(#fill)"/>
+    <path d="${line(pts)}" fill="none" stroke="#fff" stroke-width="1.8" class="draw"/>
+    <path d="${line(fc)}" fill="none" stroke="#888" stroke-width="1.6" stroke-dasharray="5 4"/>
+    <circle cx="${fc[fc.length-1][0]}" cy="${fc[fc.length-1][1]}" r="3" fill="#fff"><animate attributeName="opacity" values="1;.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+  </svg>`;
+  const p1=box.querySelector('.draw');
+  const L1=p1.getTotalLength();p1.style.strokeDasharray=L1;p1.style.strokeDashoffset=L1;p1.style.transition='stroke-dashoffset 2s ease';
+  requestAnimationFrame(()=>{p1.style.strokeDashoffset=0;});
+}
+function buildRem(){
+  const svg=document.getElementById('remChart');if(!svg)return;
+  const W=400,H=200,n=40;let real=[];
+  for(let i=0;i<n;i++){const x=i/(n-1)*W;const y=30+150*Math.exp(-i*0.09)+Math.sin(i*0.6)*4;real.push([x,y]);}
+  const upper=real.map(p=>[p[0],p[1]-14]),lower=real.map(p=>[p[0],p[1]+14]);
+  const line=a=>a.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const bandPath=line(upper)+' L '+lower.slice().reverse().map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ')+' Z';
+  const samples=[0,10,20,30,39];
+  svg.innerHTML=`<defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+    <path d="${bandPath}" fill="rgba(255,255,255,.08)"/>
+    <path d="${line(real)} L ${W} ${H} L 0 ${H} Z" fill="url(#rg)"/>
+    <path d="${line(real)}" fill="none" stroke="#fff" stroke-width="2" class="rdraw"/>
+    ${samples.map(i=>`<circle cx="${real[i][0].toFixed(1)}" cy="${real[i][1].toFixed(1)}" r="3.5" fill="#000" stroke="#fff" stroke-width="1.6"/>`).join('')}`;
+  const rp=svg.querySelector('.rdraw'),L=rp.getTotalLength();
+  rp.style.strokeDasharray=L;rp.style.strokeDashoffset=L;rp.style.transition='stroke-dashoffset 2.4s ease';
+  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){rp.style.strokeDashoffset=0;o.disconnect();}})},{threshold:.3}).observe(svg);
+}
+buildChart();buildRem();
+
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let w,h,parts=[],mouse={x:-999,y:-999};
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function resize(){w=c.width=innerWidth*devicePixelRatio;h=c.height=innerHeight*devicePixelRatio;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';}
+  resize();addEventListener('resize',resize);
+  addEventListener('pointermove',e=>{mouse.x=e.clientX*devicePixelRatio;mouse.y=e.clientY*devicePixelRatio;});
+  const N=Math.min(80,Math.floor(innerWidth/18));
+  for(let i=0;i<N;i++)parts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.22*devicePixelRatio,vy:(Math.random()-.5)*.22*devicePixelRatio,r:(Math.random()*1.3+.4)*devicePixelRatio});
+  function tick(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of parts){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+      const dx=p.x-mouse.x,dy=p.y-mouse.y,dm=Math.hypot(dx,dy);
+      if(dm<140*devicePixelRatio&&dm>0){p.x+=dx/dm*.6;p.y+=dy/dm*.6;}
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle='rgba(255,255,255,.5)';ctx.fill();
+    }
+    for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){
+      const a=parts[i],b=parts[j],d=Math.hypot(a.x-b.x,a.y-b.y),max=120*devicePixelRatio;
+      if(d<max){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(255,255,255,'+(0.09*(1-d/max))+')';ctx.lineWidth=devicePixelRatio*.5;ctx.stroke();}
+    }
+    requestAnimationFrame(tick);
+  }
+  if(!reduce)tick();
+})();
+</script>
+</body>
+</html>
