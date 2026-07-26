@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra Laboratories / The autonomy layer for living systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080B;--bg2:#0A0C11;--panel:#0E1015;--line:#20242C;--ink:#F3F5F8;--body:#AAB0BB;
+  --mut:#6E7681;--acc:#D3D7DD;--disp:'Space Grotesk',system-ui,sans-serif;--mono:'Space Mono',monospace;
+  --mx:clamp(20px,6vw,120px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:var(--disp);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--ink);color:var(--bg)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{color:var(--ink);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+img{max-width:100%;display:block}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.045;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.5) 0 1px,transparent 1px 3px)}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--ink);width:0;z-index:80}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:18px var(--mx);transition:.4s;border-bottom:1px solid transparent}
+nav.shrunk{padding:11px var(--mx);background:rgba(7,8,11,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--ink);font-weight:700}
+.navlinks{display:flex;gap:24px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mut)}
+.navlinks a{transition:.25s}.navlinks a:hover{color:var(--ink)}
+.navcta{border:1px solid var(--line);padding:9px 16px;color:var(--ink);border-radius:3px}
+.navcta:hover{background:var(--ink);color:var(--bg)}
+@media(max-width:900px){.navlinks a:not(.navcta){display:none}}
+/* SECTION */
+section{position:relative;padding:clamp(80px,11vh,150px) var(--mx)}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:var(--acc);display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.kick::before{content:"";width:32px;height:1px;background:var(--acc)}
+.h2{font-size:clamp(28px,4.4vw,54px);max-width:20ch}
+.lead{font-size:clamp(16px,1.4vw,20px);color:var(--body);max-width:62ch;margin-top:20px}
+.btn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:15px 26px;border:1px solid var(--line);color:var(--ink);border-radius:3px;transition:.28s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+.rule{height:1px;background:var(--line);margin:0 var(--mx)}
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px var(--mx) 60px;overflow:hidden;
+  background-color:var(--bg);
+  background-image:linear-gradient(100deg,rgba(7,8,11,.95) 0%,rgba(7,8,11,.72) 46%,rgba(7,8,11,.35) 100%),url('https://commons.wikimedia.org/wiki/Special:FilePath/NASA-Apollo8-Dec24-Earthrise.jpg');
+  background-size:cover;background-position:center}
+#hero .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--acc);margin-bottom:22px}
+.h1{font-size:clamp(44px,8vw,116px);letter-spacing:-.03em;line-height:.96;max-width:14ch}
+.hero-sub{max-width:56ch;margin-top:26px;font-size:clamp(16px,1.5vw,21px);color:var(--body)}
+.trustline{margin-top:44px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--mut);max-width:60ch;line-height:1.9}
+#hero .wrap>*{opacity:0;animation:up 1s cubic-bezier(.2,.7,.2,1) forwards}
+#hero .wrap>*:nth-child(1){animation-delay:.1s}#hero .wrap>*:nth-child(2){animation-delay:.26s}
+#hero .wrap>*:nth-child(3){animation-delay:.42s}#hero .wrap>*:nth-child(4){animation-delay:.58s}#hero .wrap>*:nth-child(5){animation-delay:.74s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#hero .wrap>*{animation:none;opacity:1}}
+/* TRUST BAR */
+.trustbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 40px;padding:30px var(--mx);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}
+.trustbar .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--mut)}
+.trustbar .names{display:flex;gap:34px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;letter-spacing:.12em;color:var(--body)}
+/* GRID + CARDS */
+.grid{display:grid;gap:18px;margin-top:46px}
+.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:6px;padding:30px;transition:transform .4s,border-color .4s}
+.card:hover{transform:translateY(-5px);border-color:#333a45}
+.card .n{font-family:var(--mono);font-size:12px;color:var(--acc);letter-spacing:.2em}
+.card h3{font-size:21px;margin:16px 0 10px}
+.card p{font-size:14.5px;color:var(--mut)}
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:10px}
+.split .txt{padding:clamp(30px,4vw,64px);display:flex;flex-direction:column;justify-content:center}
+.split .img{min-height:420px;background-color:var(--bg2);background-size:cover;background-position:center}
+@media(max-width:860px){.split{grid-template-columns:1fr}.split .img{min-height:280px}}
+.ul{list-style:none;margin-top:22px;display:grid;gap:12px}
+.ul li{padding-left:22px;position:relative;font-size:15px;color:var(--body)}
+.ul li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:var(--acc);border-radius:1px}
+/* TECH (3D) */
+.techgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media(max-width:900px){.techgrid{grid-template-columns:1fr}}
+#gl{position:relative;width:100%;height:clamp(340px,48vh,540px);border:1px solid var(--line);border-radius:8px;overflow:hidden;background:radial-gradient(70% 70% at 60% 40%,#0c0e13,#07080b)}
+#gl canvas{position:absolute;inset:0}
+/* MESH */
+.meshwrap{position:relative;border:1px solid var(--line);border-radius:8px;background:radial-gradient(80% 80% at 60% 40%,#0c0e13,#07080b);overflow:hidden;margin-top:40px}
+#meshcanvas{display:block;width:100%;height:420px}
+.meshcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mut)}
+.meshcap b{color:var(--ink)}
+/* SOLUTIONS */
+.sol{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+@media(max-width:900px){.sol{grid-template-columns:1fr}}
+.solcard{border:1px solid var(--line);border-radius:6px;padding:26px;background:var(--panel);transition:.35s}
+.solcard:hover{border-color:#333a45;transform:translateY(-4px)}
+.solcard .tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--acc)}
+.solcard h3{font-size:19px;margin:12px 0 8px}
+.solcard p{font-size:13.5px;color:var(--mut)}
+/* METRICS BAND (image) */
+.band{position:relative;padding:clamp(70px,10vh,130px) var(--mx);background-color:var(--bg);
+  background-image:linear-gradient(rgba(7,8,11,.82),rgba(7,8,11,.9)),url('https://commons.wikimedia.org/wiki/Special:FilePath/The_Blue_Marble.jpg');
+  background-size:cover;background-position:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}}
+.metric .v{font-size:clamp(30px,3.6vw,50px);color:var(--ink);font-weight:600}
+.metric .l{font-size:13px;color:var(--body);margin-top:8px;max-width:26ch}
+/* EMBED */
+.embedwrap{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000;margin-top:36px}
+.embedwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* QUOTE */
+.quote{text-align:center}
+.quote p{font-size:clamp(26px,4vw,50px);color:var(--ink);max-width:20ch;margin:0 auto;letter-spacing:-.02em;line-height:1.1}
+.quote span{color:var(--mut)}
+/* CTA BAND */
+.ctaband{text-align:center;padding:clamp(80px,12vh,150px) var(--mx);background:linear-gradient(180deg,var(--bg),#0b0e14)}
+.ctaband h2{font-size:clamp(30px,5vw,64px);max-width:18ch;margin:0 auto}
+/* FOOTER */
+footer{padding:70px var(--mx) 40px;border-top:1px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+@media(max-width:820px){footer{grid-template-columns:1fr}}
+footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
+.fcol h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mut);margin-bottom:14px}
+.fcol a,.fcol div{display:block;font-size:14px;color:var(--body);margin-bottom:9px}
+.fcol a:hover{color:var(--ink)}
+.legal{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:#4a4f57;letter-spacing:.04em;line-height:1.8;max-width:1000px}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
+
+<nav id="nav">
+  <div class="brand">TERRA&nbsp;LABORATORIES</div>
+  <div class="navlinks">
+    <a href="#platform">PLATFORM</a>
+    <a href="#solutions">SOLUTIONS</a>
+    <a href="#tech">TECHNOLOGY</a>
+    <a href="#deck">DECK</a>
+    <a href="mailto:cameron@terralaboratories.com" class="navcta">TALK TO US</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="hero">
+  <div class="wrap">
+    <div class="eyebrow">TERRA LABORATORIES</div>
+    <h1 class="h1">Keeping life alive, anywhere.</h1>
+    <p class="hero-sub">Terra is the autonomy layer for closed living systems. We read the true state of a living loop, forecast failure hours before it happens, and act on it, from aquaculture on Earth to life support in space.</p>
+    <div class="cta-row">
+      <a href="mailto:cameron@terralaboratories.com" class="btn solid">TALK TO US</a>
+      <a href="#deck" class="btn">SEE THE PITCH DECK</a>
+    </div>
+    <div class="trustline">In motion with NASA-connected industry partners, Oregon State University, NOAA, and the MEDB Hawaii accelerator.</div>
+  </div>
+</header>
+
+<!-- TRUST BAR -->
+<div class="trustbar">
+  <div class="lbl">RELATIONSHIPS &amp; PARTNERS</div>
+  <div class="names"><span>NASA-CONNECTED PARTNERS</span><span>OREGON STATE</span><span>NOAA</span><span>MEDB HAWAII</span></div>
+</div>
+
+<!-- VALUE PROPS -->
+<section id="platform">
+  <div class="kick reveal">THE PLATFORM</div>
+  <h2 class="h2 reveal d1">Autonomy for the systems that keep us alive.</h2>
+  <p class="lead reveal d2">Conventional monitoring alarms on one sensor at a time, after something breaks. Terra models the whole loop, sees the failure coming, and does something about it.</p>
+  <div class="grid g3">
+    <div class="card reveal d1"><div class="n">01</div><h3>See failure before it happens</h3><p>Forecast a breach hours ahead from the true whole-system state, not from a single gauge crossing a line.</p></div>
+    <div class="card reveal d2"><div class="n">02</div><h3>Act autonomously, offline</h3><p>Dose, aerate, or alert on-site with no cloud and no operator, every decision behind a full audit log.</p></div>
+    <div class="card reveal d3"><div class="n">03</div><h3>One engine, every environment</h3><p>A new domain is a specification, not a rebuild. The same core runs from a fish farm to a lunar habitat.</p></div>
+  </div>
+</section>
+<div class="rule"></div>
+
+<!-- SPLIT: PROBLEM -->
+<section>
+  <div class="split reveal">
+    <div class="txt">
+      <div class="kick">THE PROBLEM</div>
+      <h2 class="h2">They fail as a whole, quietly.</h2>
+      <p class="lead">Closed living systems collapse at the level of the whole loop before any single reading crosses a line, and the probes we trust foul and drift. The dashboard looks calm while the system dies.</p>
+      <ul class="ul">
+        <li>$3M+ can be lost in a single bad night on a land-based farm</li>
+        <li>Hours from first hidden drift to catastrophic loss</li>
+        <li>In a sealed habitat, the same failure costs a crew</li>
+      </ul>
+    </div>
+    <div class="img" style="background-image:linear-gradient(120deg,rgba(7,8,11,.25),rgba(7,8,11,.05)),url('https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg')"></div>
+  </div>
+</section>
+<div class="rule"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="kick reveal">HOW IT WORKS</div>
+  <h2 class="h2 reveal d1">Measure. Infer. Act.</h2>
+  <div class="grid g3">
+    <div class="card reveal d1"><div class="n">STEP 01</div><h3>Measure</h3><p>Commodity probes plus a small edge node. Drift and fouling are separated in software.</p></div>
+    <div class="card reveal d2"><div class="n">STEP 02</div><h3>Infer &amp; forecast</h3><p>A Bayesian state estimator reconstructs the hidden variable that fails first, then predicts the breach hours ahead.</p></div>
+    <div class="card reveal d3"><div class="n">STEP 03</div><h3>Act</h3><p>Autonomous, safety-bounded control on-site. No cloud, no operator, no network required.</p></div>
+  </div>
+</section>
+<div class="rule"></div>
+
+<!-- TECHNOLOGY (3D) -->
+<section id="tech">
+  <div class="techgrid">
+    <div class="reveal">
+      <div class="kick">TECHNOLOGY</div>
+      <h2 class="h2">An intelligence layer over the planet.</h2>
+      <p class="lead">The Terra Engine fuses low-cost sensors with a rigorous probabilistic model, running the full stack on edge hardware. It is honest about uncertainty and leaves an audit trail for every action.</p>
+      <ul class="ul">
+        <li>Unscented Kalman filtering on the edge, offline</li>
+        <li>Hamiltonian Monte Carlo calibration (JAX / NumPyro)</li>
+        <li>Sensor-drift separation and consistency self-checks</li>
+      </ul>
+    </div>
+    <div id="gl" class="reveal d2"></div>
+  </div>
+</section>
+<div class="rule"></div>
+
+<!-- MESH -->
+<section id="mesh">
+  <div class="kick reveal">THE SELF-HEALING MESH</div>
+  <h2 class="h2 reveal d1">A network that heals itself.</h2>
+  <p class="lead reveal d2">Nodes cross-check each other, isolate a failed or drifting node, and re-weight the survivors, so the whole-system estimate holds with no operator and no cloud.</p>
+  <div class="meshwrap reveal d2">
+    <canvas id="meshcanvas"></canvas>
+    <div class="meshcap" id="meshcap">STATUS: <b>nominal</b> / all nodes reporting</div>
+  </div>
+</section>
+<div class="rule"></div>
+
+<!-- SOLUTIONS -->
+<section id="solutions">
+  <div class="kick reveal">SOLUTIONS</div>
+  <h2 class="h2 reveal d1">One platform. Many worlds.</h2>
+  <p class="lead reveal d2">We start where the pain is sharp and funded, then carry the same engine into markets that share the same problem.</p>
+  <div class="sol">
+    <div class="solcard reveal d1"><div class="tag">BEACHHEAD</div><h3>Aquaculture</h3><p>Prevent mass-mortality events on land-based farms. The wedge market and first revenue.</p></div>
+    <div class="solcard reveal d1"><div class="tag">EARTH</div><h3>Environment &amp; water</h3><p>Autonomous remediation, wastewater, and environmental monitoring at scale.</p></div>
+    <div class="solcard reveal d2"><div class="tag">INDUSTRY</div><h3>Bioprocess</h3><p>Bioreactor and biopharma batch guardianship, where a drifting batch is money burned.</p></div>
+    <div class="solcard reveal d2"><div class="tag">DEFENSE</div><h3>Submarine &amp; field</h3><p>Closed-hull life support, expeditionary water, and bio-threat detection.</p></div>
+    <div class="solcard reveal d3"><div class="tag">MISSION</div><h3>Space life support</h3><p>Bioregenerative life support for the Moon and Mars, a NASA-documented gap.</p></div>
+    <div class="solcard reveal d3"><div class="tag">ACROSS ALL</div><h3>Terra Mesh</h3><p>The self-healing sensor network that makes every deployment resilient by design.</p></div>
+  </div>
+</section>
+
+<!-- METRICS BAND -->
+<div class="band">
+  <div class="metrics">
+    <div class="metric reveal d1"><div class="v"><span class="count" data-to="1.64" data-dec="2" data-pre="$" data-suf="B"></span></div><div class="l">Aquaculture beachhead market (2025)</div></div>
+    <div class="metric reveal d2"><div class="v">~<span class="count" data-to="6.5" data-dec="1"></span>h</div><div class="l">Early warning ahead of a failure (simulation)</div></div>
+    <div class="metric reveal d3"><div class="v"><span class="count" data-to="20"></span>%</div><div class="l">Value-share pricing, we win when you win</div></div>
+    <div class="metric reveal d4"><div class="v">$5-<span class="count" data-to="10"></span>B</div><div class="l">Space life-support market by 2033</div></div>
+  </div>
+</div>
+
+<!-- DECK -->
+<section id="deck">
+  <div class="kick reveal">PITCH DECK</div>
+  <h2 class="h2 reveal d1">The full story, in one deck.</h2>
+  <p class="lead reveal d2">Vision, engine, the self-healing mesh, market, and the raise.</p>
+  <div class="embedwrap reveal d2">
+    <iframe src="https://docs.google.com/presentation/d/1BZjOacThLT6VuwxhZRNgoqnW99890HUz/embed?start=false&loop=false&delayms=5000" allowfullscreen></iframe>
+  </div>
+</section>
+<div class="rule"></div>
+
+<!-- QUOTE -->
+<section class="quote">
+  <p class="reveal">The engine that keeps biology alive, <span>anywhere in the universe.</span></p>
+</section>
+<div class="rule"></div>
+
+<!-- TEAM -->
+<section id="company">
+  <div class="kick reveal">COMPANY</div>
+  <h2 class="h2 reveal d1">Focused by design. Built for the long climb.</h2>
+  <div class="grid g2">
+    <div class="card reveal d1"><div class="n">THE APPROACH</div><h3 style="margin-top:12px">One engine, honestly built</h3><p>We deepen a single engine instead of splitting focus, price on the value we create, and are candid about our stage. Deep domain and machine-learning expertise in house.</p></div>
+    <div class="card reveal d2"><div class="n">THE RAISE</div><h3 style="margin-top:12px">$500K pre-seed</h3><p style="color:var(--acc);font-family:var(--mono);font-size:12px;margin:4px 0 12px">$6M cap SAFE / 12-month runway</p><p>Funding bench validation, first paid value-share pilots, and the first commercial hire. Pre-revenue today; bench validation Q4 2026, pilots H1 2027.</p></div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="ctaband">
+  <h2 class="reveal">Let's keep life alive, anywhere.</h2>
+  <div class="cta-row reveal d1" style="justify-content:center">
+    <a href="mailto:cameron@terralaboratories.com" class="btn solid">TALK TO US</a>
+    <a href="#deck" class="btn">SEE THE DECK</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="big">The autonomy layer for living systems.</div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.14em;margin-top:20px">TERRA LABORATORIES / FROM THE MUD TO THE MOON</div>
+  </div>
+  <div class="fcol">
+    <h4>EXPLORE</h4>
+    <a href="#platform">Platform</a><a href="#solutions">Solutions</a><a href="#tech">Technology</a><a href="#deck">Pitch deck</a>
+  </div>
+  <div class="fcol">
+    <h4>CONTACT</h4>
+    <a href="mailto:cameron@terralaboratories.com">cameron@terralaboratories.com</a>
+    <div>terralaboratories.com</div>
+  </div>
+  <div class="legal">Market figures are drawn from third-party research (GM Insights, MarketsandMarkets, Industry Experts, BCC Research, Verified Market Reports) and the peer-reviewed literature. Engine performance is validated in simulation on a real-data foundation; the company is pre-revenue. Imagery courtesy of NASA (public domain). This page is not an offer to sell securities.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const nav=document.getElementById('nav'),prog=document.getElementById('progress');
+function onScroll(){const y=scrollY,h=document.body.scrollHeight-innerHeight;nav.classList.toggle('shrunk',y>40);prog.style.width=(100*y/Math.max(h,1))+'%';}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);cio.unobserve(e.target);}}),{threshold:.5});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0'),pre=el.dataset.pre||'',suf=el.dataset.suf||'';let t0=null;
+  function s(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1300,1),e=1-Math.pow(1-p,3);el.textContent=pre+(to*e).toFixed(dec)+suf;if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
+/* 3D globe in #gl container */
+(function(){
+  if(!window.THREE)return;const holder=document.getElementById('gl');if(!holder)return;
+  let W=holder.clientWidth,H=holder.clientHeight;
+  const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x07080B,0.14);
+  const cam=new THREE.PerspectiveCamera(52,W/H,0.1,100);cam.position.set(0,0,6);
+  const rnd=new THREE.WebGLRenderer({alpha:true,antialias:true});rnd.setPixelRatio(Math.min(devicePixelRatio,2));rnd.setSize(W,H);holder.appendChild(rnd.domElement);
+  const grp=new THREE.Group();scene.add(grp);
+  const geo=new THREE.IcosahedronGeometry(2.2,2);
+  grp.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:0x2c313b,transparent:true,opacity:.9})));
+  grp.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xF3F5F8,size:0.05,transparent:true,opacity:.95})));
+  grp.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.4,1)),new THREE.LineBasicMaterial({color:0x1c2029,transparent:true,opacity:.7})));
+  const beacons=[],bgm=new THREE.SphereGeometry(0.05,10,10),pos=geo.attributes.position;
+  for(let i=0;i<6;i++){const k=Math.floor(Math.random()*pos.count);const m=new THREE.Mesh(bgm,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));m.position.set(pos.getX(k),pos.getY(k),pos.getZ(k));m.userData.ph=Math.random()*6.28;grp.add(m);beacons.push(m);}
+  const ring=new THREE.Group();ring.rotation.x=0.6;scene.add(ring);const RN=160,rp=new Float32Array(RN*3);
+  for(let i=0;i<RN;i++){const a=i/RN*6.283;rp[i*3]=Math.cos(a)*3.2;rp[i*3+1]=(Math.random()-.5)*.12;rp[i*3+2]=Math.sin(a)*3.2;}
+  const rgg=new THREE.BufferGeometry();rgg.setAttribute('position',new THREE.BufferAttribute(rp,3));
+  ring.add(new THREE.Points(rgg,new THREE.PointsMaterial({color:0x9aa2ad,size:0.03,transparent:true,opacity:.55})));
+  ring.add(new THREE.LineLoop(rgg,new THREE.LineBasicMaterial({color:0x232830,transparent:true,opacity:.6})));
+  let mx=0,my=0,tmx=0,tmy=0;
+  addEventListener('mousemove',e=>{tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5;},{passive:true});
+  addEventListener('resize',()=>{W=holder.clientWidth;H=holder.clientHeight;cam.aspect=W/H;cam.updateProjectionMatrix();rnd.setSize(W,H);});
+  const clock=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);const t=clock.getElapsedTime();mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
+    grp.rotation.y+=0.0018;grp.rotation.x=0.12+my*0.4;grp.rotation.z=mx*0.15;ring.rotation.y=-t*0.09;
+    beacons.forEach(m=>{const s=0.7+Math.abs(Math.sin(t*1.6+m.userData.ph))*1.8;m.scale.setScalar(s);m.material.opacity=0.25+0.6*Math.abs(Math.sin(t*1.6+m.userData.ph));});
+    rnd.render(scene,cam);})();
+})();
+/* self-healing mesh */
+(function(){
+  const cv=document.getElementById('meshcanvas');if(!cv)return;const ctx=cv.getContext('2d'),cap=document.getElementById('meshcap');let W,H,DPR;
+  const N=[[.14,.34],[.32,.16],[.5,.34],[.7,.18],[.87,.38],[.2,.64],[.42,.74],[.63,.6],[.83,.72],[.4,.48]];
+  const E=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,9],[9,2],[9,6],[5,6],[6,7],[7,8],[7,3],[8,4],[1,9],[6,9],[2,7]];
+  function nb(k){const s=new Set();E.forEach(e=>{if(e[0]===k)s.add(e[1]);if(e[1]===k)s.add(e[0]);});return[...s];}
+  let state='nominal',failed=-1,reroute=[],tmr=0,dash=0;
+  function resize(){DPR=Math.min(devicePixelRatio,2);W=cv.clientWidth;H=cv.clientHeight=420;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+  addEventListener('resize',resize);resize();
+  function P(i){return[N[i][0]*W,N[i][1]*H];}
+  (function loop(){requestAnimationFrame(loop);tmr++;dash=(dash+1)%16;
+    if(state==='nominal'&&tmr>150){failed=Math.floor(Math.random()*N.length);const ns=nb(failed);reroute=[];for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++)reroute.push([ns[i],ns[j]]);state='failing';tmr=0;cap.innerHTML='STATUS: <b>node '+String(failed).padStart(2,'0')+' offline</b> / rerouting';}
+    else if(state==='failing'&&tmr>150){state='healed';tmr=0;cap.innerHTML='STATUS: <b>estimate holds</b> / survivors re-weighted';}
+    else if(state==='healed'&&tmr>110){state='nominal';failed=-1;reroute=[];tmr=0;cap.innerHTML='STATUS: <b>nominal</b> / all nodes reporting';}
+    ctx.clearRect(0,0,W,H);
+    E.forEach(e=>{const dim=(e[0]===failed||e[1]===failed);ctx.beginPath();ctx.strokeStyle=dim?'rgba(120,128,140,.1)':'rgba(120,128,140,.3)';ctx.lineWidth=1;const a=P(e[0]),b=P(e[1]);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();});
+    if(state!=='nominal'){ctx.setLineDash([6,6]);ctx.lineDashOffset=-dash;reroute.forEach(e=>{ctx.beginPath();ctx.strokeStyle='rgba(243,245,248,.85)';ctx.lineWidth=1.3;const a=P(e[0]),b=P(e[1]);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();});ctx.setLineDash([]);}
+    N.forEach((n,i)=>{const p=P(i),fl=(i===failed);if(fl){ctx.beginPath();ctx.setLineDash([4,4]);ctx.lineDashOffset=dash;ctx.strokeStyle='rgba(120,128,140,.6)';ctx.lineWidth=1.2;ctx.arc(p[0],p[1],7,0,6.28);ctx.stroke();ctx.setLineDash([]);}else{const t=Date.now()/600;ctx.beginPath();ctx.fillStyle='rgba(243,245,248,.12)';ctx.arc(p[0],p[1],7+Math.sin(t+i)*1.2,0,6.28);ctx.fill();ctx.beginPath();ctx.fillStyle='#F3F5F8';ctx.arc(p[0],p[1],3.2,0,6.28);ctx.fill();}});
+  })();
+})();
+</script>
+</body>
+</html>
