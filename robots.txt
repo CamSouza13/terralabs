@@ -1,0 +1,21 @@
+# Terra Laboratories
+# All crawlers, including AI assistants, are welcome.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://terralaboratories.com/sitemap.xml

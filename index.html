@@ -3,7 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terra Laboratories / The autonomy layer for living systems</title>
+<title>Terra Laboratories / Autonomy for land-based fish farms (RAS)</title>
+<meta name="description" content="Terra forecasts a DO crash or biofilter collapse on land-based fish farms hours ahead, and acts on it offline. The autonomy layer for recirculating aquaculture (RAS).">
+<link rel="canonical" href="https://terralaboratories.com/">
+<meta name="theme-color" content="#07080B">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Terra Laboratories">
+<meta property="og:url" content="https://terralaboratories.com/">
+<meta property="og:title" content="Stop the bad night before it starts.">
+<meta property="og:description" content="Terra forecasts a DO crash or biofilter collapse on land-based fish farms hours ahead, and acts on it offline. The autonomy layer for recirculating aquaculture (RAS).">
+<meta property="og:image" content="https://terralaboratories.com/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Terra Laboratories: forecast a DO crash on land-based fish farms hours ahead.">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stop the bad night before it starts.">
+<meta name="twitter:description" content="Terra forecasts a DO crash or biofilter collapse on land-based fish farms hours ahead, and acts on it offline.">
+<meta name="twitter:image" content="https://terralaboratories.com/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -94,6 +112,32 @@ section{position:relative;padding:clamp(80px,11vh,150px) var(--mx)}
 /* SOLUTIONS */
 .sol{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
 @media(max-width:900px){.sol{grid-template-columns:1fr}}
+.aquagrid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center}
+@media(max-width:820px){.aquagrid{grid-template-columns:1fr}}
+.roadmap{display:flex;flex-wrap:wrap;gap:10px}
+.roadmap span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--body);border:1px solid var(--line);border-radius:20px;padding:8px 15px}
+.notfor{margin-top:20px;font-size:13.5px;color:var(--mut);max-width:60ch}
+/* FAQ */
+.faq{margin-top:40px;display:grid;gap:12px}
+.faq details{border:1px solid var(--line);border-radius:6px;background:var(--panel);padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-size:17px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--acc);font-family:var(--mono)}
+.faq details[open] summary::after{content:"–"}
+.faq p{font-size:14.5px;color:var(--body);padding:0 0 20px;max-width:70ch}
+/* FOUNDER */
+.founder{display:flex;gap:22px;align-items:flex-start}
+.favatar{width:76px;height:76px;border-radius:50%;flex:0 0 76px;border:1px solid var(--line);background:var(--bg2);object-fit:cover;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:var(--acc);font-size:22px}
+.flinks{display:flex;gap:16px;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--acc)}
+.flinks a{border-bottom:1px solid var(--line)}
+/* PILOT FORM */
+.pilotwrap{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:44px}
+@media(max-width:820px){.pilotwrap{grid-template-columns:1fr}}
+.pilotwrap .side{padding:clamp(28px,4vw,52px);background:var(--bg2)}
+.pilotwrap form{padding:clamp(28px,4vw,52px);display:grid;gap:14px}
+.pilotwrap label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mut)}
+.pilotwrap input,.pilotwrap textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--disp);font-size:15px;padding:12px 14px;margin-top:6px}
+.pilotwrap input:focus,.pilotwrap textarea:focus{outline:none;border-color:#333a45}
 .solcard{border:1px solid var(--line);border-radius:6px;padding:26px;background:var(--panel);transition:.35s}
 .solcard:hover{border-color:#333a45;transform:translateY(-4px)}
 .solcard .tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--acc)}
@@ -126,6 +170,39 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
 .fcol a:hover{color:var(--ink)}
 .legal{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:#4a4f57;letter-spacing:.04em;line-height:1.8;max-width:1000px}
 </style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://terralaboratories.com/#org",
+      "name":"Terra Laboratories",
+      "url":"https://terralaboratories.com/",
+      "logo":"https://terralaboratories.com/logo.png",
+      "description":"The autonomy layer for closed living systems. Terra forecasts a DO crash or biofilter collapse on land-based fish farms hours ahead and acts on it offline.",
+      "founder":{"@type":"Person","name":"Cameron Souza","jobTitle":"Founder","url":"https://camsouza8.wixstudio.com/csouza"},
+      "sameAs":["https://camsouza8.wixstudio.com/csouza","https://github.com/CamSouza13"]
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://terralaboratories.com/#website",
+      "url":"https://terralaboratories.com/",
+      "name":"Terra Laboratories",
+      "publisher":{"@id":"https://terralaboratories.com/#org"}
+    },
+    {
+      "@type":"Service",
+      "name":"Terra Engine for recirculating aquaculture (RAS)",
+      "provider":{"@id":"https://terralaboratories.com/#org"},
+      "serviceType":"Autonomous water-quality forecasting and control for land-based fish farms",
+      "areaServed":"US",
+      "description":"An edge-deployed Bayesian state estimator that forecasts DO crashes, ammonia spikes, and biofilter collapse hours ahead on land-based recirculating aquaculture systems, and acts on-site with no cloud and no operator, behind a full audit log.",
+      "audience":{"@type":"Audience","audienceType":"Land-based aquaculture / RAS farm operators"}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="grain"></div>
@@ -134,43 +211,48 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
 <nav id="nav">
   <div class="brand">TERRA&nbsp;LABORATORIES</div>
   <div class="navlinks">
-    <a href="#platform">PLATFORM</a>
-    <a href="#solutions">SOLUTIONS</a>
-    <a href="#tech">TECHNOLOGY</a>
+    <a href="#how">HOW IT WORKS</a>
+    <a href="#solutions">AQUACULTURE</a>
+    <a href="#faq">FAQ</a>
+    <a href="/about/">ABOUT</a>
     <a href="#deck">DECK</a>
-    <a href="mailto:cameron@terralaboratories.com" class="navcta">TALK TO US</a>
+    <a href="#pilot" class="navcta">REQUEST A PILOT</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <header id="hero">
   <div class="wrap">
-    <div class="eyebrow">TERRA LABORATORIES</div>
-    <h1 class="h1">Keeping life alive, anywhere.</h1>
-    <p class="hero-sub">Terra is the autonomy layer for closed living systems. We read the true state of a living loop, forecast failure hours before it happens, and act on it, from aquaculture on Earth to life support in space.</p>
+    <div class="eyebrow">AUTONOMY FOR LAND-BASED FISH FARMS (RAS)</div>
+    <h1 class="h1">Stop the bad night before it starts.</h1>
+    <p class="hero-sub">Terra is the autonomy layer for land-based fish farms. We forecast a DO crash or biofilter collapse hours ahead and act on it, offline, behind a full audit log.</p>
     <div class="cta-row">
-      <a href="mailto:cameron@terralaboratories.com" class="btn solid">TALK TO US</a>
+      <a href="#pilot" class="btn solid">REQUEST A PILOT</a>
       <a href="#deck" class="btn">SEE THE PITCH DECK</a>
     </div>
-    <div class="trustline">In motion with NASA-connected industry partners, Oregon State University, NOAA, and the MEDB Hawaii accelerator.</div>
+    <div class="trustline">Built for recirculating aquaculture. In conversation with Oregon State University, NOAA, and the MEDB Hawaii accelerator. <a href="#faq" style="color:var(--acc);border-bottom:1px solid var(--line)">See where we are, honestly.</a></div>
   </div>
 </header>
 
 <!-- TRUST BAR -->
+<!-- FLAG (D3.5): the audit wants each relationship stated concretely, and flags "NASA-connected" as an unverified overclaim.
+     Removed the vague "NASA-CONNECTED PARTNERS" logo. Add ONE true, specific line per partner below
+     (e.g. "Oregon State University: engine benchmarked against OSU aquaculture lab data, 2026").
+     Only name a partner you can substantiate; reinstate NASA only if there is a real, nameable relationship. -->
 <div class="trustbar">
-  <div class="lbl">RELATIONSHIPS &amp; PARTNERS</div>
-  <div class="names"><span>NASA-CONNECTED PARTNERS</span><span>OREGON STATE</span><span>NOAA</span><span>MEDB HAWAII</span></div>
+  <div class="lbl">WHERE WE ARE</div>
+  <div class="names"><span>OREGON STATE UNIVERSITY</span><span>NOAA</span><span>MEDB HAWAII ACCELERATOR</span></div>
 </div>
 
 <!-- VALUE PROPS -->
 <section id="platform">
   <div class="kick reveal">THE PLATFORM</div>
-  <h2 class="h2 reveal d1">Autonomy for the systems that keep us alive.</h2>
-  <p class="lead reveal d2">Conventional monitoring alarms on one sensor at a time, after something breaks. Terra models the whole loop, sees the failure coming, and does something about it.</p>
+  <h2 class="h2 reveal d1">Autonomy for the systems that keep fish alive.</h2>
+  <p class="lead reveal d2">Conventional monitoring alarms on one probe at a time, after the DO has already crashed. Terra models the whole RAS loop, sees the crash coming hours out, and acts before you lose the tank.</p>
   <div class="grid g3">
-    <div class="card reveal d1"><div class="n">01</div><h3>See failure before it happens</h3><p>Forecast a breach hours ahead from the true whole-system state, not from a single gauge crossing a line.</p></div>
-    <div class="card reveal d2"><div class="n">02</div><h3>Act autonomously, offline</h3><p>Dose, aerate, or alert on-site with no cloud and no operator, every decision behind a full audit log.</p></div>
-    <div class="card reveal d3"><div class="n">03</div><h3>One engine, every environment</h3><p>A new domain is a specification, not a rebuild. The same core runs from a fish farm to a lunar habitat.</p></div>
+    <div class="card reveal d1"><div class="n">01</div><h3>See the DO crash before it happens</h3><p>Forecast a DO crash, ammonia spike, or biofilter collapse hours ahead from the true whole-system state, not from a single gauge crossing a line.</p></div>
+    <div class="card reveal d2"><div class="n">02</div><h3>Act autonomously, offline</h3><p>Aerate, dose, or alert on-site with no cloud and no operator, even on a bad VSAT link, every decision behind a full audit log.</p></div>
+    <div class="card reveal d3"><div class="n">03</div><h3>One engine, every environment</h3><p>A new domain is a specification, not a rebuild. The same core runs from a land-based fish farm to a lunar habitat.</p></div>
   </div>
 </section>
 <div class="rule"></div>
@@ -180,15 +262,60 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
   <div class="split reveal">
     <div class="txt">
       <div class="kick">THE PROBLEM</div>
-      <h2 class="h2">They fail as a whole, quietly.</h2>
-      <p class="lead">Closed living systems collapse at the level of the whole loop before any single reading crosses a line, and the probes we trust foul and drift. The dashboard looks calm while the system dies.</p>
+      <h2 class="h2">The tank crashes as a whole, quietly.</h2>
+      <p class="lead">In a recirculating system (RAS), a DO crash, an ammonia spike, or a slow biofilter collapse builds for hours before any single probe trips an alarm. Probes foul and drift, so the dashboard reads calm while the fish are already dying.</p>
       <ul class="ul">
-        <li>$3M+ can be lost in a single bad night on a land-based farm</li>
-        <li>Hours from first hidden drift to catastrophic loss</li>
-        <li>In a sealed habitat, the same failure costs a crew</li>
+        <li>A single bad night can wipe a cohort and cost a land-based farm millions</li>
+        <li>Hours pass between the first hidden drift and mass mortality</li>
+        <li>Threshold alarms fire after the DO has already crossed the line</li>
       </ul>
     </div>
-    <div class="img" style="background-image:linear-gradient(120deg,rgba(7,8,11,.25),rgba(7,8,11,.05)),url('https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg')"></div>
+    <div class="img" style="padding:22px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut)"><span>DISSOLVED OXYGEN FORECAST</span><span style="border:1px solid var(--line);padding:3px 8px;border-radius:3px">SIMULATION</span></div>
+      <svg viewBox="0 0 600 340" width="100%" role="img" aria-label="Dissolved-oxygen forecast crossing the 4.0 mg/L mass-mortality line, with Terra warning about 6.5 hours ahead of the crossing (simulation).">
+        <defs><linearGradient id="risk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0564d" stop-opacity=".16"/><stop offset="1" stop-color="#e0564d" stop-opacity=".02"/></linearGradient></defs>
+        <!-- risk zone below 4.0 mg/L -->
+        <rect x="50" y="240" width="510" height="80" fill="url(#risk)"/>
+        <!-- axes -->
+        <line x1="50" y1="40" x2="50" y2="320" stroke="#20242C"/>
+        <line x1="50" y1="320" x2="560" y2="320" stroke="#20242C"/>
+        <!-- gridlines -->
+        <line x1="50" y1="120" x2="560" y2="120" stroke="#161a20"/>
+        <line x1="50" y1="200" x2="560" y2="200" stroke="#161a20"/>
+        <!-- mass-mortality threshold -->
+        <line x1="50" y1="240" x2="560" y2="240" stroke="#C58B3B" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <text x="556" y="234" text-anchor="end" font-family="monospace" font-size="11" fill="#C58B3B">4.0 mg/L mass-mortality line</text>
+        <!-- observed DO (solid) -->
+        <polyline points="50,100 135,120 220,148 305,176" fill="none" stroke="#F3F5F8" stroke-width="2.4"/>
+        <!-- forecast DO (dashed) -->
+        <polyline points="305,176 390,208 489,240 560,264" fill="none" stroke="#9aa2ad" stroke-width="2.2" stroke-dasharray="6 5"/>
+        <!-- early-warning marker -->
+        <line x1="305" y1="40" x2="305" y2="320" stroke="#F3F5F8" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
+        <circle cx="305" cy="176" r="4.5" fill="#F3F5F8"/>
+        <text x="312" y="70" font-family="monospace" font-size="11" fill="#F3F5F8">Terra warning</text>
+        <text x="312" y="86" font-family="monospace" font-size="11" fill="#9aa2ad">~6.5 h ahead</text>
+        <!-- breach point -->
+        <circle cx="489" cy="240" r="4.5" fill="#e0564d"/>
+        <text x="482" y="262" text-anchor="end" font-family="monospace" font-size="11" fill="#e0564d">forecast breach</text>
+        <!-- axis labels -->
+        <text x="50" y="336" font-family="monospace" font-size="10" fill="#6E7681">now</text>
+        <text x="556" y="336" text-anchor="end" font-family="monospace" font-size="10" fill="#6E7681">+18 h</text>
+        <text x="16" y="104" font-family="monospace" font-size="10" fill="#6E7681">8</text>
+        <text x="16" y="244" font-family="monospace" font-size="10" fill="#6E7681">4</text>
+      </svg>
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--mut);line-height:1.7">Terra forecasts the DO crossing the 4.0 mg/L line about 6.5 hours before a threshold alarm would fire. Illustrative simulation.</div>
+    </div>
+  </div>
+  <!-- AUDIT LOG (desired-result / after-state, D1.5) -->
+  <div class="reveal" style="margin-top:18px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:22px 24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut);margin-bottom:14px"><span>ACTION &amp; AUDIT LOG</span><span style="border:1px solid var(--line);padding:3px 8px;border-radius:3px">SIMULATION</span></div>
+    <div style="font-family:var(--mono);font-size:12.5px;line-height:2;color:var(--body)">
+      <div><span style="color:var(--mut)">02:14</span> &nbsp;DO forecast: 4.0 mg/L breach predicted in ~6.5 h &nbsp;<span style="color:var(--acc)">(p=0.87)</span></div>
+      <div><span style="color:var(--mut)">02:14</span> &nbsp;ALERT sent to on-call operator</div>
+      <div><span style="color:var(--mut)">02:15</span> &nbsp;ACTION: emergency aeration engaged &nbsp;<span style="color:var(--mut)">(within operator limit: max +30%)</span></div>
+      <div><span style="color:var(--mut)">03:02</span> &nbsp;DO trend reversed; forecast breach cleared</div>
+      <div><span style="color:var(--mut)">03:02</span> &nbsp;Logged for operator review &nbsp;<span style="color:#7bbf8a">nominal</span></div>
+    </div>
   </div>
 </section>
 <div class="rule"></div>
@@ -238,15 +365,34 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
 <!-- SOLUTIONS -->
 <section id="solutions">
   <div class="kick reveal">SOLUTIONS</div>
-  <h2 class="h2 reveal d1">One platform. Many worlds.</h2>
-  <p class="lead reveal d2">We start where the pain is sharp and funded, then carry the same engine into markets that share the same problem.</p>
-  <div class="sol">
-    <div class="solcard reveal d1"><div class="tag">BEACHHEAD</div><h3>Aquaculture</h3><p>Prevent mass-mortality events on land-based farms. The wedge market and first revenue.</p></div>
-    <div class="solcard reveal d1"><div class="tag">EARTH</div><h3>Environment &amp; water</h3><p>Autonomous remediation, wastewater, and environmental monitoring at scale.</p></div>
-    <div class="solcard reveal d2"><div class="tag">INDUSTRY</div><h3>Bioprocess</h3><p>Bioreactor and biopharma batch guardianship, where a drifting batch is money burned.</p></div>
-    <div class="solcard reveal d2"><div class="tag">DEFENSE</div><h3>Submarine &amp; field</h3><p>Closed-hull life support, expeditionary water, and bio-threat detection.</p></div>
-    <div class="solcard reveal d3"><div class="tag">MISSION</div><h3>Space life support</h3><p>Bioregenerative life support for the Moon and Mars, a NASA-documented gap.</p></div>
-    <div class="solcard reveal d3"><div class="tag">ACROSS ALL</div><h3>Terra Mesh</h3><p>The self-healing sensor network that makes every deployment resilient by design.</p></div>
+  <h2 class="h2 reveal d1">Start on the farm. Same engine everywhere else.</h2>
+  <p class="lead reveal d2">We start where the pain is sharpest and funded, land-based aquaculture, then carry the same engine into markets with the same failure mode.</p>
+
+  <div class="reveal d2" style="margin-top:40px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,var(--panel),var(--bg2));padding:clamp(26px,4vw,44px)">
+    <div class="tag" style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--acc)">BEACHHEAD / FIRST REVENUE</div>
+    <div class="aquagrid">
+      <div>
+        <h3 style="font-size:clamp(24px,3vw,34px);margin:12px 0 12px">Land-based fish farms (RAS)</h3>
+        <p style="color:var(--body);font-size:15.5px;max-width:52ch">One bad night can wipe an entire cohort. Terra watches the whole loop, forecasts a DO crash or biofilter collapse hours ahead, and can act before the tank goes. Start with one system on a value-share pilot: you only pay when we prevent a loss.</p>
+        <div class="cta-row" style="margin-top:24px">
+          <a href="#pilot" class="btn solid">REQUEST A PILOT</a>
+          <a href="#how" class="btn">HOW IT WORKS</a>
+        </div>
+      </div>
+      <div style="display:grid;gap:12px">
+        <div style="border:1px solid var(--line);border-radius:6px;padding:16px"><div style="font-size:26px;color:var(--ink);font-weight:600">~6.5 h</div><div style="font-size:12.5px;color:var(--mut)">early warning ahead of a DO crash (simulation)</div></div>
+        <div style="border:1px solid var(--line);border-radius:6px;padding:16px"><div style="font-size:26px;color:var(--ink);font-weight:600">Value-share</div><div style="font-size:12.5px;color:var(--mut)">you pay when we prevent a loss</div></div>
+        <div style="border:1px solid var(--line);border-radius:6px;padding:16px"><div style="font-size:26px;color:var(--ink);font-weight:600">Offline</div><div style="font-size:12.5px;color:var(--mut)">runs on-site, no cloud required</div></div>
+      </div>
+    </div>
+    <p class="notfor">Terra is built for land-based, recirculating systems. If you run net pens or open ponds, we are not the right fit yet.</p>
+  </div>
+
+  <div class="reveal d3" style="margin-top:26px">
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mut);margin-bottom:14px">WHERE THE SAME ENGINE GOES NEXT (ROADMAP)</div>
+    <div class="roadmap">
+      <span>Environment &amp; water</span><span>Bioprocess &amp; biopharma</span><span>Submarine &amp; field life support</span><span>Space life support (Moon / Mars)</span><span>Terra Mesh, the self-healing network</span>
+    </div>
   </div>
 </section>
 
@@ -259,6 +405,20 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
     <div class="metric reveal d4"><div class="v">$5-<span class="count" data-to="10"></span>B</div><div class="l">Space life-support market by 2033</div></div>
   </div>
 </div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="kick reveal">FAQ</div>
+  <h2 class="h2 reveal d1">The questions operators actually ask.</h2>
+  <div class="faq reveal d2">
+    <details><summary>Does it act without me?</summary><p>Only inside limits you set. Every autonomous action, like bumping aeration, is bounded by operator-defined caps and written to a full audit log. You can also run Terra in alert-only mode, where it forecasts and warns but never touches an actuator.</p></details>
+    <details><summary>Does it work offline, on a bad VSAT link?</summary><p>Yes. The whole engine runs on a small edge node on-site. It needs no cloud and no network to forecast or act, so a dropped or slow VSAT link does not stop it. Connectivity is for reporting, not for the decision.</p></details>
+    <details><summary>Is this proven yet?</summary><p>We are candid about our stage. Terra is validated in simulation today on a real-data foundation, and the company is pre-revenue. Bench validation is planned for Q4 2026 and the first paid pilots for H1 2027. If you want to be one of those first pilots, that is exactly what the pilot request is for.</p></details>
+    <details><summary>Do I need a data scientist to run it?</summary><p>No. Terra uses commodity probes plus a small edge node, and we handle calibration and the model. Your team sees forecasts, alerts, and an audit log, not math.</p></details>
+    <details><summary>What does a pilot cost?</summary><p>We price on value share: you pay when we prevent a loss. A pilot starts on a single system so the risk to you is small and the result is measurable on your own farm.</p></details>
+  </div>
+</section>
+<div class="rule"></div>
 
 <!-- DECK -->
 <section id="deck">
@@ -281,17 +441,65 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
 <section id="company">
   <div class="kick reveal">COMPANY</div>
   <h2 class="h2 reveal d1">Focused by design. Built for the long climb.</h2>
+
+  <!-- FOUNDER BLOCK (D3.3)
+       FLAG: add /founder.jpg (a real headshot) to the repo root, replace LINKEDIN_URL_HERE with the real profile,
+       and review the first-person paragraph so it is in your own voice. Until founder.jpg exists a "CS" monogram shows. -->
+  <div class="card reveal d1" style="margin-top:44px">
+    <div class="founder">
+      <img class="favatar" src="/founder.jpg" alt="Cameron Souza, founder of Terra Laboratories" onerror="this.outerHTML='&lt;div class=\'favatar\'&gt;CS&lt;/div&gt;'">
+      <div>
+        <div style="font-family:var(--mono);color:var(--acc);font-size:12px;letter-spacing:.2em">FOUNDER</div>
+        <h3 style="margin:8px 0 8px">Cameron Souza</h3>
+        <p style="color:var(--body);font-size:14.5px;max-width:64ch">I am a data scientist, and I started Terra because the systems we count on to keep living things alive still fail from a variable nobody is watching. On a land-based farm that is a DO crash a single probe catches too late. I am building one honest engine that forecasts that failure early and acts on it, and I would rather show you exactly where we are than oversell it.</p>
+        <div class="flinks">
+          <a href="https://camsouza8.wixstudio.com/csouza" target="_blank" rel="noopener">PORTFOLIO</a>
+          <a href="LINKEDIN_URL_HERE" target="_blank" rel="noopener">LINKEDIN</a>
+          <a href="mailto:cameron@terralaboratories.com">EMAIL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIAL / DESIGN-PARTNER PROOF (D3.2, D3.5)
+       FLAG: story proof scored 0/7. This needs real, named quotes you must collect. When you have them,
+       replace this comment with 3-5 blocks, each: quote, full name, role, org, and a photo. Do not ship invented quotes.
+       Example markup for one:
+       <blockquote>"<real quote>" <cite><name>, <role>, <org></cite></blockquote> -->
+
   <div class="grid g2">
     <div class="card reveal d1"><div class="n">THE APPROACH</div><h3 style="margin-top:12px">One engine, honestly built</h3><p>We deepen a single engine instead of splitting focus, price on the value we create, and are candid about our stage. Deep domain and machine-learning expertise in house.</p></div>
     <div class="card reveal d2"><div class="n">THE RAISE</div><h3 style="margin-top:12px">$500K pre-seed</h3><p style="color:var(--acc);font-family:var(--mono);font-size:12px;margin:4px 0 12px">$6M cap SAFE / 12-month runway</p><p>Funding bench validation, first paid value-share pilots, and the first commercial hire. Pre-revenue today; bench validation Q4 2026, pilots H1 2027.</p></div>
   </div>
 </section>
 
+<!-- PILOT REQUEST (D2.4, D2.2, D3.1) -->
+<section id="pilot">
+  <div class="pilotwrap reveal">
+    <div class="side">
+      <div class="kick">REQUEST A PILOT</div>
+      <h2 class="h2" style="font-size:clamp(24px,3vw,38px)">Put Terra on one system.</h2>
+      <p class="lead" style="font-size:16px">Tell us about your farm and we will scope a single-system, value-share pilot. You only pay when we prevent a loss. No cloud to install, no data scientist to hire.</p>
+    </div>
+    <!-- FLAG: this form needs a backend to capture leads. Create a free Formspree form and paste its ID over FORM_ID
+         (or point action= at your own handler). Until then, submissions are not captured and the mailto fallback carries it. -->
+    <form action="https://formspree.io/f/FORM_ID" method="POST">
+      <div><label for="f_name">NAME</label><input id="f_name" name="name" required></div>
+      <div><label for="f_org">FARM / ORGANIZATION</label><input id="f_org" name="organization" required></div>
+      <div><label for="f_email">EMAIL</label><input id="f_email" type="email" name="email" required></div>
+      <div><label for="f_about">WHAT DO YOU RUN? (species, system size)</label><textarea id="f_about" name="about" rows="3"></textarea></div>
+      <button type="submit" class="btn solid" style="justify-self:start">REQUEST A PILOT</button>
+      <p style="font-size:11px;color:var(--mut);font-family:var(--mono)">Prefer email? <a href="mailto:cameron@terralaboratories.com" style="color:var(--acc)">cameron@terralaboratories.com</a></p>
+    </form>
+  </div>
+</section>
+<div class="rule"></div>
+
 <!-- CTA BAND -->
 <div class="ctaband">
-  <h2 class="reveal">Let's keep life alive, anywhere.</h2>
+  <h2 class="reveal">Stop the next bad night.</h2>
   <div class="cta-row reveal d1" style="justify-content:center">
-    <a href="mailto:cameron@terralaboratories.com" class="btn solid">TALK TO US</a>
+    <a href="#pilot" class="btn solid">REQUEST A PILOT</a>
     <a href="#deck" class="btn">SEE THE DECK</a>
   </div>
 </div>
@@ -303,12 +511,15 @@ footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
   </div>
   <div class="fcol">
     <h4>EXPLORE</h4>
-    <a href="#platform">Platform</a><a href="#solutions">Solutions</a><a href="#tech">Technology</a><a href="#deck">Pitch deck</a>
+    <a href="#how">How it works</a><a href="#solutions">Aquaculture</a><a href="#faq">FAQ</a><a href="/about/">About</a><a href="#deck">Pitch deck</a><a href="#pilot">Request a pilot</a>
   </div>
   <div class="fcol">
-    <h4>CONTACT</h4>
+    <h4>FOUNDER &amp; CONTACT</h4>
+    <div>Cameron Souza, Founder</div>
     <a href="mailto:cameron@terralaboratories.com">cameron@terralaboratories.com</a>
-    <div>terralaboratories.com</div>
+    <!-- FLAG: replace LINKEDIN_URL_HERE with the real profile -->
+    <a href="LINKEDIN_URL_HERE" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://camsouza8.wixstudio.com/csouza" target="_blank" rel="noopener">Portfolio</a>
   </div>
   <div class="legal">Market figures are drawn from third-party research (GM Insights, MarketsandMarkets, Industry Experts, BCC Research, Verified Market Reports) and the peer-reviewed literature. Engine performance is validated in simulation on a real-data foundation; the company is pre-revenue. Imagery courtesy of NASA (public domain). This page is not an offer to sell securities.</div>
 </footer>
@@ -372,6 +583,19 @@ function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.de
     N.forEach((n,i)=>{const p=P(i),fl=(i===failed);if(fl){ctx.beginPath();ctx.setLineDash([4,4]);ctx.lineDashOffset=dash;ctx.strokeStyle='rgba(120,128,140,.6)';ctx.lineWidth=1.2;ctx.arc(p[0],p[1],7,0,6.28);ctx.stroke();ctx.setLineDash([]);}else{const t=Date.now()/600;ctx.beginPath();ctx.fillStyle='rgba(243,245,248,.12)';ctx.arc(p[0],p[1],7+Math.sin(t+i)*1.2,0,6.28);ctx.fill();ctx.beginPath();ctx.fillStyle='#F3F5F8';ctx.arc(p[0],p[1],3.2,0,6.28);ctx.fill();}});
   })();
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Does it act without me?","acceptedAnswer":{"@type":"Answer","text":"Only inside limits you set. Every autonomous action is bounded by operator-defined caps and written to a full audit log. You can also run Terra in alert-only mode, where it forecasts and warns but never touches an actuator."}},
+    {"@type":"Question","name":"Does it work offline, on a bad VSAT link?","acceptedAnswer":{"@type":"Answer","text":"Yes. The whole engine runs on a small edge node on-site. It needs no cloud and no network to forecast or act, so a dropped or slow VSAT link does not stop it."}},
+    {"@type":"Question","name":"Is this proven yet?","acceptedAnswer":{"@type":"Answer","text":"Terra is validated in simulation today on a real-data foundation, and the company is pre-revenue. Bench validation is planned for Q4 2026 and the first paid pilots for H1 2027."}},
+    {"@type":"Question","name":"Do I need a data scientist to run it?","acceptedAnswer":{"@type":"Answer","text":"No. Terra uses commodity probes plus a small edge node, and we handle calibration and the model. Your team sees forecasts, alerts, and an audit log, not math."}},
+    {"@type":"Question","name":"What does a pilot cost?","acceptedAnswer":{"@type":"Answer","text":"We price on value share: you pay when we prevent a loss. A pilot starts on a single system so the risk to you is small and the result is measurable on your own farm."}}
+  ]
+}
 </script>
 </body>
 </html>
