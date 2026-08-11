@@ -4,93 +4,230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terra for bioregenerative life support / Terra Laboratories</title>
-<meta name="description" content="Terra's north star: closed-loop life support for the Moon and Mars. Validated on SIMOC, the Biosphere-2 closed-habitat model, across 60 fault scenarios.">
+<meta name="description" content="Terra’s north star: closed-loop life support for the Moon and Mars. Validated on SIMOC, the Biosphere-2 closed-habitat model, across 60 fault scenarios.">
 <link rel="canonical" href="https://terralaboratories.com/space/">
-<meta name="theme-color" content="#07080B">
+<meta name="theme-color" content="#F7F5EF">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Terra for bioregenerative life support / Terra Laboratories">
-<meta property="og:description" content="Terra's north star: closed-loop life support for the Moon and Mars. Validated on SIMOC, the Biosphere-2 closed-habitat model, across 60 fault scenarios.">
+<meta property="og:site_name" content="Terra Laboratories">
+<meta property="og:title" content="Terra for bioregenerative life support.">
+<meta property="og:description" content="Terra’s north star: closed-loop life support for the Moon and Mars. Validated on SIMOC, the Biosphere-2 closed-habitat model, across 60 fault scenarios.">
 <meta property="og:url" content="https://terralaboratories.com/space/">
 <meta property="og:image" content="https://terralaboratories.com/og-cover.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Terra for bioregenerative life support.">
+<meta name="twitter:description" content="Terra’s north star: closed-loop life support for the Moon and Mars. Validated on SIMOC, the Biosphere-2 closed-habitat model, across 60 fault scenarios.">
+<meta name="twitter:image" content="https://terralaboratories.com/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>:root{--bg:#07080B;--bg2:#0A0C11;--panel:#0E1015;--line:#20242C;--ink:#F3F5F8;--body:#AAB0BB;--mut:#6E7681;--acc:#D3D7DD;--amb:#C58B3B;--disp:'Space Grotesk',system-ui,sans-serif;--mono:'Space Mono',monospace;--mx:clamp(20px,6vw,120px)}
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F5EF;--paper2:#F1EEE5;--card:#FDFCF8;--ink:#14201B;--soft:#33403A;--mut:#5C6862;
+ --line:#E6E2D8;--green:#17453A;--signal:#1FB874;
+ --dark:#0E1613;--dline:#2A362F;--dink:#F1F5F2;--dmut:#AEBBB2;
+ --disp:'Instrument Sans',system-ui,sans-serif;--serif:'Instrument Serif',Georgia,serif;--mono:'JetBrains Mono',monospace;
+ --mx:clamp(20px,5vw,64px);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--body);font-family:var(--disp);line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--disp);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{color:var(--ink);font-weight:600;letter-spacing:-.02em;line-height:1.1}
 img{max-width:100%;display:block}
-nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--mx);border-bottom:1px solid var(--line);flex-wrap:wrap;gap:10px}
-.brand{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--ink);font-weight:700}
-.nlinks{display:flex;gap:20px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mut)}
-.nlinks a:hover{color:var(--ink)}
-main{max-width:900px;margin:0 auto;padding:clamp(46px,8vh,96px) var(--mx)}
-.ey{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--amb);margin-bottom:18px}
-h1{font-size:clamp(32px,5.4vw,60px);margin-bottom:20px;max-width:20ch}
-.lead{font-size:clamp(17px,1.6vw,21px);color:var(--body);max-width:66ch}
-h2{font-size:23px;margin:44px 0 12px}
-p{margin-bottom:14px;max-width:72ch}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.1}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--green);letter-spacing:0}
+.mono{font-family:var(--mono)}
+.seclabel{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.seclabel .tick{width:22px;height:1px;background:var(--green);opacity:.5}
+.btn{font-size:14px;font-weight:600;padding:13px 22px;border-radius:9px;cursor:pointer;border:.5px solid transparent;font-family:var(--disp);transition:transform .2s ease,background .2s ease}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+/* NAV */
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px var(--mx);border-bottom:.5px solid var(--line);background:rgba(247,245,239,.82);backdrop-filter:blur(10px)}
+.wordmark{font-weight:600;font-size:16px;letter-spacing:.005em}
+.navlinks{display:flex;gap:26px;font-size:13.5px;color:var(--soft)}
+.navlinks a:hover{color:var(--ink)}
+.navcta{font-size:13px;font-weight:600;color:var(--paper);background:var(--ink);padding:10px 17px;border-radius:8px}
+@media(max-width:860px){.navlinks{display:none}}
+/* HERO */
+.hero{display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center;padding:72px var(--mx) 52px}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:34px;padding:44px var(--mx)}}
+h1{font-size:clamp(38px,4.7vw,58px);line-height:1.09;letter-spacing:-.015em;margin:20px 0;max-width:17ch}
+.sub{font-size:18.5px;line-height:1.62;color:var(--soft);max-width:48ch;margin-bottom:28px}
+.ctarow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.meta{margin-top:32px;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--mut);flex-wrap:wrap}
+.meta .sep{width:1px;height:12px;background:var(--line)}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--signal);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,184,116,.5)}70%{box-shadow:0 0 0 8px rgba(31,184,116,0)}100%{box-shadow:0 0 0 0 rgba(31,184,116,0)}}
+/* INSTRUMENT PANEL */
+.inst{background:var(--dark);border-radius:14px;padding:22px;position:relative;color:var(--dink);box-shadow:0 24px 60px -30px rgba(20,32,27,.5)}
+.inst .corners span{position:absolute;width:9px;height:9px;border-color:rgba(255,255,255,.2);border-style:solid}
+.inst .ih{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dmut);margin-bottom:16px}
+.inst .sim{border:.5px solid var(--dline);border-radius:5px;padding:3px 8px}
+.rlabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dmut);margin-bottom:12px}
+.reading{display:flex;align-items:flex-end;gap:8px}
+.reading .val{font-family:var(--mono);font-size:34px;font-weight:500;letter-spacing:-.02em}
+.reading .unit{font-family:var(--mono);font-size:12px;color:var(--dmut);margin-bottom:7px}
+.statgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--dline);border:.5px solid var(--dline);border-radius:8px;overflow:hidden;margin-top:16px}
+.statgrid .s{background:var(--dark);padding:11px 12px}
+.statgrid .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dmut);margin-bottom:5px}
+.statgrid .v{font-family:var(--mono);font-size:14px;color:var(--dink)}
+.statgrid .v.sig{color:var(--signal)}
+.ifoot{display:flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dmut)}
+.spark{stroke-dasharray:400;stroke-dashoffset:400}
+.spark.in{transition:stroke-dashoffset 1.6s ease .2s;stroke-dashoffset:0}
+/* SECTIONS */
+section{padding:70px var(--mx);border-top:.5px solid var(--line)}
+h2{font-size:clamp(26px,3.2vw,38px);max-width:20ch;margin-bottom:10px}
+h2 em.s{font-family:var(--serif)}
+.lede{font-size:16.5px;color:var(--soft);max-width:58ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{border-top:1.5px solid var(--ink);padding-top:16px}
+.step .num{font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.1em}
+.step h3{font-size:18px;margin:8px 0 6px}
+.step p{font-size:14px;color:var(--soft);max-width:34ch}
+/* DOMAINS */
+.doms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+@media(max-width:860px){.doms{grid-template-columns:1fr}}
+.dom{position:relative;height:360px;border-radius:14px;overflow:hidden;border:.5px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end}
+.dom .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02) brightness(.82);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.dom:hover .bg{transform:scale(1.05)}
+.dom .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,18,.15) 0%,rgba(10,22,18,.55) 52%,rgba(8,16,13,.93) 100%)}
+.dom .duo2{position:absolute;inset:0;background:rgba(23,69,58,.28);mix-blend-mode:multiply}
+.dom .c{position:relative;z-index:2;padding:24px}
+.dom .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#CDE9DC;display:flex;justify-content:space-between}
+.dom h3{font-size:21px;color:#fff;margin:14px 0 8px}
+.dom p{font-size:13.5px;color:#D7E1DB;margin-bottom:16px;max-width:36ch}
+.dom a{font-family:var(--mono);font-size:12px;color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+/* PROOF */
+.proof{position:relative;border-top:none;color:var(--dink);padding:64px var(--mx);overflow:hidden;background:var(--dark)}
+.proof .pbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:grayscale(.2)}
+.proof .pov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,15,.86),rgba(10,18,15,.94))}
+.proof .in{position:relative;z-index:2}
+.proof .seclabel{color:var(--signal)}
+.proof h2{color:#fff}
+.proof .lede{color:var(--dmut);max-width:62ch}
+.proofgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dline);border:.5px solid var(--dline);border-radius:12px;overflow:hidden;margin-top:30px;position:relative;z-index:2}
+@media(max-width:860px){.proofgrid{grid-template-columns:1fr 1fr}}
+.pcell{background:rgba(14,22,19,.72);padding:24px 22px}
+.pcell .pv{font-family:var(--mono);font-size:30px;color:#fff;font-weight:500;letter-spacing:-.02em}
+.pcell .pv .sig{color:var(--signal)}
+.pcell .pk{font-size:12.5px;color:var(--dmut);margin-top:8px;max-width:22ch}
+.pnote{font-family:var(--mono);font-size:10.5px;color:var(--dmut);margin-top:18px;position:relative;z-index:2}
+/* FAQ */
+.faq{margin-top:28px;max-width:780px}
+details{border-top:.5px solid var(--line);padding:18px 0}
+summary{cursor:pointer;list-style:none;font-size:17px;font-weight:500;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--green);font-family:var(--mono)}
+details[open] summary::after{content:"–"}
+details p{font-size:14.5px;color:var(--soft);margin-top:12px;max-width:64ch}
+/* PILOT */
+.pilot{background:var(--paper2);border-radius:16px;padding:clamp(28px,4vw,44px);display:grid;grid-template-columns:1fr 1fr;gap:36px}
+@media(max-width:860px){.pilot{grid-template-columns:1fr}}
+.field{margin-bottom:12px}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:6px}
+.field input{width:100%;background:#FFFDF9;border:.5px solid var(--line);border-radius:8px;padding:12px 13px;font-family:var(--disp);font-size:15px;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--green)}
+/* FOOTER */
+footer{padding:52px var(--mx) 32px;border-top:.5px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+@media(max-width:860px){footer{grid-template-columns:1fr}}
+footer .big{font-size:22px;font-weight:600;max-width:20ch}
+footer .tagm{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mut);margin-top:14px}
+.fcol h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.fcol a{display:block;font-size:14px;color:var(--soft);margin-bottom:8px}
+.legal{grid-column:1/-1;border-top:.5px solid var(--line);margin-top:16px;padding-top:16px;font-family:var(--mono);font-size:10px;color:var(--mut);line-height:1.7;max-width:1000px}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.14s}.d3{transition-delay:.22s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.spark{stroke-dashoffset:0}}
+
+/* domain-page additions */
+.dhero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:60px var(--mx) 36px}
+@media(max-width:860px){.dhero{grid-template-columns:1fr;gap:28px}}
+.dimg{position:relative;height:360px;border-radius:14px;overflow:hidden;border:.5px solid var(--line)}
+.dimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02) brightness(.84)}
+.dimg .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,18,.08),rgba(10,22,18,.5))}
+.dimg .duo2{position:absolute;inset:0;background:rgba(23,69,58,.24);mix-blend-mode:multiply}
+.dimg .cap{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#DCE7E0}
 .ul{list-style:none;margin:16px 0;display:grid;gap:10px}
-.ul li{padding-left:20px;position:relative;color:var(--body)}
-.ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;background:var(--acc);border-radius:1px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
-@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
-.stat{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--panel)}
-.stat .v{font-size:26px;color:var(--ink);font-weight:600}
-.stat .l{font-size:12px;color:var(--mut);margin-top:6px}
-.note{border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:0;background:var(--panel);padding:16px 18px;margin:20px 0;font-size:14px;color:var(--body)}
-.btn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:14px 24px;border:1px solid var(--line);color:var(--ink);border-radius:3px;margin-top:8px}
-.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px;font-family:var(--mono);font-size:11px;color:var(--mut)}
-.tagrow a{border:1px solid var(--line);border-radius:20px;padding:7px 14px}
-.tagrow a:hover{color:var(--ink);border-color:#333a45}
-footer{padding:40px var(--mx);border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:#4a4f57;letter-spacing:.04em;line-height:1.8}</style>
+.ul li{padding-left:20px;position:relative;color:var(--soft);font-size:15px;max-width:70ch}
+.ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;background:var(--green);border-radius:1px}
+.prose p{color:var(--soft);font-size:15.5px;max-width:70ch;margin-bottom:14px}
+.callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
+@media(max-width:860px){.callouts{grid-template-columns:1fr}}
+.co{border:.5px solid var(--line);border-radius:10px;padding:18px;background:var(--card)}
+.co .v{font-family:var(--mono);font-size:22px;color:var(--ink)}
+.co .k{font-size:12px;color:var(--mut);margin-top:6px}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px;font-family:var(--mono);font-size:11px}
+.tagrow a{border:.5px solid var(--line);border-radius:20px;padding:7px 14px;color:var(--soft)}
+.tagrow a:hover{color:var(--ink);border-color:var(--ink)}
+.note{border:.5px solid var(--line);border-left:2.5px solid var(--green);border-radius:0 8px 8px 0;background:var(--paper2);padding:16px 18px;margin:20px 0;font-size:14px;color:var(--soft)}
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
 {"@type":"ListItem","position":1,"name":"Home","item":"https://terralaboratories.com/"},
-{"@type":"ListItem","position":2,"name":"Space life support","item":"https://terralaboratories.com/space/"}]}
+{"@type":"ListItem","position":2,"name":"Terra for bioregenerative life support","item":"https://terralaboratories.com/space/"}]}
 </script>
 </head>
 <body>
 <nav>
-  <a class="brand" href="/">TERRA&nbsp;LABORATORIES</a>
-  <div class="nlinks">
-    <a href="/aquaculture/">AQUACULTURE</a>
-    <a href="/bioremediation/">BIOREMEDIATION</a>
-    <a href="/space/">SPACE</a>
-    <a href="/">HOME</a>
-  </div>
+  <a class="wordmark" href="/">Terra&nbsp;Laboratories</a>
+  <div class="navlinks"><a href="/#how">Platform</a><a href="/aquaculture/">Aquaculture</a><a href="/bioremediation/">Bioremediation</a><a href="/space/">Space</a><a href="/about/">Company</a></div>
+  <a href="/#pilot" class="navcta">Request a pilot</a>
 </nav>
-<main>
-  <div class="ey">SPACE LIFE SUPPORT / VALIDATED IN SIMULATION</div>
-  <h1>Keeping a crew alive, off Earth.</h1>
-  <p class="lead">Bioregenerative life support is the hardest closed living system there is, and a NASA-documented gap. It is Terra's north star, and where we have the most rigorous validation to date.</p>
-  
-  <h2>The validation, in numbers</h2>
-  <p>We ran Terra against SIMOC, the agent-based closed-ecosystem model developed with Biosphere 2, across a 60-run ensemble spanning seven habitat configurations and dozens of fault conditions. In each run Terra saw only two gas sensors, calibrated itself to that habitat, and forecast a crew-safety breach.</p>
-  <div class="stats">
-    <div class="stat"><div class="v">98%</div><div class="l">of safety breaches forecast before they occurred (40 of 41)</div></div>
-    <div class="stat"><div class="v">18 h</div><div class="l">median warning lead, up to 168 h</div></div>
-    <div class="stat"><div class="v">11%</div><div class="l">false-alarm rate on non-breaching runs</div></div>
-    <div class="stat"><div class="v">0.87</div><div class="l">median per-habitat calibration fit (R2 on O2)</div></div>
+<header class="dhero">
+  <div class="reveal">
+    <div class="seclabel"><span class="tick"></span>Orbit · validated in simulation</div>
+    <h1>Terra for <em class="s">bioregenerative</em> life support.</h1>
+    <div class="sub">Bioregenerative life support is the hardest closed living system there is, and a NASA-documented gap. It is Terra’s north star, and where we have the most rigorous validation to date.</div>
+    <div class="ctarow"><a href="/#pilot" class="btn solid">Request a pilot</a><a href="/#how" class="btn ghost">How it works →</a></div>
   </div>
-  <p style="color:var(--mut);font-size:14px">This is simulation-to-simulation validation against an independent, peer-built model. It is not flight data, and Terra has no flight heritage. The two false alarms and one low-lead case are reported in the full write-up rather than hidden.</p>
-  <h2>Why the north star pulls the whole company</h2>
-  <p>Bioregenerative life support, growing food and regenerating air in a sealed habitat, is a NASA-documented gap and the hardest closed living system there is. An engine hardened on that problem is exactly what makes the aquaculture product trustworthy on Earth. Same math, same audit-logged autonomy, three closed worlds.</p>
-  <h2>Where this stands</h2>
-  <p>Simulation-validated today, pre-revenue, no flight heritage. We are looking for research partners and non-dilutive support (for example USDA, NOAA, and NASA SBIR tracks) to move from simulation toward bench validation.</p>
-  <div class="cta-row">
-    <a href="mailto:cameron@terralaboratories.com?subject=Space%20life%20support%20/%20SIMOC" class="btn solid">TALK TO US</a>
-    <a href="/#deck" class="btn">SEE THE DECK</a>
+  <div class="dimg reveal d2"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg" alt="Earth from Apollo 17"><div class="duo"></div><div class="duo2"></div><div class="cap">Earth from Apollo 17</div></div>
+</header>
+<section class="proof">
+  <img class="pbg" src="https://commons.wikimedia.org/wiki/Special:FilePath/NASA-Apollo8-Dec24-Earthrise.jpg" alt=""><div class="pov"></div>
+  <div class="in">
+    <div class="seclabel"><span class="tick" style="background:var(--signal)"></span>The validation, in numbers</div>
+    <h2 class="reveal">A 60-run ensemble on <em class="s">SIMOC</em>.</h2>
+    <div class="lede reveal d1">Against SIMOC, the agent-based closed-ecosystem model developed with Biosphere 2, across seven habitat configurations. In each run Terra saw only two gas sensors, calibrated itself, and forecast a crew-safety breach.</div>
+    <div class="proofgrid reveal d1">
+      <div class="pcell"><div class="pv"><span class="sig count" data-to="98">0</span><span class="sig">%</span></div><div class="pk">of safety breaches forecast before they occurred</div></div>
+      <div class="pcell"><div class="pv"><span class="count" data-to="18">0</span> h</div><div class="pk">median warning lead, up to 168 h</div></div>
+      <div class="pcell"><div class="pv"><span class="count" data-to="11">0</span>%</div><div class="pk">false-alarm rate on non-breaching runs</div></div>
+      <div class="pcell"><div class="pv"><span class="count" data-to="0.87" data-dec="2">0</span></div><div class="pk">median per-habitat calibration fit, R²</div></div>
+    </div>
+    <div class="pnote">Simulation-to-simulation validation against an independent, peer-built model. Not flight data; no flight heritage.</div>
   </div>
-
-  <div class="tagrow">
-    <a href="/aquaculture/">Aquaculture</a><a href="/bioremediation/">Bioremediation</a><a href="/space/">Space</a><a href="/#pilot">Request a pilot</a><a href="/">Back to home</a>
-  </div>
-</main>
-<footer>TERRA LABORATORIES / FROM THE MUD TO THE MOON &nbsp;&middot;&nbsp; The company is pre-revenue; engine performance is validated in simulation on a real-data foundation. Imagery and figures are illustrative unless cited.</footer>
+</section>
+<section>
+  <div class="seclabel reveal"><span class="tick"></span>Why the north star pulls the company</div>
+  <div class="prose reveal d1"><p>Bioregenerative life support, growing food and regenerating air in a sealed habitat, is a NASA-documented gap and the hardest closed living system there is. An engine hardened on that problem is exactly what makes the aquaculture product trustworthy on Earth. Same math, same audit-logged autonomy, three closed worlds.</p></div>
+</section>
+<section>
+  <div class="seclabel reveal"><span class="tick"></span>Where this stands</div>
+  <div class="prose reveal d1"><p>Simulation-validated today, pre-revenue, no flight heritage. We are looking for research partners and non-dilutive support (for example USDA, NOAA, and NASA SBIR tracks) to move from simulation toward bench validation.</p></div>
+  <div class="ctarow reveal" style="margin-top:8px"><a href="mailto:cameron@terralaboratories.com?subject=Space%20life%20support%20/%20SIMOC" class="btn solid">Talk to us</a></div>
+</section>
+<section>
+  <div class="tagrow reveal"><a href="/aquaculture/">Aquaculture</a><a href="/bioremediation/">Bioremediation</a><a href="/space/">Space</a><a href="/#pilot">Request a pilot</a><a href="/">Back to platform</a></div>
+</section>
+<footer id="company">
+  <div><div class="big">The autonomous intelligence platform for living systems.</div><div class="tagm">Terra Laboratories · From the mud to the moon</div></div>
+  <div class="fcol"><h4>Platform</h4><a href="/#how">How it works</a><a href="/aquaculture/">Aquaculture</a><a href="/bioremediation/">Bioremediation</a><a href="/space/">Space</a></div>
+  <div class="fcol"><h4>Company</h4><a href="/about/">About</a><a href="/#pilot">Request a pilot</a><a href="mailto:cameron@terralaboratories.com">cameron@terralaboratories.com</a></div>
+  <div class="legal">Engine performance is validated in simulation on a real-data foundation; the company is pre-revenue. Imagery: NASA (public domain) and Wikimedia Commons contributors. This page is not an offer to sell securities.</div>
+</footer>
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.16});
+document.querySelectorAll('.reveal,.spark').forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);cio.unobserve(e.target);}}),{threshold:.6});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0');let t0=null;function s(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1100,1),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(s);else el.textContent=to.toFixed(dec);}if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=to.toFixed(dec);return;}requestAnimationFrame(s);}
+</script>
 </body>
 </html>

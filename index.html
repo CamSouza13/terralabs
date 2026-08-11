@@ -3,631 +3,302 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terra Laboratories / Intelligence for the systems that keep life alive</title>
-<meta name="description" content="Terra reads the true state of a closed living system, forecasts failure hours ahead, and acts on it offline. One engine, from water and remediation on Earth to life support in space.">
+<title>Terra Laboratories / The autonomous intelligence platform for living systems</title>
+<meta name="description" content="Terra is the autonomous intelligence platform for living systems. It reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline. Aquaculture, bioremediation, and space life support.">
 <link rel="canonical" href="https://terralaboratories.com/">
-<meta name="theme-color" content="#07080B">
-<!-- Open Graph -->
+<meta name="theme-color" content="#F7F5EF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Terra Laboratories">
+<meta property="og:title" content="The autonomous intelligence platform for living systems.">
+<meta property="og:description" content="Terra is the autonomous intelligence platform for living systems. It reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline. Aquaculture, bioremediation, and space life support.">
 <meta property="og:url" content="https://terralaboratories.com/">
-<meta property="og:title" content="Intelligence for the systems that keep life alive.">
-<meta property="og:description" content="Terra reads the true state of a closed living system, forecasts failure hours ahead, and acts on it offline. One engine, from water and remediation on Earth to life support in space.">
 <meta property="og:image" content="https://terralaboratories.com/og-cover.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Terra Laboratories: intelligence for the systems that keep life alive.">
-<!-- Twitter -->
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Intelligence for the systems that keep life alive.">
-<meta name="twitter:description" content="Terra reads the true state of a closed living system, forecasts failure hours ahead, and acts on it offline.">
+<meta name="twitter:title" content="The autonomous intelligence platform for living systems.">
+<meta name="twitter:description" content="Terra is the autonomous intelligence platform for living systems. It reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline. Aquaculture, bioremediation, and space life support.">
 <meta name="twitter:image" content="https://terralaboratories.com/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07080B;--bg2:#0A0C11;--panel:#0E1015;--line:#20242C;--ink:#F3F5F8;--body:#AAB0BB;
-  --mut:#6E7681;--acc:#D3D7DD;--disp:'Space Grotesk',system-ui,sans-serif;--mono:'Space Mono',monospace;
-  --mx:clamp(20px,6vw,120px);
+ --paper:#F7F5EF;--paper2:#F1EEE5;--card:#FDFCF8;--ink:#14201B;--soft:#33403A;--mut:#5C6862;
+ --line:#E6E2D8;--green:#17453A;--signal:#1FB874;
+ --dark:#0E1613;--dline:#2A362F;--dink:#F1F5F2;--dmut:#AEBBB2;
+ --disp:'Instrument Sans',system-ui,sans-serif;--serif:'Instrument Serif',Georgia,serif;--mono:'JetBrains Mono',monospace;
+ --mx:clamp(20px,5vw,64px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--body);font-family:var(--disp);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-::selection{background:var(--ink);color:var(--bg)}
+body{background:var(--paper);color:var(--ink);font-family:var(--disp);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{color:var(--ink);font-weight:600;letter-spacing:-.02em;line-height:1.05}
 img{max-width:100%;display:block}
-.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.045;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.5) 0 1px,transparent 1px 3px)}
-.progress{position:fixed;top:0;left:0;height:2px;background:var(--ink);width:0;z-index:80}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.1}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--green);letter-spacing:0}
+.mono{font-family:var(--mono)}
+.seclabel{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.seclabel .tick{width:22px;height:1px;background:var(--green);opacity:.5}
+.btn{font-size:14px;font-weight:600;padding:13px 22px;border-radius:9px;cursor:pointer;border:.5px solid transparent;font-family:var(--disp);transition:transform .2s ease,background .2s ease}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:18px var(--mx);transition:.4s;border-bottom:1px solid transparent}
-nav.shrunk{padding:11px var(--mx);background:rgba(7,8,11,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.brand{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--ink);font-weight:700}
-.navlinks{display:flex;gap:24px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mut)}
-.navlinks a{transition:.25s}.navlinks a:hover{color:var(--ink)}
-.navcta{border:1px solid var(--line);padding:9px 16px;color:var(--ink);border-radius:3px}
-.navcta:hover{background:var(--ink);color:var(--bg)}
-@media(max-width:900px){.navlinks a:not(.navcta){display:none}}
-/* SECTION */
-section{position:relative;padding:clamp(80px,11vh,150px) var(--mx)}
-.kick{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:var(--acc);display:flex;align-items:center;gap:12px;margin-bottom:24px}
-.kick::before{content:"";width:32px;height:1px;background:var(--acc)}
-.h2{font-size:clamp(28px,4.4vw,54px);max-width:20ch}
-.lead{font-size:clamp(16px,1.4vw,20px);color:var(--body);max-width:62ch;margin-top:20px}
-.btn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:15px 26px;border:1px solid var(--line);color:var(--ink);border-radius:3px;transition:.28s;cursor:pointer}
-.btn:hover{transform:translateY(-2px)}
-.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn.solid:hover{background:transparent;color:var(--ink)}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
-.rule{height:1px;background:var(--line);margin:0 var(--mx)}
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px var(--mx);border-bottom:.5px solid var(--line);background:rgba(247,245,239,.82);backdrop-filter:blur(10px)}
+.wordmark{font-weight:600;font-size:16px;letter-spacing:.005em}
+.navlinks{display:flex;gap:26px;font-size:13.5px;color:var(--soft)}
+.navlinks a:hover{color:var(--ink)}
+.navcta{font-size:13px;font-weight:600;color:var(--paper);background:var(--ink);padding:10px 17px;border-radius:8px}
+@media(max-width:860px){.navlinks{display:none}}
 /* HERO */
-#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px var(--mx) 60px;overflow:hidden;
-  background-color:var(--bg);
-  background-image:linear-gradient(100deg,rgba(7,8,11,.95) 0%,rgba(7,8,11,.72) 46%,rgba(7,8,11,.35) 100%),url('https://commons.wikimedia.org/wiki/Special:FilePath/NASA-Apollo8-Dec24-Earthrise.jpg');
-  background-size:cover;background-position:center}
-#hero .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--acc);margin-bottom:22px}
-.h1{font-size:clamp(44px,8vw,116px);letter-spacing:-.03em;line-height:.96;max-width:14ch}
-.hero-sub{max-width:56ch;margin-top:26px;font-size:clamp(16px,1.5vw,21px);color:var(--body)}
-.trustline{margin-top:44px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--mut);max-width:60ch;line-height:1.9}
-#hero .wrap>*{opacity:0;animation:up 1s cubic-bezier(.2,.7,.2,1) forwards}
-#hero .wrap>*:nth-child(1){animation-delay:.1s}#hero .wrap>*:nth-child(2){animation-delay:.26s}
-#hero .wrap>*:nth-child(3){animation-delay:.42s}#hero .wrap>*:nth-child(4){animation-delay:.58s}#hero .wrap>*:nth-child(5){animation-delay:.74s}
-@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){#hero .wrap>*{animation:none;opacity:1}}
-.herogrid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
-@media(max-width:960px){.herogrid{grid-template-columns:1fr;gap:28px}}
-.hticker{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mut);white-space:nowrap;overflow:hidden;margin-bottom:26px;opacity:0;animation:up 1s .05s forwards}
-.herolive{display:flex;flex-direction:column;gap:10px}
-.livehead{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mut)}
-.simtag{border:1px solid var(--line);padding:3px 8px;border-radius:3px;font-size:9.5px}
-.tilegrid{display:grid;grid-template-columns:1fr;gap:10px}
-.ltile{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:rgba(10,12,17,.72);backdrop-filter:blur(4px)}
-.ltile .ll{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mut)}
-.ltile .lc{font-family:var(--mono);font-size:9px;color:#4a4f57;margin:2px 0 6px}
-.ltile .lv{font-family:var(--mono);font-size:24px;color:var(--ink)}
-.ltile .lu{font-size:10px;color:var(--mut)}
-.ltile .lst{margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:#7bbf8a}
-/* TRUST BAR */
-.trustbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 40px;padding:30px var(--mx);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}
-.trustbar .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--mut)}
-.trustbar .names{display:flex;gap:34px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;letter-spacing:.12em;color:var(--body)}
-/* GRID + CARDS */
-.grid{display:grid;gap:18px;margin-top:46px}
-.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
-@media(max-width:900px){.g3,.g2{grid-template-columns:1fr}}
-.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:6px;padding:30px;transition:transform .4s,border-color .4s}
-.card:hover{transform:translateY(-5px);border-color:#333a45}
-.card .n{font-family:var(--mono);font-size:12px;color:var(--acc);letter-spacing:.2em}
-.card h3{font-size:21px;margin:16px 0 10px}
-.card p{font-size:14.5px;color:var(--mut)}
-/* SPLIT */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:10px}
-.split .txt{padding:clamp(30px,4vw,64px);display:flex;flex-direction:column;justify-content:center}
-.split .img{min-height:420px;background-color:var(--bg2);background-size:cover;background-position:center}
-@media(max-width:860px){.split{grid-template-columns:1fr}.split .img{min-height:280px}}
-.ul{list-style:none;margin-top:22px;display:grid;gap:12px}
-.ul li{padding-left:22px;position:relative;font-size:15px;color:var(--body)}
-.ul li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:var(--acc);border-radius:1px}
-/* TECH (3D) */
-.techgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-@media(max-width:900px){.techgrid{grid-template-columns:1fr}}
-#gl{position:relative;width:100%;height:clamp(340px,48vh,540px);border:1px solid var(--line);border-radius:8px;overflow:hidden;background:radial-gradient(70% 70% at 60% 40%,#0c0e13,#07080b)}
-#gl canvas{position:absolute;inset:0}
-/* MESH */
-.meshwrap{position:relative;border:1px solid var(--line);border-radius:8px;background:radial-gradient(80% 80% at 60% 40%,#0c0e13,#07080b);overflow:hidden;margin-top:40px}
-#meshcanvas{display:block;width:100%;height:420px}
-.meshcap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mut)}
-.meshcap b{color:var(--ink)}
-/* SOLUTIONS */
-.sol{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
-@media(max-width:900px){.sol{grid-template-columns:1fr}}
-.aquagrid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center}
-@media(max-width:820px){.aquagrid{grid-template-columns:1fr}}
-.roadmap{display:flex;flex-wrap:wrap;gap:10px}
-.roadmap span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--body);border:1px solid var(--line);border-radius:20px;padding:8px 15px}
-.notfor{margin-top:20px;font-size:13.5px;color:var(--mut);max-width:60ch}
+.hero{display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center;padding:72px var(--mx) 52px}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:34px;padding:44px var(--mx)}}
+h1{font-size:clamp(38px,4.7vw,58px);line-height:1.09;letter-spacing:-.015em;margin:20px 0;max-width:17ch}
+.sub{font-size:18.5px;line-height:1.62;color:var(--soft);max-width:48ch;margin-bottom:28px}
+.ctarow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.meta{margin-top:32px;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--mut);flex-wrap:wrap}
+.meta .sep{width:1px;height:12px;background:var(--line)}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--signal);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,184,116,.5)}70%{box-shadow:0 0 0 8px rgba(31,184,116,0)}100%{box-shadow:0 0 0 0 rgba(31,184,116,0)}}
+/* INSTRUMENT PANEL */
+.inst{background:var(--dark);border-radius:14px;padding:22px;position:relative;color:var(--dink);box-shadow:0 24px 60px -30px rgba(20,32,27,.5)}
+.inst .corners span{position:absolute;width:9px;height:9px;border-color:rgba(255,255,255,.2);border-style:solid}
+.inst .ih{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dmut);margin-bottom:16px}
+.inst .sim{border:.5px solid var(--dline);border-radius:5px;padding:3px 8px}
+.rlabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dmut);margin-bottom:12px}
+.reading{display:flex;align-items:flex-end;gap:8px}
+.reading .val{font-family:var(--mono);font-size:34px;font-weight:500;letter-spacing:-.02em}
+.reading .unit{font-family:var(--mono);font-size:12px;color:var(--dmut);margin-bottom:7px}
+.statgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--dline);border:.5px solid var(--dline);border-radius:8px;overflow:hidden;margin-top:16px}
+.statgrid .s{background:var(--dark);padding:11px 12px}
+.statgrid .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dmut);margin-bottom:5px}
+.statgrid .v{font-family:var(--mono);font-size:14px;color:var(--dink)}
+.statgrid .v.sig{color:var(--signal)}
+.ifoot{display:flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dmut)}
+.spark{stroke-dasharray:400;stroke-dashoffset:400}
+.spark.in{transition:stroke-dashoffset 1.6s ease .2s;stroke-dashoffset:0}
+/* SECTIONS */
+section{padding:70px var(--mx);border-top:.5px solid var(--line)}
+h2{font-size:clamp(26px,3.2vw,38px);max-width:20ch;margin-bottom:10px}
+h2 em.s{font-family:var(--serif)}
+.lede{font-size:16.5px;color:var(--soft);max-width:58ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{border-top:1.5px solid var(--ink);padding-top:16px}
+.step .num{font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.1em}
+.step h3{font-size:18px;margin:8px 0 6px}
+.step p{font-size:14px;color:var(--soft);max-width:34ch}
+/* DOMAINS */
+.doms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+@media(max-width:860px){.doms{grid-template-columns:1fr}}
+.dom{position:relative;height:360px;border-radius:14px;overflow:hidden;border:.5px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end}
+.dom .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02) brightness(.82);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.dom:hover .bg{transform:scale(1.05)}
+.dom .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,18,.15) 0%,rgba(10,22,18,.55) 52%,rgba(8,16,13,.93) 100%)}
+.dom .duo2{position:absolute;inset:0;background:rgba(23,69,58,.28);mix-blend-mode:multiply}
+.dom .c{position:relative;z-index:2;padding:24px}
+.dom .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#CDE9DC;display:flex;justify-content:space-between}
+.dom h3{font-size:21px;color:#fff;margin:14px 0 8px}
+.dom p{font-size:13.5px;color:#D7E1DB;margin-bottom:16px;max-width:36ch}
+.dom a{font-family:var(--mono);font-size:12px;color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+/* PROOF */
+.proof{position:relative;border-top:none;color:var(--dink);padding:64px var(--mx);overflow:hidden;background:var(--dark)}
+.proof .pbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:grayscale(.2)}
+.proof .pov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,15,.86),rgba(10,18,15,.94))}
+.proof .in{position:relative;z-index:2}
+.proof .seclabel{color:var(--signal)}
+.proof h2{color:#fff}
+.proof .lede{color:var(--dmut);max-width:62ch}
+.proofgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dline);border:.5px solid var(--dline);border-radius:12px;overflow:hidden;margin-top:30px;position:relative;z-index:2}
+@media(max-width:860px){.proofgrid{grid-template-columns:1fr 1fr}}
+.pcell{background:rgba(14,22,19,.72);padding:24px 22px}
+.pcell .pv{font-family:var(--mono);font-size:30px;color:#fff;font-weight:500;letter-spacing:-.02em}
+.pcell .pv .sig{color:var(--signal)}
+.pcell .pk{font-size:12.5px;color:var(--dmut);margin-top:8px;max-width:22ch}
+.pnote{font-family:var(--mono);font-size:10.5px;color:var(--dmut);margin-top:18px;position:relative;z-index:2}
 /* FAQ */
-.faq{margin-top:40px;display:grid;gap:12px}
-.faq details{border:1px solid var(--line);border-radius:6px;background:var(--panel);padding:0 22px}
-.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-size:17px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";color:var(--acc);font-family:var(--mono)}
-.faq details[open] summary::after{content:"–"}
-.faq p{font-size:14.5px;color:var(--body);padding:0 0 20px;max-width:70ch}
-/* FOUNDER */
-.founder{display:flex;gap:22px;align-items:flex-start}
-.favatar{width:76px;height:76px;border-radius:50%;flex:0 0 76px;border:1px solid var(--line);background:var(--bg2);object-fit:cover;display:flex;align-items:center;justify-content:center;font-family:var(--mono);color:var(--acc);font-size:22px}
-.flinks{display:flex;gap:16px;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--acc)}
-.flinks a{border-bottom:1px solid var(--line)}
-/* PILOT FORM */
-.pilotwrap{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:44px}
-@media(max-width:820px){.pilotwrap{grid-template-columns:1fr}}
-.pilotwrap .side{padding:clamp(28px,4vw,52px);background:var(--bg2)}
-.pilotwrap form{padding:clamp(28px,4vw,52px);display:grid;gap:14px}
-.pilotwrap label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mut)}
-.pilotwrap input,.pilotwrap textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--disp);font-size:15px;padding:12px 14px;margin-top:6px}
-.pilotwrap input:focus,.pilotwrap textarea:focus{outline:none;border-color:#333a45}
-.solcard{border:1px solid var(--line);border-radius:6px;padding:26px;background:var(--panel);transition:.35s}
-.solcard:hover{border-color:#333a45;transform:translateY(-4px)}
-.solcard .tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--acc)}
-.solcard h3{font-size:19px;margin:12px 0 8px}
-.solcard p{font-size:13.5px;color:var(--mut)}
-/* DOMAIN COLUMNS */
-.dcols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start;margin-top:46px}
-@media(max-width:820px){.dcols{grid-template-columns:1fr}}
-.dcol{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background-size:cover;background-position:center;background-color:var(--bg2);min-height:430px;display:flex;flex-direction:column;justify-content:flex-end;transition:border-color .3s}
-.dcol.open{border-color:#3a4048}
-.dcol::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,11,.12) 0%,rgba(7,8,11,.58) 46%,rgba(7,8,11,.94) 100%);z-index:1}
-.dtop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:15px 16px;z-index:3}
-.dtag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#F3F5F8}
-.dpill{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;padding:4px 9px;border-radius:20px;background:rgba(7,8,11,.5);border:1px solid rgba(255,255,255,.16);color:#EDEFF2}
-.dbody{position:relative;z-index:3;padding:18px 16px}
-.dbody h3{color:#fff;font-size:21px;margin-bottom:8px}
-.dbody .sum{font-size:13px;color:#cfd3da;line-height:1.5}
-.dbody .stat{margin:12px 0;font-family:var(--mono);font-size:10.5px;color:#fff}
-.dbtn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:11px 14px;cursor:pointer;width:100%;display:flex;justify-content:space-between;align-items:center}
-.dbtn:hover{background:rgba(255,255,255,.12)}
-.ddet{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.2,.7,.2,1)}
-.ddet .blk{margin-top:14px}
-.ddet .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#aab0bb;margin-bottom:5px}
-.ddet p{font-size:12px;color:#e2e6ec;line-height:1.6;margin:0}
-.dlink{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:#fff;border-bottom:1px solid rgba(255,255,255,.35)}
-/* METRICS BAND (image) */
-.band{position:relative;padding:clamp(70px,10vh,130px) var(--mx);background-color:var(--bg);
-  background-image:linear-gradient(rgba(7,8,11,.82),rgba(7,8,11,.9)),url('https://commons.wikimedia.org/wiki/Special:FilePath/The_Blue_Marble.jpg');
-  background-size:cover;background-position:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}}
-.metric .v{font-size:clamp(30px,3.6vw,50px);color:var(--ink);font-weight:600}
-.metric .l{font-size:13px;color:var(--body);margin-top:8px;max-width:26ch}
-/* EMBED */
-.embedwrap{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000;margin-top:36px}
-.embedwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-/* QUOTE */
-.quote{text-align:center}
-.quote p{font-size:clamp(26px,4vw,50px);color:var(--ink);max-width:20ch;margin:0 auto;letter-spacing:-.02em;line-height:1.1}
-.quote span{color:var(--mut)}
-/* CTA BAND */
-.ctaband{text-align:center;padding:clamp(80px,12vh,150px) var(--mx);background:linear-gradient(180deg,var(--bg),#0b0e14)}
-.ctaband h2{font-size:clamp(30px,5vw,64px);max-width:18ch;margin:0 auto}
+.faq{margin-top:28px;max-width:780px}
+details{border-top:.5px solid var(--line);padding:18px 0}
+summary{cursor:pointer;list-style:none;font-size:17px;font-weight:500;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--green);font-family:var(--mono)}
+details[open] summary::after{content:"–"}
+details p{font-size:14.5px;color:var(--soft);margin-top:12px;max-width:64ch}
+/* PILOT */
+.pilot{background:var(--paper2);border-radius:16px;padding:clamp(28px,4vw,44px);display:grid;grid-template-columns:1fr 1fr;gap:36px}
+@media(max-width:860px){.pilot{grid-template-columns:1fr}}
+.field{margin-bottom:12px}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:6px}
+.field input{width:100%;background:#FFFDF9;border:.5px solid var(--line);border-radius:8px;padding:12px 13px;font-family:var(--disp);font-size:15px;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--green)}
 /* FOOTER */
-footer{padding:70px var(--mx) 40px;border-top:1px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
-@media(max-width:820px){footer{grid-template-columns:1fr}}
-footer .big{font-size:clamp(22px,3vw,34px);color:var(--ink);max-width:18ch}
-.fcol h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mut);margin-bottom:14px}
-.fcol a,.fcol div{display:block;font-size:14px;color:var(--body);margin-bottom:9px}
-.fcol a:hover{color:var(--ink)}
-.legal{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:#4a4f57;letter-spacing:.04em;line-height:1.8;max-width:1000px}
+footer{padding:52px var(--mx) 32px;border-top:.5px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+@media(max-width:860px){footer{grid-template-columns:1fr}}
+footer .big{font-size:22px;font-weight:600;max-width:20ch}
+footer .tagm{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mut);margin-top:14px}
+.fcol h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.fcol a{display:block;font-size:14px;color:var(--soft);margin-bottom:8px}
+.legal{grid-column:1/-1;border-top:.5px solid var(--line);margin-top:16px;padding-top:16px;font-family:var(--mono);font-size:10px;color:var(--mut);line-height:1.7;max-width:1000px}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.14s}.d3{transition-delay:.22s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.spark{stroke-dashoffset:0}}
+
+/* domain-page additions */
+.dhero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:60px var(--mx) 36px}
+@media(max-width:860px){.dhero{grid-template-columns:1fr;gap:28px}}
+.dimg{position:relative;height:360px;border-radius:14px;overflow:hidden;border:.5px solid var(--line)}
+.dimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02) brightness(.84)}
+.dimg .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,18,.08),rgba(10,22,18,.5))}
+.dimg .duo2{position:absolute;inset:0;background:rgba(23,69,58,.24);mix-blend-mode:multiply}
+.dimg .cap{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#DCE7E0}
+.ul{list-style:none;margin:16px 0;display:grid;gap:10px}
+.ul li{padding-left:20px;position:relative;color:var(--soft);font-size:15px;max-width:70ch}
+.ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;background:var(--green);border-radius:1px}
+.prose p{color:var(--soft);font-size:15.5px;max-width:70ch;margin-bottom:14px}
+.callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
+@media(max-width:860px){.callouts{grid-template-columns:1fr}}
+.co{border:.5px solid var(--line);border-radius:10px;padding:18px;background:var(--card)}
+.co .v{font-family:var(--mono);font-size:22px;color:var(--ink)}
+.co .k{font-size:12px;color:var(--mut);margin-top:6px}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px;font-family:var(--mono);font-size:11px}
+.tagrow a{border:.5px solid var(--line);border-radius:20px;padding:7px 14px;color:var(--soft)}
+.tagrow a:hover{color:var(--ink);border-color:var(--ink)}
+.note{border:.5px solid var(--line);border-left:2.5px solid var(--green);border-radius:0 8px 8px 0;background:var(--paper2);padding:16px 18px;margin:20px 0;font-size:14px;color:var(--soft)}
 </style>
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@graph":[
-    {
-      "@type":"Organization",
-      "@id":"https://terralaboratories.com/#org",
-      "name":"Terra Laboratories",
-      "url":"https://terralaboratories.com/",
-      "logo":"https://terralaboratories.com/logo.png",
-      "description":"The autonomy layer for closed living systems. Terra forecasts a DO crash or biofilter collapse on land-based fish farms hours ahead and acts on it offline.",
-      "founder":{"@type":"Person","name":"Cameron Souza","jobTitle":"Founder","url":"https://camsouza8.wixstudio.com/csouza"},
-      "sameAs":["https://camsouza8.wixstudio.com/csouza","https://github.com/CamSouza13"]
-    },
-    {
-      "@type":"WebSite",
-      "@id":"https://terralaboratories.com/#website",
-      "url":"https://terralaboratories.com/",
-      "name":"Terra Laboratories",
-      "publisher":{"@id":"https://terralaboratories.com/#org"}
-    },
-    {
-      "@type":"Service",
-      "name":"Terra Engine for recirculating aquaculture (RAS)",
-      "provider":{"@id":"https://terralaboratories.com/#org"},
-      "serviceType":"Autonomous water-quality forecasting and control for land-based fish farms",
-      "areaServed":"US",
-      "description":"An edge-deployed Bayesian state estimator that forecasts DO crashes, ammonia spikes, and biofilter collapse hours ahead on land-based recirculating aquaculture systems, and acts on-site with no cloud and no operator, behind a full audit log.",
-      "audience":{"@type":"Audience","audienceType":"Land-based aquaculture / RAS farm operators"}
-    }
-  ]
-}
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://terralaboratories.com/#org","name":"Terra Laboratories","url":"https://terralaboratories.com/","logo":"https://terralaboratories.com/og-cover.png","description":"The autonomous intelligence platform for living systems.","founder":{"@type":"Person","name":"Cameron Souza","url":"https://www.linkedin.com/in/csouza13/"},"sameAs":["https://www.linkedin.com/in/csouza13/","https://github.com/CamSouza13"]},
+{"@type":"WebSite","url":"https://terralaboratories.com/","name":"Terra Laboratories","publisher":{"@id":"https://terralaboratories.com/#org"}},
+{"@type":"Service","name":"Terra autonomous intelligence platform","provider":{"@id":"https://terralaboratories.com/#org"},"serviceType":"Autonomous state estimation, forecasting and control for closed living systems","areaServed":"US","description":"Reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline behind a full audit log."}]}
 </script>
 </head>
 <body>
-<div class="grain"></div>
-<div class="progress" id="progress"></div>
 
-<nav id="nav">
-  <div class="brand">TERRA&nbsp;LABORATORIES</div>
-  <div class="navlinks">
-    <a href="#how">HOW IT WORKS</a>
-    <a href="#solutions">DOMAINS</a>
-    <a href="#faq">FAQ</a>
-    <a href="/about/">ABOUT</a>
-    <a href="#deck">DECK</a>
-    <a href="#pilot" class="navcta">REQUEST A PILOT</a>
-  </div>
+<nav>
+  <span class="wordmark">Terra&nbsp;Laboratories</span>
+  <div class="navlinks"><a href="#how">Platform</a><a href="#domains">Aquaculture</a><a href="#domains">Bioremediation</a><a href="#domains">Space</a><a href="#company">Company</a></div>
+  <a href="#pilot" class="navcta">Request a pilot</a>
 </nav>
 
-<!-- HERO -->
-<header id="hero">
-  <div class="wrap">
-    <div class="eyebrow">AUTONOMY FOR CLOSED LIVING SYSTEMS</div>
-    <h1 class="h1" style="max-width:16ch;font-size:clamp(40px,7vw,92px)">Intelligence for the systems that keep life alive.</h1>
-    <p class="hero-sub">Terra reads the true state of a living loop and forecasts failure hours before it happens, then acts on it offline. One engine, from water and remediation on Earth to life support in space.</p>
-    <div class="cta-row">
-      <a href="#pilot" class="btn solid">REQUEST A PILOT</a>
-      <a href="#deck" class="btn">SEE THE PITCH DECK</a>
-    </div>
-    <div class="trustline">Built on the state-estimation used in spacecraft navigation. Validated on SIMOC, the closed-habitat model built with Biosphere 2. <a href="#faq" style="color:var(--acc);border-bottom:1px solid var(--line)">See where we are, honestly.</a></div>
+<header class="hero">
+  <div class="reveal">
+    <div class="seclabel"><span class="tick"></span>Autonomous intelligence · living systems</div>
+    <h1>The autonomous intelligence platform for <em class="s">living systems</em>.</h1>
+    <div class="sub">Terra reads the true state of any closed living loop, forecasts failure hours before it happens, and acts on it on-site: offline, and accountable to a full audit log.</div>
+    <div class="ctarow"><a href="#pilot" class="btn solid">Request a pilot</a><a href="#how" class="btn ghost">Read the technology →</a></div>
+    <div class="meta"><span class="livedot"></span>Engine · nominal<span class="sep"></span>UKF · edge · offline<span class="sep"></span>Validated on SIMOC</div>
+  </div>
+  <div class="inst reveal d2">
+    <div class="corners"><span style="top:9px;left:9px;border-width:1px 0 0 1px"></span><span style="top:9px;right:9px;border-width:1px 1px 0 0"></span><span style="bottom:9px;left:9px;border-width:0 0 1px 1px"></span><span style="bottom:9px;right:9px;border-width:0 1px 1px 0"></span></div>
+    <div class="ih"><span>State estimate</span><span class="sim">Simulation</span></div>
+    <div class="rlabel">Dissolved oxygen · tank 04</div>
+    <div class="reading"><span class="val">6.2</span><span class="unit">mg/L</span></div>
+    <svg viewBox="0 0 320 92" width="100%" height="84" style="margin-top:6px" preserveAspectRatio="none">
+      <line x1="0" y1="68" x2="320" y2="68" stroke="#1FB874" stroke-width="1" stroke-dasharray="2 4" opacity=".55"/>
+      <text x="316" y="62" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#1FB874" opacity=".85">4.0 mg/L limit</text>
+      <path class="spark" d="M4,24 C60,28 96,38 150,48 C200,58 250,64 316,76" fill="none" stroke="#EAF1EC" stroke-width="2"/>
+      <circle cx="150" cy="48" r="3.4" fill="#EAF1EC"/><circle cx="252" cy="68" r="4.6" fill="none" stroke="#1FB874" stroke-width="1.6"/><circle cx="252" cy="68" r="1.6" fill="#1FB874"/>
+    </svg>
+    <div class="statgrid"><div class="s"><div class="k">Forecast lead</div><div class="v sig">6.5 h</div></div><div class="s"><div class="k">Confidence</div><div class="v">0.87</div></div><div class="s"><div class="k">Action</div><div class="v">Aerate</div></div></div>
+    <div class="ifoot"><span class="livedot"></span>Audit log · writing</div>
   </div>
 </header>
 
-<!-- TRUST BAR -->
-<!-- FLAG (D3.5): the audit wants each relationship stated concretely, and flags "NASA-connected" as an unverified overclaim.
-     Removed the vague "NASA-CONNECTED PARTNERS" logo. Add ONE true, specific line per partner below
-     (e.g. "Oregon State University: engine benchmarked against OSU aquaculture lab data, 2026").
-     Only name a partner you can substantiate; reinstate NASA only if there is a real, nameable relationship. -->
-<div class="trustbar">
-  <div class="lbl">WHERE WE ARE</div>
-  <div class="names"><span>OREGON STATE UNIVERSITY</span><span>NOAA</span><span>MEDB HAWAII ACCELERATOR</span></div>
-</div>
-
-<!-- VALUE PROPS -->
-<section id="platform">
-  <div class="kick reveal">THE PLATFORM</div>
-  <h2 class="h2 reveal d1">Autonomy for the systems that keep life alive.</h2>
-  <p class="lead reveal d2">Conventional monitoring alarms one sensor at a time, after something has already broken. Terra models the whole loop, sees the failure coming hours out, and acts before you lose it.</p>
-  <div class="grid g3">
-    <div class="card reveal d1"><div class="n">01</div><h3>See failure before it happens</h3><p>Forecast a breach hours ahead, whether it is a dissolved-oxygen crash in a tank or an oxygen drop in a habitat, from the true whole-system state, not a single gauge crossing a line.</p></div>
-    <div class="card reveal d2"><div class="n">02</div><h3>Act autonomously, offline</h3><p>Aerate, dose, or alert on-site with no cloud and no operator, even on a bad VSAT link, every decision behind a full audit log.</p></div>
-    <div class="card reveal d3"><div class="n">03</div><h3>One engine, every environment</h3><p>A new domain is a specification, not a rebuild. The same core runs from a land-based fish farm to a lunar habitat.</p></div>
-  </div>
-</section>
-<div class="rule"></div>
-
-<!-- SPLIT: PROBLEM -->
-<section>
-  <div class="split reveal">
-    <div class="txt">
-      <div class="kick">THE PROBLEM</div>
-      <h2 class="h2">A closed system crashes as a whole, quietly.</h2>
-      <p class="lead">In a closed living loop, failure builds for hours before any single probe trips an alarm. Take a land-based fish farm: a DO crash, an ammonia spike, or a biofilter collapse is underway while the dashboard still reads calm. Probes foul and drift, so the numbers look fine while the system dies.</p>
-      <ul class="ul">
-        <li>A single bad night can wipe a cohort, or a crew can lose its air</li>
-        <li>Hours pass between the first hidden drift and catastrophic loss</li>
-        <li>Threshold alarms fire only after the line has already been crossed</li>
-      </ul>
-    </div>
-    <div class="img" style="padding:22px;display:flex;flex-direction:column;justify-content:center;gap:14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut)"><span>DISSOLVED OXYGEN FORECAST</span><span style="border:1px solid var(--line);padding:3px 8px;border-radius:3px">SIMULATION</span></div>
-      <svg viewBox="0 0 600 340" width="100%" role="img" aria-label="Dissolved-oxygen forecast crossing the 4.0 mg/L mass-mortality line, with Terra warning about 6.5 hours ahead of the crossing (simulation).">
-        <defs><linearGradient id="risk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0564d" stop-opacity=".16"/><stop offset="1" stop-color="#e0564d" stop-opacity=".02"/></linearGradient></defs>
-        <!-- risk zone below 4.0 mg/L -->
-        <rect x="50" y="240" width="510" height="80" fill="url(#risk)"/>
-        <!-- axes -->
-        <line x1="50" y1="40" x2="50" y2="320" stroke="#20242C"/>
-        <line x1="50" y1="320" x2="560" y2="320" stroke="#20242C"/>
-        <!-- gridlines -->
-        <line x1="50" y1="120" x2="560" y2="120" stroke="#161a20"/>
-        <line x1="50" y1="200" x2="560" y2="200" stroke="#161a20"/>
-        <!-- mass-mortality threshold -->
-        <line x1="50" y1="240" x2="560" y2="240" stroke="#C58B3B" stroke-width="1.5" stroke-dasharray="2 4"/>
-        <text x="556" y="234" text-anchor="end" font-family="monospace" font-size="11" fill="#C58B3B">4.0 mg/L mass-mortality line</text>
-        <!-- observed DO (solid) -->
-        <polyline points="50,100 135,120 220,148 305,176" fill="none" stroke="#F3F5F8" stroke-width="2.4"/>
-        <!-- forecast DO (dashed) -->
-        <polyline points="305,176 390,208 489,240 560,264" fill="none" stroke="#9aa2ad" stroke-width="2.2" stroke-dasharray="6 5"/>
-        <!-- early-warning marker -->
-        <line x1="305" y1="40" x2="305" y2="320" stroke="#F3F5F8" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
-        <circle cx="305" cy="176" r="4.5" fill="#F3F5F8"/>
-        <text x="312" y="70" font-family="monospace" font-size="11" fill="#F3F5F8">Terra warning</text>
-        <text x="312" y="86" font-family="monospace" font-size="11" fill="#9aa2ad">~6.5 h ahead</text>
-        <!-- breach point -->
-        <circle cx="489" cy="240" r="4.5" fill="#e0564d"/>
-        <text x="482" y="262" text-anchor="end" font-family="monospace" font-size="11" fill="#e0564d">forecast breach</text>
-        <!-- axis labels -->
-        <text x="50" y="336" font-family="monospace" font-size="10" fill="#6E7681">now</text>
-        <text x="556" y="336" text-anchor="end" font-family="monospace" font-size="10" fill="#6E7681">+18 h</text>
-        <text x="16" y="104" font-family="monospace" font-size="10" fill="#6E7681">8</text>
-        <text x="16" y="244" font-family="monospace" font-size="10" fill="#6E7681">4</text>
-      </svg>
-      <div style="font-family:var(--mono);font-size:10.5px;color:var(--mut);line-height:1.7">Terra forecasts the DO crossing the 4.0 mg/L line about 6.5 hours before a threshold alarm would fire. Illustrative simulation.</div>
-    </div>
-  </div>
-  <!-- AUDIT LOG (desired-result / after-state, D1.5) -->
-  <div class="reveal" style="margin-top:18px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:22px 24px">
-    <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut);margin-bottom:14px"><span>ACTION &amp; AUDIT LOG</span><span style="border:1px solid var(--line);padding:3px 8px;border-radius:3px">SIMULATION</span></div>
-    <div style="font-family:var(--mono);font-size:12.5px;line-height:2;color:var(--body)">
-      <div><span style="color:var(--mut)">02:14</span> &nbsp;DO forecast: 4.0 mg/L breach predicted in ~6.5 h &nbsp;<span style="color:var(--acc)">(p=0.87)</span></div>
-      <div><span style="color:var(--mut)">02:14</span> &nbsp;ALERT sent to on-call operator</div>
-      <div><span style="color:var(--mut)">02:15</span> &nbsp;ACTION: emergency aeration engaged &nbsp;<span style="color:var(--mut)">(within operator limit: max +30%)</span></div>
-      <div><span style="color:var(--mut)">03:02</span> &nbsp;DO trend reversed; forecast breach cleared</div>
-      <div><span style="color:var(--mut)">03:02</span> &nbsp;Logged for operator review &nbsp;<span style="color:#7bbf8a">nominal</span></div>
-    </div>
-  </div>
-</section>
-<div class="rule"></div>
-
-<!-- HOW IT WORKS -->
 <section id="how">
-  <div class="kick reveal">HOW IT WORKS</div>
-  <h2 class="h2 reveal d1">Measure. Infer. Act.</h2>
-  <div class="grid g3">
-    <div class="card reveal d1"><div class="n">STEP 01</div><h3>Measure</h3><p>Commodity probes plus a small edge node. Drift and fouling are separated in software.</p></div>
-    <div class="card reveal d2"><div class="n">STEP 02</div><h3>Infer &amp; forecast</h3><p>A Bayesian state estimator reconstructs the hidden variable that fails first, then predicts the breach hours ahead.</p></div>
-    <div class="card reveal d3"><div class="n">STEP 03</div><h3>Act</h3><p>Autonomous, safety-bounded control on-site. No cloud, no operator, no network required.</p></div>
+  <div class="seclabel reveal"><span class="tick"></span>How it works</div>
+  <h2 class="reveal d1"><em class="s">Measure.</em> Infer. Act.</h2>
+  <div class="lede reveal d1">Conventional monitoring alarms one sensor at a time, after something breaks. Terra models the whole loop and acts before it does.</div>
+  <div class="steps">
+    <div class="step reveal d1"><div class="num">01</div><h3>Measure</h3><p>Commodity probes and a small edge node. Drift and fouling are separated in software.</p></div>
+    <div class="step reveal d2"><div class="num">02</div><h3>Infer &amp; forecast</h3><p>A Bayesian state estimator reconstructs the hidden variable that fails first, then predicts the breach hours ahead.</p></div>
+    <div class="step reveal d3"><div class="num">03</div><h3>Act</h3><p>Safety-bounded control on-site, offline, with every decision written to a full audit log.</p></div>
   </div>
 </section>
-<div class="rule"></div>
 
-<!-- TECHNOLOGY (3D) -->
-<section id="tech">
-  <div class="techgrid">
-    <div class="reveal">
-      <div class="kick">TECHNOLOGY</div>
-      <h2 class="h2">An intelligence layer over the planet.</h2>
-      <p class="lead">The Terra Engine fuses low-cost sensors with a rigorous probabilistic model, running the full stack on edge hardware. It is honest about uncertainty and leaves an audit trail for every action.</p>
-      <ul class="ul">
-        <li>Unscented Kalman filtering on the edge, offline</li>
-        <li>Hamiltonian Monte Carlo calibration (JAX / NumPyro)</li>
-        <li>Sensor-drift separation and consistency self-checks</li>
-      </ul>
+<section id="domains">
+  <div class="seclabel reveal"><span class="tick"></span>One engine, three closed worlds</div>
+  <h2 class="reveal d1">Where the platform works.</h2>
+  <div class="doms">
+    <a href="#" class="dom reveal d1">
+      <img class="bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Aquaponics_with_catfish.jpg" alt="Indoor recirculating aquaculture tanks">
+      <div class="duo"></div><div class="duo2"></div>
+      <div class="c"><div class="tag"><span>Water</span><span>Now</span></div><h3>Aquaculture</h3><p>Forecast a DO crash or biofilter collapse on land-based farms, and act before the tank goes.</p><span>Explore aquaculture →</span></div>
+    </a>
+    <a href="#" class="dom reveal d2">
+      <img class="bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wards_Island_Wastewater_Treatment_Plant_%2860106%29.jpg" alt="Wastewater treatment aeration basins">
+      <div class="duo"></div><div class="duo2"></div>
+      <div class="c"><div class="tag"><span>Earth</span><span>Next</span></div><h3>Bioremediation</h3><p>Wastewater and environmental loops, watched in real time. The same engine, on the roadmap.</p><span>Read the plan →</span></div>
+    </a>
+    <a href="#" class="dom reveal d3">
+      <img class="bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg" alt="Earth seen from space, Apollo 17">
+      <div class="duo"></div><div class="duo2"></div>
+      <div class="c"><div class="tag"><span>Orbit</span><span>Validated</span></div><h3>Space life support</h3><p>Bioregenerative life support, the north star. Validated on Biosphere-2 habitat models.</p><span>See the results →</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="proof">
+  <img class="pbg" src="https://commons.wikimedia.org/wiki/Special:FilePath/NASA-Apollo8-Dec24-Earthrise.jpg" alt="">
+  <div class="pov"></div>
+  <div class="in">
+    <div class="seclabel"><span class="tick" style="background:var(--signal)"></span>Validated on SIMOC</div>
+    <h2 class="reveal">Proven on the hardest closed loop there is.</h2>
+    <div class="lede reveal d1">A 60-run ensemble against SIMOC, the closed-habitat model built with Biosphere 2, across seven habitats and dozens of fault conditions.</div>
+    <div class="proofgrid reveal d1">
+      <div class="pcell"><div class="pv"><span class="sig count" data-to="98">0</span><span class="sig">%</span></div><div class="pk">of safety breaches forecast before they occurred</div></div>
+      <div class="pcell"><div class="pv"><span class="count" data-to="18">0</span> h</div><div class="pk">median warning lead, up to 168 h</div></div>
+      <div class="pcell"><div class="pv"><span class="count" data-to="11">0</span>%</div><div class="pk">false-alarm rate on non-breaching runs</div></div>
+      <div class="pcell"><div class="pv"><span class="count" data-to="0.87" data-dec="2">0</span></div><div class="pk">median per-habitat calibration fit, R²</div></div>
     </div>
-    <div id="gl" class="reveal d2"></div>
+    <div class="pnote">Simulation-to-simulation validation against an independent, peer-built model. Not flight data; no flight heritage.</div>
   </div>
 </section>
-<div class="rule"></div>
 
-<!-- MESH -->
-<section id="mesh">
-  <div class="kick reveal">THE SELF-HEALING MESH</div>
-  <h2 class="h2 reveal d1">A network that heals itself.</h2>
-  <p class="lead reveal d2">Nodes cross-check each other, isolate a failed or drifting node, and re-weight the survivors, so the whole-system estimate holds with no operator and no cloud.</p>
-  <div class="meshwrap reveal d2">
-    <canvas id="meshcanvas"></canvas>
-    <div class="meshcap" id="meshcap">STATUS: <b>nominal</b> / all nodes reporting</div>
-  </div>
-</section>
-<div class="rule"></div>
-
-<!-- SOLUTIONS -->
-<section id="solutions">
-  <div class="kick reveal">WHERE THE ENGINE WORKS</div>
-  <h2 class="h2 reveal d1">One engine. Three closed worlds.</h2>
-  <p class="lead reveal d2">The same core runs anywhere a living loop can fail. Water on Earth, bioengineering and remediation, and life support in space. Expand any column for the full picture.</p>
-  <div class="dcols reveal d2" id="dcols"></div>
-</section>
-
-<!-- METRICS BAND -->
-<div class="band">
-  <div class="metrics">
-    <div class="metric reveal d1"><div class="v"><span class="count" data-to="1.64" data-dec="2" data-pre="$" data-suf="B"></span></div><div class="l">Aquaculture beachhead market (2025)</div></div>
-    <div class="metric reveal d2"><div class="v">~<span class="count" data-to="6.5" data-dec="1"></span>h</div><div class="l">Early warning ahead of a failure (simulation)</div></div>
-    <div class="metric reveal d3"><div class="v"><span class="count" data-to="20"></span>%</div><div class="l">Value-share pricing, we win when you win</div></div>
-    <div class="metric reveal d4"><div class="v">$5-<span class="count" data-to="10"></span>B</div><div class="l">Space life-support market by 2033</div></div>
-  </div>
-</div>
-
-<!-- FAQ -->
 <section id="faq">
-  <div class="kick reveal">FAQ</div>
-  <h2 class="h2 reveal d1">The questions operators actually ask.</h2>
-  <div class="faq reveal d2">
-    <details><summary>Does it act without me?</summary><p>Only inside limits you set. Every autonomous action, like bumping aeration, is bounded by operator-defined caps and written to a full audit log. You can also run Terra in alert-only mode, where it forecasts and warns but never touches an actuator.</p></details>
-    <details><summary>Does it work offline, on a bad VSAT link?</summary><p>Yes. The whole engine runs on a small edge node on-site. It needs no cloud and no network to forecast or act, so a dropped or slow VSAT link does not stop it. Connectivity is for reporting, not for the decision.</p></details>
-    <details><summary>Is this proven yet?</summary><p>We are candid about our stage. Terra is validated in simulation today on a real-data foundation, and the company is pre-revenue. Bench validation is planned for Q4 2026 and the first paid pilots for H1 2027. If you want to be one of those first pilots, that is exactly what the pilot request is for.</p></details>
-    <details><summary>Do I need a data scientist to run it?</summary><p>No. Terra uses commodity probes plus a small edge node, and we handle calibration and the model. Your team sees forecasts, alerts, and an audit log, not math.</p></details>
-    <details><summary>What does a pilot cost?</summary><p>We price on value share: you pay when we prevent a loss. A pilot starts on a single system so the risk to you is small and the result is measurable on your own site.</p></details>
-  </div>
-</section>
-<div class="rule"></div>
-
-<!-- DECK -->
-<section id="deck">
-  <div class="kick reveal">PITCH DECK</div>
-  <h2 class="h2 reveal d1">The full story, in one deck.</h2>
-  <p class="lead reveal d2">Vision, engine, the self-healing mesh, market, and the raise.</p>
-  <div class="embedwrap reveal d2">
-    <iframe src="https://docs.google.com/presentation/d/1BZjOacThLT6VuwxhZRNgoqnW99890HUz/embed?start=false&loop=false&delayms=5000" allowfullscreen></iframe>
-  </div>
-</section>
-<div class="rule"></div>
-
-<!-- QUOTE -->
-<section class="quote">
-  <p class="reveal">The engine that keeps biology alive, <span>anywhere in the universe.</span></p>
-</section>
-<div class="rule"></div>
-
-<!-- TEAM -->
-<section id="company">
-  <div class="kick reveal">COMPANY</div>
-  <h2 class="h2 reveal d1">Focused by design. Built for the long climb.</h2>
-
-  <!-- FOUNDER BLOCK (D3.3)
-       FLAG: add /founder.jpg (a real headshot) to the repo root, replace https://www.linkedin.com/in/csouza13/ with the real profile,
-       and review the first-person paragraph so it is in your own voice. Until founder.jpg exists a "CS" monogram shows. -->
-  <div class="card reveal d1" style="margin-top:44px">
-    <div class="founder">
-      <img class="favatar" src="/founder.jpg" alt="Cameron Souza, founder of Terra Laboratories" onerror="this.outerHTML='&lt;div class=\'favatar\'&gt;CS&lt;/div&gt;'">
-      <div>
-        <div style="font-family:var(--mono);color:var(--acc);font-size:12px;letter-spacing:.2em">FOUNDER</div>
-        <h3 style="margin:8px 0 8px">Cameron Souza</h3>
-        <p style="color:var(--body);font-size:14.5px;max-width:64ch">I am a data scientist, and I started Terra because the systems we count on to keep living things alive still fail from a variable nobody is watching. On a land-based farm that is a DO crash a single probe catches too late. I am building one honest engine that forecasts that failure early and acts on it, and I would rather show you exactly where we are than oversell it.</p>
-        <div class="flinks">
-          <a href="https://camsouza8.wixstudio.com/csouza" target="_blank" rel="noopener">PORTFOLIO</a>
-          <a href="https://www.linkedin.com/in/csouza13/" target="_blank" rel="noopener">LINKEDIN</a>
-          <a href="mailto:cameron@terralaboratories.com">EMAIL</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TESTIMONIAL / DESIGN-PARTNER PROOF (D3.2, D3.5)
-       FLAG: story proof scored 0/7. This needs real, named quotes you must collect. When you have them,
-       replace this comment with 3-5 blocks, each: quote, full name, role, org, and a photo. Do not ship invented quotes.
-       Example markup for one:
-       <blockquote>"<real quote>" <cite><name>, <role>, <org></cite></blockquote> -->
-
-  <div class="grid g2">
-    <div class="card reveal d1"><div class="n">THE APPROACH</div><h3 style="margin-top:12px">One engine, honestly built</h3><p>We deepen a single engine instead of splitting focus, price on the value we create, and are candid about our stage. Deep domain and machine-learning expertise in house.</p></div>
-    <div class="card reveal d2"><div class="n">THE RAISE</div><h3 style="margin-top:12px">$500K pre-seed</h3><p style="color:var(--acc);font-family:var(--mono);font-size:12px;margin:4px 0 12px">$6M cap SAFE / 12-month runway</p><p>Funding bench validation, first paid value-share pilots, and the first commercial hire. Pre-revenue today; bench validation Q4 2026, pilots H1 2027.</p></div>
+  <div class="seclabel reveal"><span class="tick"></span>FAQ</div>
+  <h2 class="reveal d1">The questions operators ask.</h2>
+  <div class="faq reveal d1">
+    <details open><summary>Does it act without me?</summary><p>Only inside limits you set. Every autonomous action is bounded by operator-defined caps and written to a full audit log. You can also run it alert-only.</p></details>
+    <details><summary>Does it work offline?</summary><p>Yes. The whole engine runs on a small edge node on-site. No cloud, no network required to forecast or act.</p></details>
+    <details><summary>Is this proven yet?</summary><p>Validated in simulation today on a real-data foundation. Pre-revenue. Bench validation Q4 2026, first paid pilots H1 2027.</p></details>
+    <details><summary>What does a pilot cost?</summary><p>Value-share: you pay when we prevent a loss. A pilot starts on a single system, measurable on your own site.</p></details>
   </div>
 </section>
 
-<!-- PILOT REQUEST (D2.4, D2.2, D3.1) -->
 <section id="pilot">
-  <div class="pilotwrap reveal">
-    <div class="side">
-      <div class="kick">REQUEST A PILOT</div>
-      <h2 class="h2" style="font-size:clamp(24px,3vw,38px)">Put Terra on one system.</h2>
-      <p class="lead" style="font-size:16px">Tell us about your operation and we will scope a single-system, value-share pilot. You only pay when we prevent a loss. No cloud to install, no data scientist to hire.</p>
+  <div class="pilot reveal">
+    <div>
+      <div class="seclabel"><span class="tick"></span>Request a pilot</div>
+      <h2>Put Terra on one system.</h2>
+      <div class="lede">Tell us what you run and we will scope a single-system, value-share pilot. No cloud to install, no data scientist to hire.</div>
     </div>
-    <!-- FLAG: this form needs a backend to capture leads. Create a free Formspree form and paste its ID over FORM_ID
-         (or point action= at your own handler). Until then, submissions are not captured and the mailto fallback carries it. -->
-    <form action="https://formspree.io/f/FORM_ID" method="POST">
-      <div><label for="f_name">NAME</label><input id="f_name" name="name" required></div>
-      <div><label for="f_org">ORGANIZATION</label><input id="f_org" name="organization" required></div>
-      <div><label for="f_email">EMAIL</label><input id="f_email" type="email" name="email" required></div>
-      <div><label for="f_about">WHAT DO YOU RUN? (system type and size)</label><textarea id="f_about" name="about" rows="3"></textarea></div>
-      <button type="submit" class="btn solid" style="justify-self:start">REQUEST A PILOT</button>
-      <p style="font-size:11px;color:var(--mut);font-family:var(--mono)">Prefer email? <a href="mailto:cameron@terralaboratories.com" style="color:var(--acc)">cameron@terralaboratories.com</a></p>
-    </form>
+    <div>
+      <div class="field"><label>Name</label><input placeholder="Your name"></div>
+      <div class="field"><label>Organization</label><input placeholder="Farm, facility, or fund"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+      <a class="btn solid" style="display:inline-block;margin-top:6px" href="mailto:cameron@terralaboratories.com">Request a pilot</a>
+    </div>
   </div>
 </section>
-<div class="rule"></div>
 
-<!-- CTA BAND -->
-<div class="ctaband">
-  <h2 class="reveal">Stop the next bad night.</h2>
-  <div class="cta-row reveal d1" style="justify-content:center">
-    <a href="#pilot" class="btn solid">REQUEST A PILOT</a>
-    <a href="#deck" class="btn">SEE THE DECK</a>
-  </div>
-</div>
-
-<footer>
-  <div>
-    <div class="big">The autonomy layer for living systems.</div>
-    <div style="font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.14em;margin-top:20px">TERRA LABORATORIES / FROM THE MUD TO THE MOON</div>
-  </div>
-  <div class="fcol">
-    <h4>EXPLORE</h4>
-    <a href="#how">How it works</a><a href="/aquaculture/">Aquaculture</a><a href="/bioremediation/">Bioremediation</a><a href="/space/">Space</a><a href="#faq">FAQ</a><a href="/about/">About</a><a href="#deck">Pitch deck</a><a href="#pilot">Request a pilot</a>
-  </div>
-  <div class="fcol">
-    <h4>FOUNDER &amp; CONTACT</h4>
-    <div>Cameron Souza, Founder</div>
-    <a href="mailto:cameron@terralaboratories.com">cameron@terralaboratories.com</a>
-    <!-- FLAG: replace https://www.linkedin.com/in/csouza13/ with the real profile -->
-    <a href="https://www.linkedin.com/in/csouza13/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://camsouza8.wixstudio.com/csouza" target="_blank" rel="noopener">Portfolio</a>
-  </div>
-  <div class="legal">Market figures are drawn from third-party research (GM Insights, MarketsandMarkets, Industry Experts, BCC Research, Verified Market Reports) and the peer-reviewed literature. Engine performance is validated in simulation on a real-data foundation; the company is pre-revenue. Imagery courtesy of NASA (public domain). This page is not an offer to sell securities.</div>
+<footer id="company">
+  <div><div class="big">The autonomous intelligence platform for living systems.</div><div class="tagm">Terra Laboratories · From the mud to the moon</div></div>
+  <div class="fcol"><h4>Platform</h4><a href="#how">How it works</a><a href="#domains">Aquaculture</a><a href="#domains">Bioremediation</a><a href="#domains">Space</a></div>
+  <div class="fcol"><h4>Company</h4><a href="/about/">About</a><a href="#pilot">Request a pilot</a><a href="mailto:cameron@terralaboratories.com">cameron@terralaboratories.com</a></div>
+  <div class="legal">Engine performance is validated in simulation on a real-data foundation; the company is pre-revenue. Imagery: NASA (public domain) and Wikimedia Commons contributors. This page is not an offer to sell securities.</div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const nav=document.getElementById('nav'),prog=document.getElementById('progress');
-function onScroll(){const y=scrollY,h=document.body.scrollHeight-innerHeight;nav.classList.toggle('shrunk',y>40);prog.style.width=(100*y/Math.max(h,1))+'%';}
-addEventListener('scroll',onScroll,{passive:true});onScroll();
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);cio.unobserve(e.target);}}),{threshold:.5});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.16});
+document.querySelectorAll('.reveal,.spark').forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);cio.unobserve(e.target);}}),{threshold:.6});
 document.querySelectorAll('.count').forEach(el=>cio.observe(el));
-function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0'),pre=el.dataset.pre||'',suf=el.dataset.suf||'';let t0=null;
-  function s(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1300,1),e=1-Math.pow(1-p,3);el.textContent=pre+(to*e).toFixed(dec)+suf;if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
-/* 3D globe in #gl container */
-(function(){
-  if(!window.THREE)return;const holder=document.getElementById('gl');if(!holder)return;
-  let W=holder.clientWidth,H=holder.clientHeight;
-  const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x07080B,0.14);
-  const cam=new THREE.PerspectiveCamera(52,W/H,0.1,100);cam.position.set(0,0,6);
-  const rnd=new THREE.WebGLRenderer({alpha:true,antialias:true});rnd.setPixelRatio(Math.min(devicePixelRatio,2));rnd.setSize(W,H);holder.appendChild(rnd.domElement);
-  const grp=new THREE.Group();scene.add(grp);
-  const geo=new THREE.IcosahedronGeometry(2.2,2);
-  grp.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:0x2c313b,transparent:true,opacity:.9})));
-  grp.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xF3F5F8,size:0.05,transparent:true,opacity:.95})));
-  grp.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.4,1)),new THREE.LineBasicMaterial({color:0x1c2029,transparent:true,opacity:.7})));
-  const beacons=[],bgm=new THREE.SphereGeometry(0.05,10,10),pos=geo.attributes.position;
-  for(let i=0;i<6;i++){const k=Math.floor(Math.random()*pos.count);const m=new THREE.Mesh(bgm,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));m.position.set(pos.getX(k),pos.getY(k),pos.getZ(k));m.userData.ph=Math.random()*6.28;grp.add(m);beacons.push(m);}
-  const ring=new THREE.Group();ring.rotation.x=0.6;scene.add(ring);const RN=160,rp=new Float32Array(RN*3);
-  for(let i=0;i<RN;i++){const a=i/RN*6.283;rp[i*3]=Math.cos(a)*3.2;rp[i*3+1]=(Math.random()-.5)*.12;rp[i*3+2]=Math.sin(a)*3.2;}
-  const rgg=new THREE.BufferGeometry();rgg.setAttribute('position',new THREE.BufferAttribute(rp,3));
-  ring.add(new THREE.Points(rgg,new THREE.PointsMaterial({color:0x9aa2ad,size:0.03,transparent:true,opacity:.55})));
-  ring.add(new THREE.LineLoop(rgg,new THREE.LineBasicMaterial({color:0x232830,transparent:true,opacity:.6})));
-  let mx=0,my=0,tmx=0,tmy=0;
-  addEventListener('mousemove',e=>{tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5;},{passive:true});
-  addEventListener('resize',()=>{W=holder.clientWidth;H=holder.clientHeight;cam.aspect=W/H;cam.updateProjectionMatrix();rnd.setSize(W,H);});
-  const clock=new THREE.Clock();
-  (function loop(){requestAnimationFrame(loop);const t=clock.getElapsedTime();mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
-    grp.rotation.y+=0.0018;grp.rotation.x=0.12+my*0.4;grp.rotation.z=mx*0.15;ring.rotation.y=-t*0.09;
-    beacons.forEach(m=>{const s=0.7+Math.abs(Math.sin(t*1.6+m.userData.ph))*1.8;m.scale.setScalar(s);m.material.opacity=0.25+0.6*Math.abs(Math.sin(t*1.6+m.userData.ph));});
-    rnd.render(scene,cam);})();
-})();
-/* self-healing mesh */
-(function(){
-  const cv=document.getElementById('meshcanvas');if(!cv)return;const ctx=cv.getContext('2d'),cap=document.getElementById('meshcap');let W,H,DPR;
-  const N=[[.14,.34],[.32,.16],[.5,.34],[.7,.18],[.87,.38],[.2,.64],[.42,.74],[.63,.6],[.83,.72],[.4,.48]];
-  const E=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,9],[9,2],[9,6],[5,6],[6,7],[7,8],[7,3],[8,4],[1,9],[6,9],[2,7]];
-  function nb(k){const s=new Set();E.forEach(e=>{if(e[0]===k)s.add(e[1]);if(e[1]===k)s.add(e[0]);});return[...s];}
-  let state='nominal',failed=-1,reroute=[],tmr=0,dash=0;
-  function resize(){DPR=Math.min(devicePixelRatio,2);W=cv.clientWidth;H=cv.clientHeight=420;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
-  addEventListener('resize',resize);resize();
-  function P(i){return[N[i][0]*W,N[i][1]*H];}
-  (function loop(){requestAnimationFrame(loop);tmr++;dash=(dash+1)%16;
-    if(state==='nominal'&&tmr>150){failed=Math.floor(Math.random()*N.length);const ns=nb(failed);reroute=[];for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++)reroute.push([ns[i],ns[j]]);state='failing';tmr=0;cap.innerHTML='STATUS: <b>node '+String(failed).padStart(2,'0')+' offline</b> / rerouting';}
-    else if(state==='failing'&&tmr>150){state='healed';tmr=0;cap.innerHTML='STATUS: <b>estimate holds</b> / survivors re-weighted';}
-    else if(state==='healed'&&tmr>110){state='nominal';failed=-1;reroute=[];tmr=0;cap.innerHTML='STATUS: <b>nominal</b> / all nodes reporting';}
-    ctx.clearRect(0,0,W,H);
-    E.forEach(e=>{const dim=(e[0]===failed||e[1]===failed);ctx.beginPath();ctx.strokeStyle=dim?'rgba(120,128,140,.1)':'rgba(120,128,140,.3)';ctx.lineWidth=1;const a=P(e[0]),b=P(e[1]);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();});
-    if(state!=='nominal'){ctx.setLineDash([6,6]);ctx.lineDashOffset=-dash;reroute.forEach(e=>{ctx.beginPath();ctx.strokeStyle='rgba(243,245,248,.85)';ctx.lineWidth=1.3;const a=P(e[0]),b=P(e[1]);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();});ctx.setLineDash([]);}
-    N.forEach((n,i)=>{const p=P(i),fl=(i===failed);if(fl){ctx.beginPath();ctx.setLineDash([4,4]);ctx.lineDashOffset=dash;ctx.strokeStyle='rgba(120,128,140,.6)';ctx.lineWidth=1.2;ctx.arc(p[0],p[1],7,0,6.28);ctx.stroke();ctx.setLineDash([]);}else{const t=Date.now()/600;ctx.beginPath();ctx.fillStyle='rgba(243,245,248,.12)';ctx.arc(p[0],p[1],7+Math.sin(t+i)*1.2,0,6.28);ctx.fill();ctx.beginPath();ctx.fillStyle='#F3F5F8';ctx.arc(p[0],p[1],3.2,0,6.28);ctx.fill();}});
-  })();
-})();
-</script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"Does it act without me?","acceptedAnswer":{"@type":"Answer","text":"Only inside limits you set. Every autonomous action is bounded by operator-defined caps and written to a full audit log. You can also run Terra in alert-only mode, where it forecasts and warns but never touches an actuator."}},
-    {"@type":"Question","name":"Does it work offline, on a bad VSAT link?","acceptedAnswer":{"@type":"Answer","text":"Yes. The whole engine runs on a small edge node on-site. It needs no cloud and no network to forecast or act, so a dropped or slow VSAT link does not stop it."}},
-    {"@type":"Question","name":"Is this proven yet?","acceptedAnswer":{"@type":"Answer","text":"Terra is validated in simulation today on a real-data foundation, and the company is pre-revenue. Bench validation is planned for Q4 2026 and the first paid pilots for H1 2027."}},
-    {"@type":"Question","name":"Do I need a data scientist to run it?","acceptedAnswer":{"@type":"Answer","text":"No. Terra uses commodity probes plus a small edge node, and we handle calibration and the model. Your team sees forecasts, alerts, and an audit log, not math."}},
-    {"@type":"Question","name":"What does a pilot cost?","acceptedAnswer":{"@type":"Answer","text":"We price on value share: you pay when we prevent a loss. A pilot starts on a single system so the risk to you is small and the result is measurable on your own site."}}
-  ]
-}
-</script>
-<script>
-(function(){
- var d=[
-  {img:'/domain-water.jpg',tag:'WATER',stage:'NOW / FIRST REVENUE',h:'Water',sum:'Land-based aquaculture (RAS) and water quality. Forecast a DO crash, ammonia spike, or biofilter collapse hours ahead and act before the tank goes.',stat:'~6.5 h early warning (simulation)',det:[['What fails','A DO crash, an ammonia or nitrite spike, or a slow biofilter collapse builds for hours before any single probe trips. Probes foul and drift, so the dashboard reads calm while the fish are already dying.'],['What Terra does','Reconstructs the whole-system state, forecasts the breach hours ahead, and acts on-site within limits you set, offline, behind a full audit log.'],['Stage','Validated in simulation; measurement-validation collaboration with the Freshwater Institute; first paid pilots H1 2027.']],link:'/aquaculture/'},
-  {img:'/domain-bio.jpg',tag:'BIOENGINEERING & REMEDIATION',stage:'NEXT / ROADMAP',h:'Bioengineering & Remediation',sum:'Wastewater, environmental remediation, and bioprocess. Closed biological loops with the same failure mode. Same engine, next on the roadmap.',stat:'On the roadmap after aquaculture',det:[['What fails','Microbial and process communities drift before effluent or a batch goes out of spec. Upsets are costly and usually caught late.'],['What Terra does','Forecast the upset ahead of time, separate true drift from fouling, and keep an audit log for every automated action, which matters where discharge is regulated.'],['Stage','On the roadmap, not deployed yet. We are looking for design partners in municipal or industrial process water.']],link:'/bioremediation/'},
-  {img:'/domain-space.jpg',tag:'BLSS',stage:'VALIDATED IN SIMULATION',h:'Bioregenerative life support',sum:'Closed-loop life support for the Moon and Mars. The hardest closed living system there is, and Terra\'s north star.',stat:'98% of breaches forecast (SIMOC, 60 runs)',det:[['The validation','A 60-run ensemble on SIMOC, the Biosphere-2 closed-habitat model, across seven habitats: 98% of safety breaches forecast before they occurred, median 18 h lead (up to 168 h), 11% false-alarm rate, self-calibrated per habitat (R2 median 0.87).'],['Honest scope','Simulation-to-simulation validation against an independent, peer-built model. Not flight data; no flight heritage.'],['Stage','Seeking research partners and non-dilutive support (USDA, NOAA, NASA SBIR) to move toward bench validation.']],link:'/space/'}
- ];
- var box=document.getElementById('dcols'); if(!box) return;
- d.forEach(function(c,i){
-   var col=document.createElement('div'); col.className='dcol'; col.style.backgroundImage="url('"+c.img+"')";
-   var det=c.det.map(function(b){return '<div class="blk"><div class="lbl">'+b[0]+'</div><p>'+b[1]+'</p></div>';}).join('');
-   col.innerHTML='<div class="dtop"><span class="dtag">'+c.tag+'</span><span class="dpill">'+c.stage+'</span></div>'+
-     '<div class="dbody"><h3>'+c.h+'</h3><div class="sum">'+c.sum+'</div><div class="stat">'+c.stat+'</div>'+
-     '<button class="dbtn" data-i="'+i+'"><span>EXPAND</span><span class="chev">+</span></button>'+
-     '<div class="ddet" id="ddet'+i+'">'+det+'<a class="dlink" href="'+c.link+'">Full page &rarr;</a></div></div>';
-   box.appendChild(col);
- });
- box.addEventListener('click',function(e){
-   var b=e.target.closest('.dbtn'); if(!b) return;
-   var i=b.getAttribute('data-i'), det=document.getElementById('ddet'+i), col=b.closest('.dcol'), chev=b.querySelector('.chev'), lab=b.querySelector('span');
-   if(det.style.maxHeight && det.style.maxHeight!=='0px'){ det.style.maxHeight='0px'; col.classList.remove('open'); chev.textContent='+'; lab.textContent='EXPAND'; }
-   else { det.style.maxHeight=det.scrollHeight+30+'px'; col.classList.add('open'); chev.textContent='–'; lab.textContent='COLLAPSE'; }
- });
-})();
+function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0');let t0=null;
+ function s(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1100,1),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(s);else el.textContent=to.toFixed(dec);}
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=to.toFixed(dec);return;}requestAnimationFrame(s);}
 </script>
 </body>
 </html>
