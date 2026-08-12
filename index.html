@@ -3,302 +3,353 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terra Laboratories / The autonomous intelligence platform for living systems</title>
-<meta name="description" content="Terra is the autonomous intelligence platform for living systems. It reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline. Aquaculture, bioremediation, and space life support.">
-<link rel="canonical" href="https://terralaboratories.com/">
-<meta name="theme-color" content="#F7F5EF">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Terra Laboratories">
-<meta property="og:title" content="The autonomous intelligence platform for living systems.">
-<meta property="og:description" content="Terra is the autonomous intelligence platform for living systems. It reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline. Aquaculture, bioremediation, and space life support.">
-<meta property="og:url" content="https://terralaboratories.com/">
-<meta property="og:image" content="https://terralaboratories.com/og-cover.png">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The autonomous intelligence platform for living systems.">
-<meta name="twitter:description" content="Terra is the autonomous intelligence platform for living systems. It reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline. Aquaculture, bioremediation, and space life support.">
-<meta name="twitter:image" content="https://terralaboratories.com/og-cover.png">
+<title>Terra Laboratories · Superintelligence for living systems</title>
+<meta name="description" content="Terra Laboratories builds the intelligence that keeps closed living systems alive: superhuman at perceiving and forecasting the hidden state of a living system, and acting on it. On Earth today, off Earth next.">
+<meta name="theme-color" content="#050609">
+<meta property="og:title" content="Superintelligence for living systems">
+<meta property="og:description" content="The intelligence that keeps living systems alive, on Earth and off it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
- --paper:#F7F5EF;--paper2:#F1EEE5;--card:#FDFCF8;--ink:#14201B;--soft:#33403A;--mut:#5C6862;
- --line:#E6E2D8;--green:#17453A;--signal:#1FB874;
- --dark:#0E1613;--dline:#2A362F;--dink:#F1F5F2;--dmut:#AEBBB2;
- --disp:'Instrument Sans',system-ui,sans-serif;--serif:'Instrument Serif',Georgia,serif;--mono:'JetBrains Mono',monospace;
- --mx:clamp(20px,5vw,64px);
+ --bg:#050609;--bg2:#080A0E;--ink:#F4F6F4;--soft:#98A19D;--mut:#565E5A;
+ --acc:#45C97F;--line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.2);
+ --disp:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+ --mx:clamp(20px,5.5vw,96px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--disp);line-height:1.55;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.1}
-em.s{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--green);letter-spacing:0}
+img{display:block;max-width:100%}
+::selection{background:var(--acc);color:#031409}
 .mono{font-family:var(--mono)}
-.seclabel{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.seclabel .tick{width:22px;height:1px;background:var(--green);opacity:.5}
-.btn{font-size:14px;font-weight:600;padding:13px 22px;border-radius:9px;cursor:pointer;border:.5px solid transparent;font-family:var(--disp);transition:transform .2s ease,background .2s ease}
-.btn.solid{background:var(--ink);color:var(--paper)}
-.btn.solid:hover{transform:translateY(-2px)}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn.ghost:hover{border-color:var(--ink)}
-/* NAV */
-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px var(--mx);border-bottom:.5px solid var(--line);background:rgba(247,245,239,.82);backdrop-filter:blur(10px)}
-.wordmark{font-weight:600;font-size:16px;letter-spacing:.005em}
-.navlinks{display:flex;gap:26px;font-size:13.5px;color:var(--soft)}
-.navlinks a:hover{color:var(--ink)}
-.navcta{font-size:13px;font-weight:600;color:var(--paper);background:var(--ink);padding:10px 17px;border-radius:8px}
-@media(max-width:860px){.navlinks{display:none}}
-/* HERO */
-.hero{display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center;padding:72px var(--mx) 52px}
-@media(max-width:860px){.hero{grid-template-columns:1fr;gap:34px;padding:44px var(--mx)}}
-h1{font-size:clamp(38px,4.7vw,58px);line-height:1.09;letter-spacing:-.015em;margin:20px 0;max-width:17ch}
-.sub{font-size:18.5px;line-height:1.62;color:var(--soft);max-width:48ch;margin-bottom:28px}
-.ctarow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.meta{margin-top:32px;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--mut);flex-wrap:wrap}
-.meta .sep{width:1px;height:12px;background:var(--line)}
-.livedot{width:7px;height:7px;border-radius:50%;background:var(--signal);animation:pulse 2.4s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,184,116,.5)}70%{box-shadow:0 0 0 8px rgba(31,184,116,0)}100%{box-shadow:0 0 0 0 rgba(31,184,116,0)}}
-/* INSTRUMENT PANEL */
-.inst{background:var(--dark);border-radius:14px;padding:22px;position:relative;color:var(--dink);box-shadow:0 24px 60px -30px rgba(20,32,27,.5)}
-.inst .corners span{position:absolute;width:9px;height:9px;border-color:rgba(255,255,255,.2);border-style:solid}
-.inst .ih{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dmut);margin-bottom:16px}
-.inst .sim{border:.5px solid var(--dline);border-radius:5px;padding:3px 8px}
-.rlabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dmut);margin-bottom:12px}
-.reading{display:flex;align-items:flex-end;gap:8px}
-.reading .val{font-family:var(--mono);font-size:34px;font-weight:500;letter-spacing:-.02em}
-.reading .unit{font-family:var(--mono);font-size:12px;color:var(--dmut);margin-bottom:7px}
-.statgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--dline);border:.5px solid var(--dline);border-radius:8px;overflow:hidden;margin-top:16px}
-.statgrid .s{background:var(--dark);padding:11px 12px}
-.statgrid .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dmut);margin-bottom:5px}
-.statgrid .v{font-family:var(--mono);font-size:14px;color:var(--dink)}
-.statgrid .v.sig{color:var(--signal)}
-.ifoot{display:flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dmut)}
-.spark{stroke-dasharray:400;stroke-dashoffset:400}
-.spark.in{transition:stroke-dashoffset 1.6s ease .2s;stroke-dashoffset:0}
-/* SECTIONS */
-section{padding:70px var(--mx);border-top:.5px solid var(--line)}
-h2{font-size:clamp(26px,3.2vw,38px);max-width:20ch;margin-bottom:10px}
-h2 em.s{font-family:var(--serif)}
-.lede{font-size:16.5px;color:var(--soft);max-width:58ch}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
-@media(max-width:860px){.steps{grid-template-columns:1fr}}
-.step{border-top:1.5px solid var(--ink);padding-top:16px}
-.step .num{font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.1em}
-.step h3{font-size:18px;margin:8px 0 6px}
-.step p{font-size:14px;color:var(--soft);max-width:34ch}
-/* DOMAINS */
-.doms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-@media(max-width:860px){.doms{grid-template-columns:1fr}}
-.dom{position:relative;height:360px;border-radius:14px;overflow:hidden;border:.5px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end}
-.dom .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02) brightness(.82);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.dom:hover .bg{transform:scale(1.05)}
-.dom .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,18,.15) 0%,rgba(10,22,18,.55) 52%,rgba(8,16,13,.93) 100%)}
-.dom .duo2{position:absolute;inset:0;background:rgba(23,69,58,.28);mix-blend-mode:multiply}
-.dom .c{position:relative;z-index:2;padding:24px}
-.dom .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#CDE9DC;display:flex;justify-content:space-between}
-.dom h3{font-size:21px;color:#fff;margin:14px 0 8px}
-.dom p{font-size:13.5px;color:#D7E1DB;margin-bottom:16px;max-width:36ch}
-.dom a{font-family:var(--mono);font-size:12px;color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
-/* PROOF */
-.proof{position:relative;border-top:none;color:var(--dink);padding:64px var(--mx);overflow:hidden;background:var(--dark)}
-.proof .pbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:grayscale(.2)}
-.proof .pov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,15,.86),rgba(10,18,15,.94))}
-.proof .in{position:relative;z-index:2}
-.proof .seclabel{color:var(--signal)}
-.proof h2{color:#fff}
-.proof .lede{color:var(--dmut);max-width:62ch}
-.proofgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dline);border:.5px solid var(--dline);border-radius:12px;overflow:hidden;margin-top:30px;position:relative;z-index:2}
-@media(max-width:860px){.proofgrid{grid-template-columns:1fr 1fr}}
-.pcell{background:rgba(14,22,19,.72);padding:24px 22px}
-.pcell .pv{font-family:var(--mono);font-size:30px;color:#fff;font-weight:500;letter-spacing:-.02em}
-.pcell .pv .sig{color:var(--signal)}
-.pcell .pk{font-size:12.5px;color:var(--dmut);margin-top:8px;max-width:22ch}
-.pnote{font-family:var(--mono);font-size:10.5px;color:var(--dmut);margin-top:18px;position:relative;z-index:2}
-/* FAQ */
-.faq{margin-top:28px;max-width:780px}
-details{border-top:.5px solid var(--line);padding:18px 0}
-summary{cursor:pointer;list-style:none;font-size:17px;font-weight:500;display:flex;justify-content:space-between;gap:16px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--green);font-family:var(--mono)}
-details[open] summary::after{content:"–"}
-details p{font-size:14.5px;color:var(--soft);margin-top:12px;max-width:64ch}
-/* PILOT */
-.pilot{background:var(--paper2);border-radius:16px;padding:clamp(28px,4vw,44px);display:grid;grid-template-columns:1fr 1fr;gap:36px}
-@media(max-width:860px){.pilot{grid-template-columns:1fr}}
-.field{margin-bottom:12px}
-.field label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:6px}
-.field input{width:100%;background:#FFFDF9;border:.5px solid var(--line);border-radius:8px;padding:12px 13px;font-family:var(--disp);font-size:15px;color:var(--ink)}
-.field input:focus{outline:none;border-color:var(--green)}
-/* FOOTER */
-footer{padding:52px var(--mx) 32px;border-top:.5px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
-@media(max-width:860px){footer{grid-template-columns:1fr}}
-footer .big{font-size:22px;font-weight:600;max-width:20ch}
-footer .tagm{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mut);margin-top:14px}
-.fcol h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
-.fcol a{display:block;font-size:14px;color:var(--soft);margin-bottom:8px}
-.legal{grid-column:1/-1;border-top:.5px solid var(--line);margin-top:16px;padding-top:16px;font-family:var(--mono);font-size:10px;color:var(--mut);line-height:1.7;max-width:1000px}
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-.d1{transition-delay:.06s}.d2{transition-delay:.14s}.d3{transition-delay:.22s}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.spark{stroke-dashoffset:0}}
-
-/* domain-page additions */
-.dhero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:60px var(--mx) 36px}
-@media(max-width:860px){.dhero{grid-template-columns:1fr;gap:28px}}
-.dimg{position:relative;height:360px;border-radius:14px;overflow:hidden;border:.5px solid var(--line)}
-.dimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02) brightness(.84)}
-.dimg .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,18,.08),rgba(10,22,18,.5))}
-.dimg .duo2{position:absolute;inset:0;background:rgba(23,69,58,.24);mix-blend-mode:multiply}
-.dimg .cap{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#DCE7E0}
-.ul{list-style:none;margin:16px 0;display:grid;gap:10px}
-.ul li{padding-left:20px;position:relative;color:var(--soft);font-size:15px;max-width:70ch}
-.ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;background:var(--green);border-radius:1px}
-.prose p{color:var(--soft);font-size:15.5px;max-width:70ch;margin-bottom:14px}
-.callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
-@media(max-width:860px){.callouts{grid-template-columns:1fr}}
-.co{border:.5px solid var(--line);border-radius:10px;padding:18px;background:var(--card)}
-.co .v{font-family:var(--mono);font-size:22px;color:var(--ink)}
-.co .k{font-size:12px;color:var(--mut);margin-top:6px}
-.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px;font-family:var(--mono);font-size:11px}
-.tagrow a{border:.5px solid var(--line);border-radius:20px;padding:7px 14px;color:var(--soft)}
-.tagrow a:hover{color:var(--ink);border-color:var(--ink)}
-.note{border:.5px solid var(--line);border-left:2.5px solid var(--green);border-radius:0 8px 8px 0;background:var(--paper2);padding:16px 18px;margin:20px 0;font-size:14px;color:var(--soft)}
+.acc{color:var(--acc)}
+/* fixed frame */
+.tick{position:fixed;width:12px;height:12px;border:1px solid var(--line2);z-index:60;pointer-events:none}
+.tick.tl{top:18px;left:18px;border-right:0;border-bottom:0}
+.tick.tr{top:18px;right:18px;border-left:0;border-bottom:0}
+.tick.bl{bottom:18px;left:18px;border-right:0;border-top:0}
+.tick.br{bottom:18px;right:18px;border-left:0;border-top:0}
+.meta-fixed{position:fixed;bottom:22px;left:36px;z-index:55;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--mut);pointer-events:none}
+.prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--acc);z-index:70;transition:width .1s linear}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:65;display:flex;align-items:center;justify-content:space-between;padding:22px var(--mx);transition:background .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.on{background:rgba(5,6,9,.7);backdrop-filter:blur(16px);border-color:var(--line);padding:15px var(--mx)}
+.brand{font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:.26em;text-transform:uppercase}
+.nlinks{display:flex;gap:36px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.nlinks a{transition:color .2s}.nlinks a:hover{color:var(--ink)}
+@media(max-width:820px){.nlinks{display:none}}
+.cta{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line2);padding:11px 18px;transition:.25s;color:var(--ink)}
+.cta:hover{background:var(--ink);color:#050609;border-color:var(--ink)}
+/* hero */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--mx) clamp(70px,11vh,120px);overflow:hidden}
+.hero-img{position:absolute;inset:0;z-index:0;background:url('assets/hero_mars.jpg') center 42%/cover;animation:slowzoom 34s ease-in-out infinite alternate}
+@keyframes slowzoom{from{transform:scale(1.05)}to{transform:scale(1.15)}}
+.hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,6,9,.55),rgba(5,6,9,.2) 38%,rgba(5,6,9,.78) 82%,var(--bg) 100%)}
+#stars{position:absolute;inset:0;z-index:2}
+.hero-c{position:relative;z-index:3;max-width:1180px}
+.ey{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--soft);margin-bottom:30px;opacity:0;animation:fu .9s .1s forwards}
+.ey::before{content:"";width:34px;height:1px;background:var(--acc)}
+h1{font-weight:800;font-size:clamp(40px,7.4vw,116px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;color:#fff;text-shadow:0 2px 40px rgba(0,0,0,.5)}
+h1 span{display:inline-block;opacity:0;transform:translateY(30px);animation:fu 1s forwards}
+.hsub{font-size:clamp(15px,1.5vw,20px);color:rgba(244,246,244,.82);max-width:56ch;margin-top:30px;font-weight:400;text-shadow:0 1px 20px rgba(0,0,0,.5);opacity:0;animation:fu 1s .8s forwards}
+.hero-a{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;align-items:center;opacity:0;animation:fu 1s .95s forwards}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px;border:1px solid var(--ink);transition:.25s}
+.btn.solid{background:var(--ink);color:#050609}.btn.solid:hover{background:#fff}
+.btn.ghost{border-color:var(--line2);color:var(--ink)}.btn.ghost:hover{border-color:var(--ink)}
+.scrolls{position:absolute;left:var(--mx);bottom:26px;z-index:3;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);opacity:0;animation:fu 1s 1.3s forwards}
+.scrolls i{display:block;width:44px;height:1px;background:linear-gradient(90deg,var(--acc),transparent);animation:sweep 2.2s ease-in-out infinite}
+@keyframes sweep{0%{transform:scaleX(0);transform-origin:left}50%{transform:scaleX(1);transform-origin:left}50.1%{transform-origin:right}100%{transform:scaleX(0);transform-origin:right}}
+@keyframes fu{to{opacity:1;transform:none}}
+.hero-meta{position:absolute;right:var(--mx);bottom:30px;z-index:3;text-align:right;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:rgba(244,246,244,.5);line-height:1.9;opacity:0;animation:fu 1s 1.3s forwards}
+@media(max-width:820px){.hero-meta{display:none}}
+/* section framework */
+.sec{position:relative;max-width:1240px;margin:0 auto;padding:clamp(92px,15vh,180px) var(--mx)}
+.shead{display:flex;align-items:baseline;gap:18px;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-bottom:34px;border-top:1px solid var(--line);padding-top:20px}
+.shead .no{color:var(--acc)}
+.big{font-weight:800;font-size:clamp(30px,4.7vw,60px);line-height:1.04;letter-spacing:-.02em;max-width:19ch}
+.big.up{text-transform:uppercase;letter-spacing:0}
+.lede{font-size:clamp(16px,1.35vw,19px);color:var(--soft);max-width:60ch;margin-top:26px;line-height:1.72}
+.rev{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.rev.in{opacity:1;transform:none}
+.rev.d1{transition-delay:.08s}.rev.d2{transition-delay:.16s}.rev.d3{transition-delay:.24s}.rev.d4{transition-delay:.32s}
+/* engine split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:56px}
+@media(max-width:920px){.split{grid-template-columns:1fr;gap:36px}}
+.pfa{border-top:1px solid var(--line);margin-top:12px}
+.pfa .row{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:24px 0;border-bottom:1px solid var(--line)}
+.pfa .n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--acc);padding-top:5px}
+.pfa h3{font-weight:700;font-size:20px;letter-spacing:-.01em}
+.pfa p{font-size:14.5px;color:var(--soft);margin-top:5px;line-height:1.6}
+/* console */
+.console{background:linear-gradient(160deg,#0B0F0D,#080A0C);border:1px solid var(--line);padding:26px}
+.console-h{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:18px}
+.sim{border:1px solid var(--line);padding:4px 9px;color:var(--acc)}
+.rl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.ro{display:flex;align-items:flex-end;gap:10px;margin:4px 0 6px}
+.ro .v{font-family:var(--mono);font-weight:500;font-size:44px;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.ro .u{font-family:var(--mono);font-size:13px;color:var(--mut);margin-bottom:9px}
+#chart{width:100%;height:150px;display:block;margin-top:6px}
+.dgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:18px}
+.dgrid .c{background:#0A0D0B;padding:13px 14px}
+.dgrid .k{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.dgrid .dv{font-family:var(--mono);font-size:14px;color:#fff}.dgrid .dv.a{color:var(--acc)}
+.dfoot{display:flex;align-items:center;gap:8px;margin-top:15px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:bp 1.5s infinite}
+@keyframes bp{0%,100%{opacity:1}50%{opacity:.25}}
+/* manifesto */
+.mani{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 var(--mx);position:relative;overflow:hidden}
+.mani #mgrid{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+.mani #mgrid .spin{transform-origin:720px 430px;animation:orbit 70s linear infinite}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.mani #msky{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+.mani p{position:relative;z-index:1;font-weight:800;font-size:clamp(28px,5.2vw,66px);line-height:1.06;letter-spacing:-.02em;max-width:16ch;text-transform:uppercase}
+.mani .sm{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-bottom:28px;font-weight:400}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:56px}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{padding:36px 24px 36px 0;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+@media(max-width:760px){.stat{border-right:0;border-bottom:1px solid var(--line)}}
+.stat .v{font-weight:800;font-size:clamp(44px,5.6vw,78px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#fff}
+.stat .l{font-family:var(--mono);font-size:11px;color:var(--soft);margin-top:16px;line-height:1.5;max-width:22ch;letter-spacing:.02em}
+.note{font-family:var(--mono);font-size:11px;color:var(--mut);margin-top:44px;letter-spacing:.02em}
+/* frontier list */
+.fl{border-top:1px solid var(--line);margin-top:52px}
+.fl .r{display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:center;padding:30px 4px;border-bottom:1px solid var(--line);transition:.3s}
+.fl .r:hover{padding-left:18px;background:rgba(255,255,255,.02)}
+.fl .st{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--acc)}
+.fl h4{font-weight:700;font-size:clamp(22px,2.6vw,32px);letter-spacing:-.02em;text-transform:uppercase}
+.fl p{font-size:14.5px;color:var(--soft);margin-top:3px}
+.fl .yr{font-family:var(--mono);font-size:12px;color:var(--mut);white-space:nowrap}
+@media(max-width:700px){.fl .r{grid-template-columns:1fr;gap:6px}.fl .yr{display:none}}
+/* full-bleed band */
+.band{position:relative;min-height:94vh;display:flex;align-items:flex-end;overflow:hidden}
+.band-img{position:absolute;inset:-10% 0;z-index:0;background-size:cover;background-position:center;will-change:transform}
+.band::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg),transparent 22%,transparent 55%,rgba(5,6,9,.85) 88%,var(--bg))}
+.band-c{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;padding:0 var(--mx) clamp(80px,12vh,140px)}
+.band-c .big,.band-c .lede,.band-c .shead{text-shadow:0 2px 30px rgba(0,0,0,.65)}
+.band-c .shead{border-top:0;padding-top:0}
+/* traction */
+.trac{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px}
+@media(max-width:820px){.trac{grid-template-columns:1fr}}
+.tc{background:var(--bg);padding:34px}
+.tc .h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:18px}
+.tc .names{display:flex;flex-wrap:wrap;gap:9px}
+.tc .names span{font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--line);padding:8px 13px}
+.tc p{font-size:14.5px;color:var(--soft);margin-top:16px;line-height:1.6}
+.tstat{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
+@media(max-width:620px){.tstat{grid-template-columns:1fr}}
+.tstat .v{font-weight:800;font-size:26px;letter-spacing:-.02em}
+.tstat .l{font-family:var(--mono);font-size:11px;color:var(--mut);margin-top:5px}
+/* ask */
+.ask{border-top:1px solid var(--line);margin-top:50px}
+.ask .r{display:grid;grid-template-columns:180px 1fr;gap:28px;padding:26px 4px;border-bottom:1px solid var(--line)}
+.ask .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);padding-top:3px}
+.ask .val{font-size:16.5px;color:var(--ink);line-height:1.5}
+@media(max-width:620px){.ask .r{grid-template-columns:1fr;gap:6px}}
+/* close */
+.close{position:relative;min-height:100vh;display:flex;align-items:center;text-align:center;overflow:hidden}
+.close-img{position:absolute;inset:-8% 0;z-index:0;background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?fm=jpg&q=74&w=1920&auto=format&fit=crop&ixlib=rb-4.1.0') center 44%/cover;will-change:transform}
+.close::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(90% 100% at 50% 46%,rgba(5,6,9,.45),rgba(5,6,9,.9) 82%),linear-gradient(180deg,var(--bg),transparent 18%,transparent 82%,var(--bg))}
+.close-c{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:0 var(--mx)}
+.close h2{font-weight:800;font-size:clamp(32px,5.6vw,82px);line-height:1;letter-spacing:-.02em;text-transform:uppercase;color:#fff;text-shadow:0 2px 34px rgba(0,0,0,.6)}
+.contact{display:inline-block;margin-top:34px;font-family:var(--mono);font-size:14px;letter-spacing:.04em;border-bottom:1px solid var(--acc);padding-bottom:5px;transition:.2s}
+.contact:hover{color:var(--acc)}
+footer{border-top:1px solid var(--line);padding:36px var(--mx);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rev{opacity:1;transform:none}}
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://terralaboratories.com/#org","name":"Terra Laboratories","url":"https://terralaboratories.com/","logo":"https://terralaboratories.com/og-cover.png","description":"The autonomous intelligence platform for living systems.","founder":{"@type":"Person","name":"Cameron Souza","url":"https://www.linkedin.com/in/csouza13/"},"sameAs":["https://www.linkedin.com/in/csouza13/","https://github.com/CamSouza13"]},
-{"@type":"WebSite","url":"https://terralaboratories.com/","name":"Terra Laboratories","publisher":{"@id":"https://terralaboratories.com/#org"}},
-{"@type":"Service","name":"Terra autonomous intelligence platform","provider":{"@id":"https://terralaboratories.com/#org"},"serviceType":"Autonomous state estimation, forecasting and control for closed living systems","areaServed":"US","description":"Reads the true state of a closed living loop, forecasts failure hours ahead, and acts on it offline behind a full audit log."}]}
-</script>
 </head>
 <body>
+<span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+<div class="meta-fixed">TERRA LABS · 44.56°N 123.26°W · EST. MMXXVI</div>
+<div class="prog" id="prog"></div>
 
-<nav>
-  <span class="wordmark">Terra&nbsp;Laboratories</span>
-  <div class="navlinks"><a href="#how">Platform</a><a href="#domains">Aquaculture</a><a href="#domains">Bioremediation</a><a href="#domains">Space</a><a href="#company">Company</a></div>
-  <a href="#pilot" class="navcta">Request a pilot</a>
+<nav id="nav">
+  <div class="brand">Terra</div>
+  <div class="nlinks"><a href="#engine">Engine</a><a href="#proof">Proof</a><a href="#frontier">Frontier</a><a href="#traction">Traction</a></div>
+  <a href="mailto:cameron@terralaboratories.com" class="cta">Request the deck</a>
 </nav>
 
+<!-- HERO -->
 <header class="hero">
-  <div class="reveal">
-    <div class="seclabel"><span class="tick"></span>Autonomous intelligence · living systems</div>
-    <h1>The autonomous intelligence platform for <em class="s">living systems</em>.</h1>
-    <div class="sub">Terra reads the true state of any closed living loop, forecasts failure hours before it happens, and acts on it on-site: offline, and accountable to a full audit log.</div>
-    <div class="ctarow"><a href="#pilot" class="btn solid">Request a pilot</a><a href="#how" class="btn ghost">Read the technology →</a></div>
-    <div class="meta"><span class="livedot"></span>Engine · nominal<span class="sep"></span>UKF · edge · offline<span class="sep"></span>Validated on SIMOC</div>
+  <div class="hero-img"></div>
+  <div class="hero-veil"></div>
+  <canvas id="stars"></canvas>
+  <div class="hero-c">
+    <div class="ey">Terra Laboratories / Living systems intelligence</div>
+    <h1><span style="animation-delay:.15s">Superintelligence</span> <span style="animation-delay:.4s">for</span> <span style="animation-delay:.62s">living</span> <span style="animation-delay:.62s">systems</span></h1>
+    <p class="hsub">One engine reads the hidden state of a closed living system, forecasts its failure hours ahead, and acts on it. On Earth today. Off Earth next.</p>
+    <div class="hero-a">
+      <a href="mailto:cameron@terralaboratories.com" class="btn solid">Request the deck</a>
+      <a href="#engine" class="btn ghost">See the engine</a>
+    </div>
   </div>
-  <div class="inst reveal d2">
-    <div class="corners"><span style="top:9px;left:9px;border-width:1px 0 0 1px"></span><span style="top:9px;right:9px;border-width:1px 1px 0 0"></span><span style="bottom:9px;left:9px;border-width:0 0 1px 1px"></span><span style="bottom:9px;right:9px;border-width:0 1px 1px 0"></span></div>
-    <div class="ih"><span>State estimate</span><span class="sim">Simulation</span></div>
-    <div class="rlabel">Dissolved oxygen · tank 04</div>
-    <div class="reading"><span class="val">6.2</span><span class="unit">mg/L</span></div>
-    <svg viewBox="0 0 320 92" width="100%" height="84" style="margin-top:6px" preserveAspectRatio="none">
-      <line x1="0" y1="68" x2="320" y2="68" stroke="#1FB874" stroke-width="1" stroke-dasharray="2 4" opacity=".55"/>
-      <text x="316" y="62" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#1FB874" opacity=".85">4.0 mg/L limit</text>
-      <path class="spark" d="M4,24 C60,28 96,38 150,48 C200,58 250,64 316,76" fill="none" stroke="#EAF1EC" stroke-width="2"/>
-      <circle cx="150" cy="48" r="3.4" fill="#EAF1EC"/><circle cx="252" cy="68" r="4.6" fill="none" stroke="#1FB874" stroke-width="1.6"/><circle cx="252" cy="68" r="1.6" fill="#1FB874"/>
-    </svg>
-    <div class="statgrid"><div class="s"><div class="k">Forecast lead</div><div class="v sig">6.5 h</div></div><div class="s"><div class="k">Confidence</div><div class="v">0.87</div></div><div class="s"><div class="k">Action</div><div class="v">Aerate</div></div></div>
-    <div class="ifoot"><span class="livedot"></span>Audit log · writing</div>
-  </div>
+  <div class="scrolls">Scroll<i></i></div>
+  <div class="hero-meta">DISPATCH 01 / MMXXVI<br>SIMOC · 60-RUN ENSEMBLE<br>STATUS: VALIDATED</div>
 </header>
 
-<section id="how">
-  <div class="seclabel reveal"><span class="tick"></span>How it works</div>
-  <h2 class="reveal d1"><em class="s">Measure.</em> Infer. Act.</h2>
-  <div class="lede reveal d1">Conventional monitoring alarms one sensor at a time, after something breaks. Terra models the whole loop and acts before it does.</div>
-  <div class="steps">
-    <div class="step reveal d1"><div class="num">01</div><h3>Measure</h3><p>Commodity probes and a small edge node. Drift and fouling are separated in software.</p></div>
-    <div class="step reveal d2"><div class="num">02</div><h3>Infer &amp; forecast</h3><p>A Bayesian state estimator reconstructs the hidden variable that fails first, then predicts the breach hours ahead.</p></div>
-    <div class="step reveal d3"><div class="num">03</div><h3>Act</h3><p>Safety-bounded control on-site, offline, with every decision written to a full audit log.</p></div>
-  </div>
+<!-- THESIS -->
+<section class="sec" id="thesis">
+  <div class="shead rev"><span class="no">/ 01</span><span>The thesis</span></div>
+  <h2 class="big rev d1">Digital AI mastered language. The next frontier is <span class="acc">life</span>.</h2>
+  <p class="lede rev d2">A fish farm, a bioreactor, a sealed habitat: each is a closed living loop that collapses as a whole, hours before any single sensor trips. The probes we trust foul and drift, so the numbers look fine while the system dies underneath them. Terra reads the true state, forecasts the failure, and closes the loop.</p>
 </section>
 
-<section id="domains">
-  <div class="seclabel reveal"><span class="tick"></span>One engine, three closed worlds</div>
-  <h2 class="reveal d1">Where the platform works.</h2>
-  <div class="doms">
-    <a href="#" class="dom reveal d1">
-      <img class="bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Aquaponics_with_catfish.jpg" alt="Indoor recirculating aquaculture tanks">
-      <div class="duo"></div><div class="duo2"></div>
-      <div class="c"><div class="tag"><span>Water</span><span>Now</span></div><h3>Aquaculture</h3><p>Forecast a DO crash or biofilter collapse on land-based farms, and act before the tank goes.</p><span>Explore aquaculture →</span></div>
-    </a>
-    <a href="#" class="dom reveal d2">
-      <img class="bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wards_Island_Wastewater_Treatment_Plant_%2860106%29.jpg" alt="Wastewater treatment aeration basins">
-      <div class="duo"></div><div class="duo2"></div>
-      <div class="c"><div class="tag"><span>Earth</span><span>Next</span></div><h3>Bioremediation</h3><p>Wastewater and environmental loops, watched in real time. The same engine, on the roadmap.</p><span>Read the plan →</span></div>
-    </a>
-    <a href="#" class="dom reveal d3">
-      <img class="bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg" alt="Earth seen from space, Apollo 17">
-      <div class="duo"></div><div class="duo2"></div>
-      <div class="c"><div class="tag"><span>Orbit</span><span>Validated</span></div><h3>Space life support</h3><p>Bioregenerative life support, the north star. Validated on Biosphere-2 habitat models.</p><span>See the results →</span></div>
-    </a>
-  </div>
-</section>
-
-<section class="proof">
-  <img class="pbg" src="https://commons.wikimedia.org/wiki/Special:FilePath/NASA-Apollo8-Dec24-Earthrise.jpg" alt="">
-  <div class="pov"></div>
-  <div class="in">
-    <div class="seclabel"><span class="tick" style="background:var(--signal)"></span>Validated on SIMOC</div>
-    <h2 class="reveal">Proven on the hardest closed loop there is.</h2>
-    <div class="lede reveal d1">A 60-run ensemble against SIMOC, the closed-habitat model built with Biosphere 2, across seven habitats and dozens of fault conditions.</div>
-    <div class="proofgrid reveal d1">
-      <div class="pcell"><div class="pv"><span class="sig count" data-to="98">0</span><span class="sig">%</span></div><div class="pk">of safety breaches forecast before they occurred</div></div>
-      <div class="pcell"><div class="pv"><span class="count" data-to="18">0</span> h</div><div class="pk">median warning lead, up to 168 h</div></div>
-      <div class="pcell"><div class="pv"><span class="count" data-to="11">0</span>%</div><div class="pk">false-alarm rate on non-breaching runs</div></div>
-      <div class="pcell"><div class="pv"><span class="count" data-to="0.87" data-dec="2">0</span></div><div class="pk">median per-habitat calibration fit, R²</div></div>
+<!-- ENGINE -->
+<section class="sec" id="engine">
+  <div class="shead rev"><span class="no">/ 02</span><span>The engine · not AGI</span></div>
+  <h2 class="big rev d1">Superhuman at one thing that matters <span class="acc">everywhere</span>.</h2>
+  <div class="split">
+    <div class="rev d2">
+      <p class="lede" style="margin-top:0">A Bayesian estimator for living systems. Terra fuses noisy, drifting sensor streams into a probabilistic estimate of the true internal state, updates it in real time, and projects it forward to forecast failure. Edge-deployed, offline-capable, fully auditable.</p>
+      <div class="pfa">
+        <div class="row"><div class="n">01</div><div><h3>Perceive</h3><p>Reconstruct the hidden variable that fails first, from cheap sensors that foul and drift.</p></div></div>
+        <div class="row"><div class="n">02</div><div><h3>Forecast</h3><p>Predict the breach hours ahead, with calibrated, honest uncertainty.</p></div></div>
+        <div class="row"><div class="n">03</div><div><h3>Act</h3><p>Act on-site, offline, within safe limits, behind a full audit log.</p></div></div>
+      </div>
     </div>
-    <div class="pnote">Simulation-to-simulation validation against an independent, peer-built model. Not flight data; no flight heritage.</div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="seclabel reveal"><span class="tick"></span>FAQ</div>
-  <h2 class="reveal d1">The questions operators ask.</h2>
-  <div class="faq reveal d1">
-    <details open><summary>Does it act without me?</summary><p>Only inside limits you set. Every autonomous action is bounded by operator-defined caps and written to a full audit log. You can also run it alert-only.</p></details>
-    <details><summary>Does it work offline?</summary><p>Yes. The whole engine runs on a small edge node on-site. No cloud, no network required to forecast or act.</p></details>
-    <details><summary>Is this proven yet?</summary><p>Validated in simulation today on a real-data foundation. Pre-revenue. Bench validation Q4 2026, first paid pilots H1 2027.</p></details>
-    <details><summary>What does a pilot cost?</summary><p>Value-share: you pay when we prevent a loss. A pilot starts on a single system, measurable on your own site.</p></details>
-  </div>
-</section>
-
-<section id="pilot">
-  <div class="pilot reveal">
-    <div>
-      <div class="seclabel"><span class="tick"></span>Request a pilot</div>
-      <h2>Put Terra on one system.</h2>
-      <div class="lede">Tell us what you run and we will scope a single-system, value-share pilot. No cloud to install, no data scientist to hire.</div>
-    </div>
-    <div>
-      <div class="field"><label>Name</label><input placeholder="Your name"></div>
-      <div class="field"><label>Organization</label><input placeholder="Farm, facility, or fund"></div>
-      <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
-      <a class="btn solid" style="display:inline-block;margin-top:6px" href="mailto:cameron@terralaboratories.com">Request a pilot</a>
+    <div class="console rev d3">
+      <div class="console-h"><span>State estimate · Tank 04</span><span class="sim">Simulation</span></div>
+      <div class="rl">Dissolved oxygen</div>
+      <div class="ro"><span class="v" id="dv">6.20</span><span class="u">mg/L</span></div>
+      <canvas id="chart"></canvas>
+      <div class="dgrid">
+        <div class="c"><div class="k">Forecast lead</div><div class="dv a" id="dlead">~6.5 h</div></div>
+        <div class="c"><div class="k">Confidence</div><div class="dv">0.87</div></div>
+        <div class="c"><div class="k">Action</div><div class="dv" id="dact">Monitor</div></div>
+      </div>
+      <div class="dfoot"><span class="dot"></span>Audit log · writing</div>
     </div>
   </div>
 </section>
 
-<footer id="company">
-  <div><div class="big">The autonomous intelligence platform for living systems.</div><div class="tagm">Terra Laboratories · From the mud to the moon</div></div>
-  <div class="fcol"><h4>Platform</h4><a href="#how">How it works</a><a href="#domains">Aquaculture</a><a href="#domains">Bioremediation</a><a href="#domains">Space</a></div>
-  <div class="fcol"><h4>Company</h4><a href="/about/">About</a><a href="#pilot">Request a pilot</a><a href="mailto:cameron@terralaboratories.com">cameron@terralaboratories.com</a></div>
-  <div class="legal">Engine performance is validated in simulation on a real-data foundation; the company is pre-revenue. Imagery: NASA (public domain) and Wikimedia Commons contributors. This page is not an offer to sell securities.</div>
+<!-- MANIFESTO -->
+<section class="mani">
+  <canvas id="msky"></canvas>
+  <p class="rev"><span class="sm">The mandate</span>Beyond Earth, survival will run on closed living systems.</p>
+</section>
+
+<!-- PROOF -->
+<section class="sec" id="proof">
+  <div class="shead rev"><span class="no">/ 03</span><span>Proof · validated on SIMOC</span></div>
+  <h2 class="big rev d1">Proven on the hardest closed loop there is.</h2>
+  <p class="lede rev d2">A 60-run ensemble against SIMOC, the closed-habitat model built with Biosphere 2, across seven habitats and dozens of fault conditions.</p>
+  <div class="stats">
+    <div class="stat rev d1"><div class="v"><span class="ct" data-to="98">0</span>%</div><div class="l">of safety breaches forecast before they occurred</div></div>
+    <div class="stat rev d2"><div class="v"><span class="ct" data-to="18">0</span>h</div><div class="l">median warning lead, up to 168 h</div></div>
+    <div class="stat rev d3"><div class="v"><span class="ct" data-to="11">0</span>%</div><div class="l">false-alarm rate on non-breaching runs</div></div>
+    <div class="stat rev d4"><div class="v"><span class="ct" data-to="0.87" data-dec="2">0</span></div><div class="l">median per-habitat calibration fit, R²</div></div>
+  </div>
+  <div class="note rev">Simulation-to-simulation validation against an independent, peer-built model. Not flight data; no flight heritage.</div>
+</section>
+
+<!-- FRONTIER -->
+<section class="sec" id="frontier">
+  <div class="shead rev"><span class="no">/ 04</span><span>The frontier · one engine, mud to moon</span></div>
+  <h2 class="big up rev d1">From the <span class="acc">mud</span> to the <span class="acc">moon</span>.</h2>
+  <div class="fl rev d2">
+    <div class="r"><div class="st">NOW</div><div><h4>Aquaculture</h4><p>Land-based recirculating farms. First revenue and the wedge market.</p></div><div class="yr">2026 →</div></div>
+    <div class="r"><div class="st">NEXT</div><div><h4>Bioremediation</h4><p>Wastewater and environmental loops. Same failure mode, same engine.</p></div><div class="yr">Roadmap</div></div>
+    <div class="r"><div class="st">FRONTIER</div><div><h4>Bioprocess</h4><p>Every living batch and reactor, held on-spec by the estimator.</p></div><div class="yr">Roadmap</div></div>
+    <div class="r"><div class="st">NORTH STAR</div><div><h4>Life support</h4><p>Bioregenerative life support. A crew, alive, on a closed loop off Earth.</p></div><div class="yr">Vision</div></div>
+  </div>
+</section>
+
+<!-- NORTH STAR BAND -->
+<section class="band">
+  <div class="band-img" data-par="0.16" style="background-image:url('assets/dome.jpg')"></div>
+  <div class="band-c">
+    <div class="shead rev"><span class="no">/ 04.4</span><span>The north star</span></div>
+    <h2 class="big up rev d1">Keep a crew alive on a closed loop.</h2>
+    <p class="lede rev d2">Bioregenerative life support is the ultimate closed living system: air, water, and food regenerated by biology, with zero tolerance for a silent failure. The same engine that saves a fish tank keeps a habitat breathing.</p>
+  </div>
+</section>
+
+<!-- TRACTION -->
+<section class="sec" id="traction">
+  <div class="shead rev"><span class="no">/ 05</span><span>Traction · senior pull, honestly stated</span></div>
+  <h2 class="big rev d1">Senior operators are already <span class="acc">pulling</span>.</h2>
+  <p class="lede rev d2">From cold outreach, with no paid marketing. We are candid: pre-revenue, with no signed pilots yet.</p>
+  <div class="trac rev d2">
+    <div class="tc"><div class="h">Controlled-environment cultivation</div><div class="names"><span>Green Thumb Industries</span><span>Cresco</span><span>Windset Farms</span><span>Mucci Farms</span></div><p>VP and Chief-level replies off cold outreach. Windset advanced to a team meeting led by their Chief Grower, and a senior leader at Mucci Farms signalled strong interest once a working pilot is in place.</p></div>
+    <div class="tc"><div class="h">Research validation · aquaculture</div><div class="names"><span>The Freshwater Institute</span></div><p>A measurement-validation collaboration checking Terra's biofilter-health estimates against laboratory assays, at a leading recirculating-aquaculture research center.</p></div>
+  </div>
+  <div class="tstat rev d3">
+    <div><div class="v">VP + Chief</div><div class="l">level of inbound reply, within weeks</div></div>
+    <div><div class="v">$0</div><div class="l">spent on paid marketing</div></div>
+    <div><div class="v">60-run</div><div class="l">SIMOC validation behind the pitch</div></div>
+  </div>
+  <div class="note rev">Pre-revenue · no signed pilots yet · first paid pilots planned H1 2027.</div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="close-img" data-par="0.1"></div>
+  <div class="close-c">
+    <div class="shead rev" style="border-top:0;justify-content:center;padding-top:0"><span class="no">/ 06</span><span>Get in touch</span></div>
+    <h2 class="rev d1">Back the intelligence layer for life itself.</h2>
+    <a href="mailto:cameron@terralaboratories.com" class="contact rev d2">cameron@terralaboratories.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>Terra Laboratories · Superintelligence for living systems</span>
+  <span>Pre-revenue; validated in simulation · Not an offer to sell securities</span>
 </footer>
 
 <script>
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.16});
-document.querySelectorAll('.reveal,.spark').forEach(el=>io.observe(el));
-const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);cio.unobserve(e.target);}}),{threshold:.6});
-document.querySelectorAll('.count').forEach(el=>cio.observe(el));
-function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0');let t0=null;
- function s(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1100,1),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(s);else el.textContent=to.toFixed(dec);}
- if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=to.toFixed(dec);return;}requestAnimationFrame(s);}
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var nav=document.getElementById('nav'),prog=document.getElementById('prog');
+function onScroll(){var y=scrollY||document.documentElement.scrollTop;nav.classList.toggle('on',y>50);
+  var h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(h>0?y/h*100:0)+'%';par(y);}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.rev').forEach(function(el){io.observe(el);});
+var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){cnt(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+document.querySelectorAll('.ct').forEach(function(el){cio.observe(el);});
+function cnt(el){var to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0'),t0=null;if(reduce){el.textContent=to.toFixed(dec);return;}function s(t){if(!t0)t0=t;var p=Math.min((t-t0)/1500,1),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(s);else el.textContent=to.toFixed(dec);}requestAnimationFrame(s);}
+var pe=[].slice.call(document.querySelectorAll('[data-par]'));
+function par(y){if(reduce)return;pe.forEach(function(el){var r=el.parentElement.getBoundingClientRect();var s=parseFloat(el.dataset.par);el.style.transform='translateY('+((r.top+r.height/2-innerHeight/2)*-s).toFixed(1)+'px)';});}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',function(){sizeStars();par(scrollY);});onScroll();
+/* hero point network */
+var cv=document.getElementById('stars'),cx=cv.getContext('2d'),st=[],mx=-999,my=-999,DPR=Math.min(devicePixelRatio||1,2);
+function sizeStars(){cv.width=innerWidth*DPR;cv.height=innerHeight*DPR;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';cx.setTransform(DPR,0,0,DPR,0,0);
+  var n=Math.min(94,Math.floor(innerWidth/15));st=[];for(var i=0;i<n;i++)st.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.26,vy:(Math.random()-.5)*.26});}
+sizeStars();
+addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+function stars(){cx.clearRect(0,0,innerWidth,innerHeight);
+  for(var i=0;i<st.length;i++){var p=st[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>innerWidth)p.vx*=-1;if(p.y<0||p.y>innerHeight)p.vy*=-1;
+    var dm=Math.hypot(p.x-mx,p.y-my);if(dm<130){var f=(130-dm)/130*.55;p.x+=(p.x-mx)/dm*f;p.y+=(p.y-my)/dm*f;}
+    cx.beginPath();cx.arc(p.x,p.y,1.4,0,6.28);cx.fillStyle='rgba(222,232,227,.62)';cx.fill();}
+  for(var a=0;a<st.length;a++)for(var b=a+1;b<st.length;b++){var dx=st[a].x-st[b].x,dy=st[a].y-st[b].y,d=dx*dx+dy*dy;
+    if(d<14500){var o=(1-d/14500)*.22;cx.strokeStyle='rgba(158,180,168,'+o.toFixed(3)+')';cx.lineWidth=.6;cx.beginPath();cx.moveTo(st[a].x,st[a].y);cx.lineTo(st[b].x,st[b].y);cx.stroke();}}
+  requestAnimationFrame(stars);}
+if(!reduce)requestAnimationFrame(stars);
+/* live forecast console */
+(function(){var c=document.getElementById('chart'),g=c.getContext('2d');var buf=[],N=30,val=6.4,dir=-1;for(var i=0;i<N;i++)buf.push(6.4);
+ function size(){var w=c.clientWidth,h=150;c.width=w*DPR;c.height=h*DPR;g.setTransform(DPR,0,0,DPR,0,0);}size();addEventListener('resize',size);
+ var dv=document.getElementById('dv'),act=document.getElementById('dact'),lead=document.getElementById('dlead');
+ function Y(v,h){return h-8-((v-3.2)/(8-3.2))*(h-20);}
+ function draw(){var w=c.clientWidth,h=150;g.clearRect(0,0,w,h);var ly=Y(4,h);
+   g.strokeStyle='rgba(224,80,80,.5)';g.setLineDash([3,4]);g.lineWidth=1;g.beginPath();g.moveTo(0,ly);g.lineTo(w,ly);g.stroke();g.setLineDash([]);
+   g.fillStyle='rgba(224,80,80,.75)';g.font='9px "JetBrains Mono",monospace';g.textAlign='right';g.fillText('4.0 limit',w-2,ly-4);
+   var step=w/(N-1),last=buf[N-1],prev=buf[N-6]||last,slope=(last-prev)/5;
+   g.strokeStyle='#F4F6F4';g.lineWidth=2;g.beginPath();buf.forEach(function(v,i){var x=i*step,y=Y(v,h);i?g.lineTo(x,y):g.moveTo(x,y);});g.stroke();
+   var br=(last+slope*24)<4,col=br?'#45C97F':'#7C857F';g.strokeStyle=col;g.setLineDash([5,4]);g.lineWidth=1.8;g.beginPath();var sx=(N-1)*step;g.moveTo(sx,Y(last,h));var pv=last;
+   for(var k=1;k<=16;k++){pv+=slope;var x=sx+k*step;if(x>w)break;g.lineTo(x,Y(pv,h));}g.stroke();g.setLineDash([]);
+   g.fillStyle=col;g.beginPath();g.arc(sx,Y(last,h),3.4,0,6.28);g.fill();dv.textContent=last.toFixed(2);
+   if(br){act.textContent='Aerate';act.style.color='#45C97F';lead.textContent='~6.5 h';}else{act.textContent='Monitor';act.style.color='#F4F6F4';lead.textContent='nominal';}}
+ draw();if(!reduce)setInterval(function(){val+=dir*(.12+Math.random()*.05);if(val<=4.3)dir=1;if(val>=6.5)dir=-1;buf.push(val);buf.shift();draw();},850);
+})();
+/* subtle drift behind the mandate line */
+(function(){var c=document.getElementById('msky');if(!c||reduce)return;var g=c.getContext('2d'),ps=[],vis=false;
+ function size(){var r=c.getBoundingClientRect();c.width=r.width*DPR;c.height=r.height*DPR;g.setTransform(DPR,0,0,DPR,0,0);var w=r.width,h=r.height,n=Math.min(320,Math.floor(w*h/5200));ps=[];for(var i=0;i<n;i++){var big=Math.random()<.14;ps.push({x:Math.random()*w,y:Math.random()*h,r:big?(Math.random()*.9+1):(Math.random()*.7+.25),tw:Math.random()*6.28,ts:.006+Math.random()*.02,base:big?.5:.22,dx:(Math.random()-.5)*.02});}}
+ new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)size();},{threshold:.04}).observe(c);
+ addEventListener('resize',function(){if(vis)size();});
+ function loop(){if(vis){var w=c.clientWidth,h=c.clientHeight;g.clearRect(0,0,w,h);for(var i=0;i<ps.length;i++){var p=ps[i];p.tw+=p.ts;p.x+=p.dx;if(p.x<-2)p.x=w+2;else if(p.x>w+2)p.x=-2;var a=p.base*(.4+.6*(Math.sin(p.tw)*.5+.5));g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle='rgba(228,237,232,'+a.toFixed(3)+')';g.fill();}}requestAnimationFrame(loop);}
+ requestAnimationFrame(loop);})();
 </script>
 </body>
 </html>
