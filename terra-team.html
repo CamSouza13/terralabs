@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Team | Terra Laboratories</title>
+<meta name="description" content="The people building Terra. Three founders across modelling, biology and commercial.">
+<meta name="theme-color" content="#0E0E0E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E0E0E'/%3E%3Cpath d='M7 9h18M16 9v15' stroke='%23EFE9DD' stroke-width='2.8'/%3E%3C/svg%3E">
+<style>
+:root{--blk:#0E0E0E;--beige:#EFE9DD;--beige2:#E5DDCE;--wht:#FFFFFF;
+--ink:#0E0E0E;--ink2:#4C4A45;--ink3:#7A776F;--line:#D3CBBA;--sig:#B4451B;
+--sans:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+--mono:"Courier New",Courier,monospace;--max:1280px;--pad:clamp(20px,4vw,54px)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--beige);color:var(--ink);font-family:var(--sans);font-size:17px;
+line-height:1.5;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}a{color:inherit}
+::selection{background:var(--blk);color:var(--beige)}
+.w{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:.98}
+h1{font-size:clamp(40px,7.4vw,104px)}
+h2{font-size:clamp(30px,5vw,66px)}
+h3{font-size:clamp(22px,2.4vw,32px);letter-spacing:-.022em;line-height:1.06}
+p{margin:0 0 18px}
+.kv{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin:0}
+.ld{font-size:clamp(17px,1.8vw,21px);line-height:1.45;color:var(--ink2);max-width:56ch}
+
+/* plus-sign link motif */
+.plus{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
+ letter-spacing:.17em;text-transform:uppercase;text-decoration:none;padding:13px 0;
+ border-bottom:1px solid currentColor}
+.plus:before{content:"+";font-size:15px;line-height:1}
+.plus:hover{color:var(--sig)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:80;background:var(--blk);color:var(--beige)}
+.nv{display:flex;align-items:center;gap:26px;height:68px;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.nv .bd{font-family:var(--mono);font-size:13px;letter-spacing:.36em;font-weight:700;text-decoration:none}
+.nv .lk{display:flex;gap:24px;margin-left:auto}
+.nv a.n{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+ color:#9A968D;text-decoration:none}
+.nv a.n:hover{color:var(--beige)}
+.nv .cta{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+ background:var(--beige);color:var(--blk);text-decoration:none;padding:11px 16px}
+.nv .cta:hover{background:var(--sig);color:var(--beige)}
+
+/* hero */
+.hero{position:relative;background:var(--blk);color:var(--beige);overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+.hero:after{content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,rgba(14,14,14,.94),rgba(14,14,14,.6) 55%,rgba(14,14,14,.3))}
+.hero .in{position:relative;z-index:2;padding:clamp(70px,11vw,140px) 0 clamp(50px,7vw,86px)}
+.hero h1{max-width:15ch}
+.hero .tag{margin-top:34px;font-size:clamp(17px,2vw,24px);font-weight:600;letter-spacing:-.015em;color:#CFC9BC}
+.hero .tag b{color:var(--beige);font-weight:600}
+.hero .plus{color:var(--beige);margin-top:26px}
+
+/* geometry motif */
+.slash{height:34px;background:repeating-linear-gradient(115deg,var(--line) 0 1px,transparent 1px 11px)}
+.blk .slash{background:repeating-linear-gradient(115deg,#2C2A26 0 1px,transparent 1px 11px)}
+
+/* sections */
+sec,section{display:block}
+.sec{padding:clamp(64px,8vw,116px) 0}
+.blk{background:var(--blk);color:var(--beige)}
+.blk .ld{color:#B3AEA3}.blk .kv{color:#8C887F}
+.wht{background:var(--wht)}
+.hd{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start;margin-bottom:52px}
+.hd .kv{padding-top:10px;color:var(--sig)}
+.blk .hd .kv{color:var(--sig)}
+
+/* statistics */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.stat{padding:38px 34px 34px 0;border-top:2px solid var(--ink)}
+.blk .stat{border-top-color:var(--beige)}
+.stat .v{font-size:clamp(46px,7.4vw,98px);line-height:.9;letter-spacing:-.05em;font-weight:700}
+.stat .t{margin-top:20px;font-size:15.5px;line-height:1.4;color:var(--ink2);max-width:26ch}
+.blk .stat .t{color:#B3AEA3}
+.stat .s{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sig)}
+
+/* flagship */
+.flag{display:grid;grid-template-columns:1.05fr .95fr;align-items:stretch}
+.flag .im{position:relative;min-height:460px}
+.flag .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.flag .tx{padding:clamp(44px,5vw,80px) clamp(30px,4vw,64px)}
+.flag .tx h2{max-width:13ch;margin-bottom:26px}
+
+/* index */
+.idx{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.sys{background:var(--wht);border:1px solid var(--line);display:flex;flex-direction:column}
+.sys .ph{position:relative;height:200px;overflow:hidden}
+.sys .ph img{width:100%;height:100%;object-fit:cover}
+.sys .num{position:absolute;left:0;top:0;background:var(--blk);color:var(--beige);
+ font-family:var(--mono);font-size:11px;letter-spacing:.16em;padding:7px 11px}
+.sys .st{position:absolute;right:0;top:0;background:var(--sig);color:var(--wht);
+ font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;padding:7px 10px}
+.sys .st.open{background:var(--beige2);color:var(--ink2)}
+.sys .bd{padding:24px 24px 26px;display:flex;flex-direction:column;flex:1}
+.sys h3{margin-bottom:5px}
+.sys .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+ color:var(--ink3);margin-bottom:16px}
+.sys p{font-size:14.5px;color:var(--ink2);margin:0 0 14px}
+.sys .ev{font-size:13px;color:var(--ink);border-left:2px solid var(--sig);padding-left:12px;margin:0 0 18px}
+.sys .plus{margin-top:auto;align-self:flex-start;font-size:10px}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink)}
+.tm{padding:34px 34px 30px 0}
+.tm .r{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sig)}
+.tm h4{font-size:24px;margin:12px 0 8px;letter-spacing:-.02em}
+.tm p{font-size:14.5px;color:var(--ink2);margin:0}
+
+/* log */
+.log{border-top:2px solid var(--beige)}
+.lr{display:grid;grid-template-columns:104px 74px 300px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #2C2A26;align-items:start}
+.lr.lh{padding:0 0 10px;border-bottom:1px solid #4A4740}
+.lr.lh div{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#6F6C65}
+.lr .s{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--sig);padding-top:2px}
+.lr .s.o{color:#8C887F}
+.lr .dg{font-family:var(--mono);font-size:12px;color:var(--beige);padding-top:1px}
+.lr .mt b{display:block;font-size:14.5px;font-weight:600;color:var(--beige)}
+.lr .mt span{display:block;font-size:12.5px;color:#8C887F;margin-top:3px;line-height:1.35}
+.lr .t{font-size:14px;color:#B3AEA3;line-height:1.45}
+.lnote{margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:#6F6C65}
+
+/* questions, accordion */
+.qs{border-top:1px solid var(--line);max-width:1000px}
+.q{border-bottom:1px solid var(--line)}
+.q summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px 1fr 28px;
+ align-items:start;gap:18px;padding:26px 0}
+.q summary::-webkit-details-marker{display:none}
+.q .qn{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--sig);padding-top:5px}
+.q .qt{font-size:20px;letter-spacing:-.018em;font-weight:600;line-height:1.32}
+.q summary:hover .qt{color:var(--sig)}
+.q .qi{position:relative;width:16px;height:16px;margin-top:6px;justify-self:end}
+.q .qi:before,.q .qi:after{content:"";position:absolute;background:var(--ink);transition:transform .18s,opacity .18s}
+.q .qi:before{left:0;top:7px;width:16px;height:1.5px}
+.q .qi:after{left:7px;top:0;width:1.5px;height:16px}
+.q[open] .qi:after{transform:scaleY(0);opacity:0}
+.q[open] .qt{color:var(--sig)}
+.q .qa{padding:0 60px 30px 74px}
+.q .qa p{font-size:15.5px;line-height:1.62;color:var(--ink2);margin:0;max-width:78ch}
+
+/* sources */
+.srcs{border-top:1px solid var(--line)}
+.sr{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
+.sr .id{font-family:var(--mono);font-size:12px;letter-spacing:.15em;color:var(--sig)}
+.sr h4{margin:0 0 8px;font-size:16.5px;letter-spacing:-.012em;font-weight:600}
+.sr p{margin:0;font-size:14.5px;line-height:1.58;color:var(--ink2);max-width:82ch}
+.sr .cite{margin-top:9px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:#6F6C65}
+.sr .lnk{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px}
+.sr .lnk:hover{color:var(--sig);border-bottom-color:var(--sig)}
+sup{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--sig);vertical-align:super;
+ margin-left:2px;font-weight:400}
+
+/* fields covered */
+.disc{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.disc b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+ color:#8A857C;font-weight:400;margin-bottom:6px}
+.disc span{display:block;font-size:13px;line-height:1.5;color:var(--ink2)}
+
+/* benchmarks */
+.bm{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.bm div{background:var(--wht);padding:26px 22px}
+.bm b{display:block;font-size:18px;letter-spacing:-.02em;margin-bottom:6px}
+.bm span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+ color:var(--ink3);margin-bottom:12px;line-height:1.4}
+.bm p{font-size:13px;color:var(--ink2);margin:0}
+
+/* cta + footer */
+.cta{background:var(--blk);color:var(--beige)}
+.cta h2{max-width:16ch}
+.btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.b{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;padding:16px 26px}
+.b1{background:var(--beige);color:var(--blk)}.b1:hover{background:var(--sig);color:var(--beige)}
+.b2{border:1px solid #4A4740;color:var(--beige)}.b2:hover{border-color:var(--beige)}
+footer{background:var(--blk);color:#8C887F;padding:56px 0 46px;border-top:1px solid #2C2A26;font-size:13.5px}
+.fg{display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap}
+footer a{display:block;color:#B3AEA3;text-decoration:none;margin-bottom:8px}
+footer a:hover{color:var(--sig)}
+
+@media(max-width:1020px){.idx{grid-template-columns:1fr 1fr}.bm{grid-template-columns:1fr 1fr}
+.flag{grid-template-columns:1fr}.flag .im{min-height:300px}}
+@media(max-width:760px){.hd{grid-template-columns:1fr;gap:14px}.stats,.team,.idx,.qs{grid-template-columns:1fr}
+.stat,.tm,.q{padding-right:0}.lr{grid-template-columns:100px 1fr}.lr .dg{grid-column:2}.lr .mt,.lr .t{grid-column:1/-1}.lr.lh{display:none}
+.nv .lk{display:none}.bm{grid-template-columns:1fr}}
+
+.ph{background:var(--blk);color:var(--beige);padding:clamp(60px,8vw,110px) 0 clamp(44px,5vw,70px)}
+.ph h1{max-width:12ch}
+.pr{display:grid;grid-template-columns:300px 1fr;gap:44px;padding:38px 0;border-top:1px solid var(--line)}
+.pr .r{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sig);margin-bottom:12px}
+.pr h3{font-size:clamp(26px,3vw,38px);letter-spacing:-.028em}
+.pr .pb p{font-size:16.5px;color:var(--ink2);max-width:62ch}
+.pr .fo{font-size:14px;color:var(--ink3);margin:0}
+.pr .fo b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+ color:var(--ink3);margin-bottom:6px;font-weight:400}
+@media(max-width:860px){.pr{grid-template-columns:1fr;gap:14px}}
+</style></head><body>
+
+<div class="nav"><div class="nv"><a class="bd" href="terra-colossal.html">TERRA</a>
+<div class="lk">
+<a class="n" href="terra-colossal.html#problem">The Problem</a>
+<a class="n" href="terra-colossal.html#science">The Science</a>
+<a class="n" href="terra-colossal.html#index">System Index</a>
+<a class="n" href="terra-colossal.html#company">Company</a>
+<a class="n" href="terra-team.html">Team</a>
+<a class="n" href="terra-colossal.html#log">Log</a></div>
+<a class="cta" href="terra-colossal.html#evaluate">Request an evaluation</a></div></div>
+
+<main>
+<section class="ph"><div class="w">
+<p class="kv" style="color:var(--sig)">Team</p>
+<h1 style="margin-top:24px">Three people.</h1>
+<p class="ld" style="margin-top:28px;color:#B3AEA3">A mechanistic model of a living process cannot be
+delegated to headcount. The team is small because the work is deep rather than wide, and it stays small
+until validated domains, not features, are the thing that needs scaling.</p>
+</div></section>
+<div class="slash"></div>
+
+<section class="sec"><div class="w"><article class="pr">
+<div class="pl"><div class="r">Chief Executive Officer</div><h3>Cameron Souza</h3></div>
+<div class="pb"><p>Modelling, biogeochemistry and aquaculture. Owns the engine and the science, and wrote the domain models behind each of the six systems.</p><p class="fo"><b>Focus</b>Land-based aquaculture, biogeochemical modelling, simulation-based inference.</p></div></article><article class="pr">
+<div class="pl"><div class="r">Co-founder</div><h3>Zachary Cowden</h3></div>
+<div class="pb"><p>Biology and industry. Previously at Leidos, working on biomanufacturing for space. Runs the bioprocess, digestion and life support domains.</p><p class="fo"><b>Focus</b>Biomanufacturing, closed-loop life support, defence and government programmes.</p></div></article><article class="pr">
+<div class="pl"><div class="r">Co-founder</div><h3>Bernard Yong</h3></div>
+<div class="pb"><p>Markets and operations. Previously at AWS, a lawyer by training, and a former adviser on UN policy. Runs commercial structure, channel and the legal interface.</p><p class="fo"><b>Focus</b>Enterprise commercial, contracts and data governance, international policy.</p></div></article></div></section>
+
+<section class="sec wht"><div class="w">
+<div class="hd"><p class="kv">Independent validation</p>
+<div><h2>Third-party validation.</h2>
+<p class="ld" style="margin-top:26px">An established recirculating aquaculture research facility is
+running an independent measurement validation, checking Terra's biofilter-health estimates against
+laboratory assay. The institution is named under evaluation agreement.</p></div></div>
+</div></section>
+
+<section class="sec cta"><div class="w">
+<p class="kv" style="color:var(--sig)">Contact</p>
+<h2 style="margin-top:24px">Direct technical contact.</h2>
+<p class="ld" style="margin-top:26px">Enquiries reach the people who built the engine. Technical
+questions are answered by the person who wrote the model, not routed through a sales tier.</p>
+<div class="btns"><a class="b b1" href="{CAL}">Schedule a briefing</a>
+<a class="b b2" href="mailto:{MAIL}">{MAIL}</a></div>
+</div></section>
+</main>
+
+<footer><div class="w"><div class="fg">
+<div style="max-width:32ch"><b style="font-family:var(--mono);letter-spacing:.36em;font-size:13px;color:var(--beige)">TERRA</b>
+<p style="margin-top:14px">Keeping living systems alive, from the mud to the moon.</p></div>
+<div><a href="terra-colossal.html#problem">The Problem</a><a href="terra-colossal.html#index">System Index</a></div>
+<div><a href="terra-team.html">Team</a><a href="terra-colossal.html#log">Log</a></div>
+<div><a href="mailto:{MAIL}">{MAIL}</a><a href="{CAL}">Schedule a briefing</a>
+<span style="display:block;margin-top:12px">San Diego, California</span></div>
+</div>
+<p style="margin-top:36px;font-size:12px">Every figure on this site is a benchmark validation or a
+retrospective backtest, each referenced in <a href="#sources" style="text-decoration:underline">Sources</a>.
+Operator evaluations are open.</p>
+</div></footer></body></html>
